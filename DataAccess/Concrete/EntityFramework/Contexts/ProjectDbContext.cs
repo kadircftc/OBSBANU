@@ -54,6 +54,32 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
         public DbSet<Ogrenci> Ogrenci { get; set; }
         public DbSet<Bolum> Bolums { get; set; }
         public DbSet<Ogrenci> Ogrencis { get; set; }
+        public DbSet<OgretimElemani> OgretimElemani { get; set; }
+        public DbSet<Derslik> Derslik { get; set; }
+        public DbSet<DersHavuzu> DersHavuzu { get; set; }
+        public DbSet<Mufredat> Mufredat { get; set; }
+        public DbSet<DersAcma> DersAcma { get; set; }
+        public DbSet<DersAlma> DersAlma { get; set; }
+        public DbSet<Sinav> Sinav { get; set; }
+        public DbSet<Degerlendirme> Degerlendirme { get; set; }
+        public DbSet<DersProgrami> DersProgrami { get; set; }
+        public DbSet<Danismanlik> Danismanlik { get; set; }
+        public DbSet<SabitlerModel> SabitlerModel { get; set; }
+        public DbSet<ST_AkademikDonem> ST_AkademikDonem { get; set; }
+        public DbSet<ST_AkademikYil> ST_AkademikYil { get; set; }
+        public DbSet<ST_DersAlmaDurumu> ST_DersAlmaDurumu { get; set; }
+        public DbSet<ST_DersDili> ST_DersDili { get; set; }
+        public DbSet<ST_DersGunu> ST_DersGunu { get; set; }
+        public DbSet<ST_DerslikTuru> ST_DerslikTuru { get; set; }
+        public DbSet<ST_DersSeviyesi> ST_DersSeviyesi { get; set; }
+        public DbSet<ST_DersTuru> ST_DersTuru { get; set; }
+        public DbSet<ST_OgrenciDurum> ST_OgrenciDurum { get; set; }
+        public DbSet<ST_OgretimDili> ST_OgretimDili { get; set; }
+        public DbSet<ST_OgretimTuru> ST_OgretimTuru { get; set; }
+        public DbSet<ST_ProgramTuru> ST_ProgramTuru { get; set; }
+        public DbSet<ST_SinavTuru> ST_SinavTuru { get; set; }
+
+
 
         protected IConfiguration Configuration { get; }
 
