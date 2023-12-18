@@ -1299,6 +1299,284 @@ namespace DataAccess.Migrations.Ms
                     b.ToTable("Bolum");
                 });
 
+            modelBuilder.Entity("Entities.Concrete.Danismanlik", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("OgrElmID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OgrenciId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Danismanlik");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.Degerlendirme", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("OgrenciId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SinavId")
+                        .HasColumnType("int");
+
+                    b.Property<float>("SinavNotu")
+                        .HasColumnType("real");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Degerlendirme");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.DersAcma", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AkademikDonemId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AkademikYilId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Kontenjan")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MufredatId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OgrElmId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DersAcma");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.DersAlma", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DersAcmaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DersDurumId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OgrenciId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DersAlma");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.DersHavuzu", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DersAdi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DersDiliId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DersKodu")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DersSeviyesiId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DersturuId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ECTS")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Kredi")
+                        .HasColumnType("real");
+
+                    b.Property<int>("Teorik")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Uygulama")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DersHavuzu");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.DersProgrami", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DersAcmaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DersGunuId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DersSaati")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DerslikId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DersProgrami");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.Derslik", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DerslikAdi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DerslikTuruId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Kapasite")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Derslik");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.Mufredat", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AkedemikDonemId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AkedemikYilId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BolumId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DersDonemi")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DersId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Mufredat");
+                });
+
             modelBuilder.Entity("Entities.Concrete.Ogrenci", b =>
                 {
                     b.Property<int>("Id")
@@ -1316,8 +1594,8 @@ namespace DataAccess.Migrations.Ms
                     b.Property<int>("BolumId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CinsiyetId")
-                        .HasColumnType("int");
+                    b.Property<bool>("Cinsiyet")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -1325,8 +1603,8 @@ namespace DataAccess.Migrations.Ms
                     b.Property<DateTime>("DeletedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("DogumTarihi")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("DogumTarihi")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("DurumId")
                         .HasColumnType("int");
@@ -1349,6 +1627,342 @@ namespace DataAccess.Migrations.Ms
                     b.HasKey("Id");
 
                     b.ToTable("Ogrenci");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.OgretimElemani", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Adi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("BolumId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Cinsiyet")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DogumTarihi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("KurumSicilNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Soyadi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TCKimlikNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Unvan")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OgretimElemani");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.ST_AkademikDonem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Ad")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ekstra")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ST_AkademikDonem");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.ST_AkademikYil", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Ad")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ekstra")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ST_AkademikYil");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.ST_DersAlmaDurumu", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Ad")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ekstra")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ST_DersAlmaDurumu");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.ST_DersDili", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Ad")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ekstra")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ST_DersDili");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.ST_DersGunu", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Ad")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ekstra")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ST_DersGunu");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.ST_DersSeviyesi", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Ad")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ekstra")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ST_DersSeviyesi");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.ST_DersTuru", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Ad")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ekstra")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ST_DersTuru");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.ST_DerslikTuru", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Ad")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ekstra")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ST_DerslikTuru");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.ST_OgrenciDurum", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Ad")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ekstra")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ST_OgrenciDurum");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.ST_OgretimDili", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Ad")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ekstra")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ST_OgretimDili");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.ST_OgretimTuru", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Ad")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ekstra")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ST_OgretimTuru");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.ST_ProgramTuru", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Ad")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ekstra")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ST_ProgramTuru");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.ST_SinavTuru", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Ad")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ekstra")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ST_SinavTuru");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.Sinav", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DersAcmaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DerslikId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EtkiOrani")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OgrElmID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("SinavTarihi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("SınavTuruId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sinav");
                 });
 #pragma warning restore 612, 618
         }

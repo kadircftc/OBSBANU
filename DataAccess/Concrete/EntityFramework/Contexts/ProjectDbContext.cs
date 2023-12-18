@@ -64,7 +64,6 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
         public DbSet<Degerlendirme> Degerlendirme { get; set; }
         public DbSet<DersProgrami> DersProgrami { get; set; }
         public DbSet<Danismanlik> Danismanlik { get; set; }
-        public DbSet<SabitlerModel> SabitlerModel { get; set; }
         public DbSet<ST_AkademikDonem> ST_AkademikDonem { get; set; }
         public DbSet<ST_AkademikYil> ST_AkademikYil { get; set; }
         public DbSet<ST_DersAlmaDurumu> ST_DersAlmaDurumu { get; set; }
@@ -78,6 +77,31 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
         public DbSet<ST_OgretimTuru> ST_OgretimTuru { get; set; }
         public DbSet<ST_ProgramTuru> ST_ProgramTuru { get; set; }
         public DbSet<ST_SinavTuru> ST_SinavTuru { get; set; }
+        public DbSet<Danismanlik> Danismanliks { get; set; }
+        public DbSet<ST_ProgramTuru> ST_ProgramTurus { get; set; }
+        public DbSet<ST_SinavTuru> ST_SinavTurus { get; set; }
+        public DbSet<ST_OgretimTuru> ST_OgretimTurus { get; set; }
+        public DbSet<ST_OgretimDili> ST_OgretimDilis { get; set; }
+        public DbSet<ST_OgrenciDurum> ST_OgrenciDurums { get; set; }
+        public DbSet<ST_DersTuru> ST_DersTurus { get; set; }
+        public DbSet<ST_DersSeviyesi> ST_DersSeviyesis { get; set; }
+        public DbSet<ST_DerslikTuru> ST_DerslikTurus { get; set; }
+        public DbSet<ST_DersGunu> ST_DersGunus { get; set; }
+        public DbSet<ST_DersDili> ST_DersDilis { get; set; }
+        public DbSet<ST_DersAlmaDurumu> ST_DersAlmaDurumus { get; set; }
+        public DbSet<ST_AkademikYil> ST_AkademikYils { get; set; }
+        public DbSet<ST_AkademikDonem> ST_AkademikDonems { get; set; }
+        public DbSet<Sinav> Sinavs { get; set; }
+        public DbSet<OgretimElemani> OgretimElemanis { get; set; }
+        public DbSet<Mufredat> Mufredats { get; set; }
+        public DbSet<DersProgrami> DersProgramis { get; set; }
+        public DbSet<Derslik> Dersliks { get; set; }
+        public DbSet<DersHavuzu> DersHavuzus { get; set; }
+        public DbSet<DersAlma> DersAlmas { get; set; }
+        public DbSet<DersAcma> DersAcmas { get; set; }
+        public DbSet<Degerlendirme> Degerlendirmes { get; set; }
+       
+
 
 
 

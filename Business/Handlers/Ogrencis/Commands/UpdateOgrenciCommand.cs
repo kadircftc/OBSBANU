@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Core.Aspects.Autofac.Validation;
 using Business.Handlers.Ogrencis.ValidationRules;
-
+using System;
 
 namespace Business.Handlers.Ogrencis.Commands
 {
@@ -32,8 +32,8 @@ namespace Business.Handlers.Ogrencis.Commands
         public string Adi { get; set; }
         public string Soyadi { get; set; }
         public string TcKimlikNo { get; set; }
-        public int CinsiyetId { get; set; }
-        public string DogumTarihi { get; set; }
+        public bool Cinsiyet{ get; set; }
+        public DateTime DogumTarihi { get; set; }
         public int UserId { get; set; }
 
         public class UpdateOgrenciCommandHandler : IRequestHandler<UpdateOgrenciCommand, IResult>
@@ -66,7 +66,7 @@ namespace Business.Handlers.Ogrencis.Commands
                 isThereOgrenciRecord.Adi = request.Adi;
                 isThereOgrenciRecord.Soyadi = request.Soyadi;
                 isThereOgrenciRecord.TcKimlikNo = request.TcKimlikNo;
-                isThereOgrenciRecord.CinsiyetId = request.CinsiyetId;
+                isThereOgrenciRecord.Cinsiyet = request.Cinsiyet;
                 isThereOgrenciRecord.DogumTarihi = request.DogumTarihi;
                 isThereOgrenciRecord.UserId = request.UserId;
 

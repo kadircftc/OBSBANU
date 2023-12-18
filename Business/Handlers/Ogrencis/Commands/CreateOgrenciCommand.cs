@@ -13,6 +13,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 using Business.Handlers.Ogrencis.ValidationRules;
+using System;
 
 namespace Business.Handlers.Ogrencis.Commands
 {
@@ -32,8 +33,8 @@ namespace Business.Handlers.Ogrencis.Commands
         public string Adi { get; set; }
         public string Soyadi { get; set; }
         public string TcKimlikNo { get; set; }
-        public int CinsiyetId { get; set; }
-        public string DogumTarihi { get; set; }
+        public bool Cinsiyet { get; set; }
+        public DateTime DogumTarihi { get; set; }
         public int UserId { get; set; }
 
 
@@ -70,7 +71,7 @@ namespace Business.Handlers.Ogrencis.Commands
                     Adi = request.Adi,
                     Soyadi = request.Soyadi,
                     TcKimlikNo = request.TcKimlikNo,
-                    CinsiyetId = request.CinsiyetId,
+                    Cinsiyet = request.Cinsiyet,
                     DogumTarihi = request.DogumTarihi,
                     UserId = request.UserId,
 
