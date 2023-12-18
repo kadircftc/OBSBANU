@@ -17,8 +17,8 @@ namespace Entities.Concrete
         public string Adi { get; set; }
         public string Soyadi { get; set; }
         public string TcKimlikNo { get; set; }
-        public int CinsiyetId { get; set; }
-        public string DogumTarihi { get; set; }
+        public bool Cinsiyet { get; set; }
+        public DateOnly DogumTarihi { get; set; }
         public int UserId { get; set; }
        
     }
