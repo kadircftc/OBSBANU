@@ -1,14 +1,21 @@
-import { Component, AfterViewInit, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { AuthService } from 'app/core/components/admin/login/services/auth.service';
 import { AlertifyService } from 'app/core/services/alertify.service';
 import { LookUpService } from 'app/core/services/lookUp.service';
-import { AuthService } from 'app/core/components/admin/login/services/auth.service';
+import { DersAcma } from '../dersAcma/models/DersAcma';
+import { DersAcmaService } from '../dersAcma/services/DersAcma.service';
+import { Derslik } from '../derslik/models/Derslik';
+import { DerslikService } from '../derslik/services/Derslik.service';
+import { OgretimElemani } from '../ogretimElemani/models/OgretimElemani';
+import { OgretimElemaniService } from '../ogretimElemani/services/OgretimElemani.service';
+import { ST_SinavTuru } from '../sT_SinavTuru/models/ST_SinavTuru';
+import { ST_SinavTuruService } from '../sT_SinavTuru/services/ST_SinavTuru.service';
 import { Sinav } from './models/Sinav';
 import { SinavService } from './services/Sinav.service';
-import { environment } from 'environments/environment';
 
 declare var jQuery: any;
 
@@ -18,29 +25,38 @@ declare var jQuery: any;
 	styleUrls: ['./sinav.component.scss']
 })
 export class SinavComponent implements AfterViewInit, OnInit {
-	
+
 	dataSource: MatTableDataSource<any>;
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;
-	displayedColumns: string[] = ['id','createdDate','updatedDate','deletedDate','dersAcmaId','sinavTuruId','derslikId','ogrElmID','etkiOrani','sinavTarihi', 'update','delete'];
+	displayedColumns: string[] = ['id', 'createdDate', 'updatedDate', 'deletedDate', 'dersAcmaId', 'sinavTuruId', 'derslikId', 'ogrElmID', 'etkiOrani', 'sinavTarihi', 'update', 'delete'];
 
-	sinavList:Sinav[];
-	sinav:Sinav=new Sinav();
+	sinavList: Sinav[];
+	dersAcmaList: DersAcma[];
+	sinavTuruList: ST_SinavTuru[];
+	derslikList: Derslik[];
+	ogrElmList: OgretimElemani[];
+	sinav: Sinav = new Sinav();
 
 	sinavAddForm: FormGroup;
 
 
-	sinavId:number;
+	sinavId: number;
 
-	constructor(private sinavService:SinavService, private lookupService:LookUpService,private alertifyService:AlertifyService,private formBuilder: FormBuilder, private authService:AuthService) { }
+	constructor(private sinavService: SinavService, private lookupService: LookUpService, private dersAcmaService: DersAcmaService, private sinavTuruService: ST_SinavTuruService,
+		private derslikService: DerslikService, private ogrElmService: OgretimElemaniService, private alertifyService: AlertifyService, private formBuilder: FormBuilder, private authService: AuthService) { }
 
-    ngAfterViewInit(): void {
-        this.getSinavList();
-    }
+	ngAfterViewInit(): void {
+		this.getSinavList();
+	}
 
 	ngOnInit() {
 
 		this.createSinavAddForm();
+		this.getDersAcmaList();
+		this.getSinavTuruList();
+		this.getDerslikList();
+		this.getOgrElmList();
 	}
 
 
@@ -48,11 +64,35 @@ export class SinavComponent implements AfterViewInit, OnInit {
 		this.sinavService.getSinavList().subscribe(data => {
 			this.sinavList = data;
 			this.dataSource = new MatTableDataSource(data);
-            this.configDataTable();
+			this.configDataTable();
 		});
 	}
 
-	save(){
+	getDersAcmaList() {
+		this.dersAcmaService.getDersAcmaList().subscribe(data => {
+			this.dersAcmaList = data;
+		})
+	}
+
+	getSinavTuruList() {
+		this.sinavTuruService.getST_SinavTuruList().subscribe(data => {
+			this.sinavTuruList = data;
+		})
+	}
+
+	getDerslikList() {
+		this.derslikService.getDerslikList().subscribe(data => {
+			this.derslikList = data;
+		})
+	}
+
+	getOgrElmList() {
+		this.ogrElmService.getOgretimElemaniList().subscribe(data => {
+			this.ogrElmList = data;
+		})
+	}
+
+	save() {
 
 		if (this.sinavAddForm.valid) {
 			this.sinav = Object.assign({}, this.sinavAddForm.value)
@@ -65,7 +105,7 @@ export class SinavComponent implements AfterViewInit, OnInit {
 
 	}
 
-	addSinav(){
+	addSinav() {
 
 		this.sinavService.addSinav(this.sinav).subscribe(data => {
 			this.getSinavList();
@@ -78,14 +118,14 @@ export class SinavComponent implements AfterViewInit, OnInit {
 
 	}
 
-	updateSinav(){
+	updateSinav() {
 
 		this.sinavService.updateSinav(this.sinav).subscribe(data => {
 
-			var index=this.sinavList.findIndex(x=>x.id==this.sinav.id);
-			this.sinavList[index]=this.sinav;
+			var index = this.sinavList.findIndex(x => x.id == this.sinav.id);
+			this.sinavList[index] = this.sinav;
 			this.dataSource = new MatTableDataSource(this.sinavList);
-            this.configDataTable();
+			this.configDataTable();
 			this.sinav = new Sinav();
 			jQuery('#sinav').modal('hide');
 			this.alertifyService.success(data);
@@ -96,33 +136,30 @@ export class SinavComponent implements AfterViewInit, OnInit {
 	}
 
 	createSinavAddForm() {
-		this.sinavAddForm = this.formBuilder.group({		
-			id : [0],
-createdDate : [null, Validators.required],
-updatedDate : [null, Validators.required],
-deletedDate : [null, Validators.required],
-dersAcmaId : [0, Validators.required],
-sinavTuruId : [0, Validators.required],
-derslikId : [0, Validators.required],
-ogrElmID : [0, Validators.required],
-etkiOrani : [0, Validators.required],
-sinavTarihi : [null, Validators.required]
+		this.sinavAddForm = this.formBuilder.group({
+			id: [0],
+			dersAcmaId: [0, Validators.required],
+			sinavTuruId: [0, Validators.required],
+			derslikId: [0, Validators.required],
+			ogrElmID: [0, Validators.required],
+			etkiOrani: [0, Validators.required],
+			sinavTarihi: [null, Validators.required]
 		})
 	}
 
-	deleteSinav(sinavId:number){
-		this.sinavService.deleteSinav(sinavId).subscribe(data=>{
+	deleteSinav(sinavId: number) {
+		this.sinavService.deleteSinav(sinavId).subscribe(data => {
 			this.alertifyService.success(data.toString());
-			this.sinavList=this.sinavList.filter(x=> x.id!=sinavId);
+			this.sinavList = this.sinavList.filter(x => x.id != sinavId);
 			this.dataSource = new MatTableDataSource(this.sinavList);
 			this.configDataTable();
 		})
 	}
 
-	getSinavById(sinavId:number){
+	getSinavById(sinavId: number) {
 		this.clearFormGroup(this.sinavAddForm);
-		this.sinavService.getSinavById(sinavId).subscribe(data=>{
-			this.sinav=data;
+		this.sinavService.getSinavById(sinavId).subscribe(data => {
+			this.sinav = data;
 			this.sinavAddForm.patchValue(data);
 		})
 	}
@@ -140,7 +177,7 @@ sinavTarihi : [null, Validators.required]
 		});
 	}
 
-	checkClaim(claim:string):boolean{
+	checkClaim(claim: string): boolean {
 		return this.authService.claimGuard(claim)
 	}
 
@@ -158,4 +195,4 @@ sinavTarihi : [null, Validators.required]
 		}
 	}
 
-  }
+}

@@ -6,6 +6,12 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'app/core/components/admin/login/services/auth.service';
 import { AlertifyService } from 'app/core/services/alertify.service';
 import { LookUpService } from 'app/core/services/lookUp.service';
+import { DersHavuzu } from '../dersHavuzu/models/DersHavuzu';
+import { DersHavuzuService } from '../dersHavuzu/services/DersHavuzu.service';
+import { Ogrenci } from '../ogrenci/models/Ogrenci';
+import { OgrenciService } from '../ogrenci/services/Ogrenci.service';
+import { Sinav } from '../sinav/models/Sinav';
+import { SinavService } from '../sinav/services/Sinav.service';
 import { Degerlendirme } from './models/Degerlendirme';
 import { DegerlendirmeService } from './services/Degerlendirme.service';
 
@@ -21,9 +27,12 @@ export class DegerlendirmeComponent implements AfterViewInit, OnInit {
 	dataSource: MatTableDataSource<any>;
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;
-	displayedColumns: string[] = ['id', 'createdDate', 'updatedDate', 'deletedDate', 'sinavId', 'ogrenciId', 'sinavNotu', 'update', 'delete'];
+	displayedColumns: string[] = ['id','sinavId', 'ogrenciId', 'sinavNotu', 'createdDate', 'updatedDate', 'deletedDate',  'update', 'delete'];
 
 	degerlendirmeList: Degerlendirme[];
+	sinavList:Sinav[];
+	ogrenciList:Ogrenci[];
+	dersHavuzuList:DersHavuzu[];
 	degerlendirme: Degerlendirme = new Degerlendirme();
 
 	degerlendirmeAddForm: FormGroup;
@@ -31,7 +40,7 @@ export class DegerlendirmeComponent implements AfterViewInit, OnInit {
 
 	degerlendirmeId: number;
 
-	constructor(private degerlendirmeService: DegerlendirmeService, private lookupService: LookUpService, private alertifyService: AlertifyService, private formBuilder: FormBuilder, private authService: AuthService) { }
+	constructor(private degerlendirmeService: DegerlendirmeService,private dersHavuzuService:DersHavuzuService,private ogrenciService:OgrenciService,private sinavService:SinavService, private lookupService: LookUpService, private alertifyService: AlertifyService, private formBuilder: FormBuilder, private authService: AuthService) { }
 
 	ngAfterViewInit(): void {
 		this.getDegerlendirmeList();
@@ -40,6 +49,8 @@ export class DegerlendirmeComponent implements AfterViewInit, OnInit {
 	ngOnInit() {
 
 		this.createDegerlendirmeAddForm();
+		this.getSinavList();
+		this.getOgrenciList();
 	}
 
 
@@ -51,6 +62,21 @@ export class DegerlendirmeComponent implements AfterViewInit, OnInit {
 		});
 	}
 
+	getSinavList(){
+		this.sinavService.getSinavList().subscribe(data=>{
+			this.sinavList=data
+		})
+	}
+	getOgrenciList(){
+		this.ogrenciService.getOgrenciList().subscribe(data=>{
+			this.ogrenciList=data
+		})
+	}
+	getDersList(){
+		this.dersHavuzuService.getDersHavuzuList().subscribe(data=>{
+			this.dersHavuzuList=data
+		});
+	}
 	save() {
 
 		if (this.degerlendirmeAddForm.valid) {

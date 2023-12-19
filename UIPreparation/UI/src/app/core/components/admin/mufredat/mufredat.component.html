@@ -119,28 +119,28 @@
 					<div class="row">
 						<div class="col-md-12">
 							<select class="browser-default custom-select" formControlName="bolumId">
-								<option *ngFor="let item of mufredatlookUp" [value]="item.id"> {{item.label}}</option>
+								<option *ngFor="let item of bolumList" [value]="item.id"> {{item.bolumAdi}}</option>
 							</select>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
 							<select class="browser-default custom-select" formControlName="dersId">
-								<option *ngFor="let item of mufredatlookUp" [value]="item.id"> {{item.label}}</option>
+								<option *ngFor="let item of dersHavuzuList" [value]="item.id"> {{item.dersAdi}}</option>
 							</select>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
 							<select class="browser-default custom-select" formControlName="akedemikYilId">
-								<option *ngFor="let item of mufredatlookUp" [value]="item.id"> {{item.label}}</option>
+								<option *ngFor="let item of akademikYilList" [value]="item.id"> {{item.ad}}</option>
 							</select>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
 							<select class="browser-default custom-select" formControlName="akedemikDonemId">
-								<option *ngFor="let item of mufredatlookUp" [value]="item.id"> {{item.label}}</option>
+								<option *ngFor="let item of akademikDonemList" [value]="item.id"> {{item.ad}}</option>
 							</select>
 						</div>
 					</div>

@@ -27,7 +27,7 @@ export class BolumComponent implements AfterViewInit, OnInit {
 	dataSource: MatTableDataSource<any>;
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;
-	displayedColumns: string[] = ['id', 'programTuruId', 'ogretimTuruId', 'ogretimDiliId', 'bolumAdi', 'webAdresi', 'createdDate', 'updatedDate', 'deletedDate', 'update', 'delete'];
+	displayedColumns: string[] = ['id','bolumAdi', 'programTuruId', 'ogretimTuruId', 'ogretimDiliId', 'webAdresi', 'createdDate', 'updatedDate', 'deletedDate', 'update', 'delete'];
 
 	bolumList: Bolum[];
 	bolum: Bolum = new Bolum();

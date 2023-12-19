@@ -125,21 +125,21 @@
 					<div class="row">
 						<div class="col-md-12">
 							<select class="browser-default custom-select" formControlName="dersAcmaId">
-								<option *ngFor="let item of sinavlookUp" [value]="item.id"> {{item.label}}</option>
+								<option *ngFor="let item of dersAcmaList" [value]="item.id"> {{item.mufredatId}}</option>
 							</select>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
 							<select class="browser-default custom-select" formControlName="sinavTuruId">
-								<option *ngFor="let item of sinavlookUp" [value]="item.id"> {{item.label}}</option>
+								<option *ngFor="let item of sinavTuruList" [value]="item.id"> {{item.ad}}</option>
 							</select>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
 							<select class="browser-default custom-select" formControlName="derslikId">
-								<option *ngFor="let item of sinavlookUp" [value]="item.id"> {{item.label}}</option>
+								<option *ngFor="let item of derslikList" [value]="item.id"> {{item.derslikAdi}}</option>
 							</select>
 						</div>
 					</div>

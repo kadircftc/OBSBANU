@@ -6,6 +6,14 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'app/core/components/admin/login/services/auth.service';
 import { AlertifyService } from 'app/core/services/alertify.service';
 import { LookUpService } from 'app/core/services/lookUp.service';
+import { Mufredat } from '../mufredat/models/Mufredat';
+import { MufredatService } from '../mufredat/services/Mufredat.service';
+import { OgretimElemani } from '../ogretimElemani/models/OgretimElemani';
+import { OgretimElemaniService } from '../ogretimElemani/services/OgretimElemani.service';
+import { ST_AkademikDonem } from '../sT_AkademikDonem/models/ST_AkademikDonem';
+import { ST_AkademikDonemService } from '../sT_AkademikDonem/services/ST_AkademikDonem.service';
+import { ST_AkademikYil } from '../sT_AkademikYil/models/ST_AkademikYil';
+import { ST_AkademikYilService } from '../sT_AkademikYil/services/ST_AkademikYil.service';
 import { DersAcma } from './models/DersAcma';
 import { DersAcmaService } from './services/DersAcma.service';
 
@@ -21,25 +29,31 @@ export class DersAcmaComponent implements AfterViewInit, OnInit {
 	dataSource: MatTableDataSource<any>;
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;
-	displayedColumns: string[] = ['id', 'createdDate', 'updatedDate', 'deletedDate', 'akademikYilId', 'akademikDonemId', 'mufredatId', 'ogrElmId', 'kontenjan', 'update', 'delete'];
+	displayedColumns: string[] = ['id','akademikYilId', 'akademikDonemId', 'mufredatId', 'ogrElmId', 'kontenjan', 'createdDate', 'updatedDate', 'deletedDate',  'update', 'delete'];
 
 	dersAcmaList: DersAcma[];
 	dersAcma: DersAcma = new DersAcma();
-
+	akademikYilList: ST_AkademikYil[];
+	akademikDonemList: ST_AkademikDonem[];
+	mufredatList: Mufredat[];
+	ogrElmList: OgretimElemani[];
 	dersAcmaAddForm: FormGroup;
 
 
 	dersAcmaId: number;
 
-	constructor(private dersAcmaService: DersAcmaService, private lookupService: LookUpService, private alertifyService: AlertifyService, private formBuilder: FormBuilder, private authService: AuthService) { }
+	constructor(private dersAcmaService: DersAcmaService, private ogrElmService: OgretimElemaniService, private mufredatService: MufredatService, private akademikDonemService: ST_AkademikDonemService, private akademikYilService: ST_AkademikYilService, private lookupService: LookUpService, private alertifyService: AlertifyService, private formBuilder: FormBuilder, private authService: AuthService) { }
 
 	ngAfterViewInit(): void {
 		this.getDersAcmaList();
 	}
 
 	ngOnInit() {
-
 		this.createDersAcmaAddForm();
+		this.getAkademikYilList();
+		this.getAkademikDonemList();
+		this.getMufredatList();
+		this.getOgrElmList();
 	}
 
 
@@ -49,6 +63,30 @@ export class DersAcmaComponent implements AfterViewInit, OnInit {
 			this.dataSource = new MatTableDataSource(data);
 			this.configDataTable();
 		});
+	}
+
+	getAkademikYilList() {
+		this.akademikYilService.getST_AkademikYilList().subscribe(data => {
+			this.akademikYilList = data
+		})
+	}
+
+	getAkademikDonemList() {
+		this.akademikDonemService.getST_AkademikDonemList().subscribe(data => {
+			this.akademikDonemList = data
+		})
+	}
+
+	getMufredatList() {
+		this.mufredatService.getMufredatList().subscribe(data => {
+			this.mufredatList = data
+		})
+	}
+
+	getOgrElmList() {
+		this.ogrElmService.getOgretimElemaniList().subscribe(data => {
+			this.ogrElmList = data
+		})
 	}
 
 	save() {

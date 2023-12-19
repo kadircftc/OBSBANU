@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Entities.Concrete;
 using System.Collections.Generic;
+using Entities.Dtos;
+using System.Linq;
 
 namespace WebAPI.Controllers
 {
@@ -30,6 +32,19 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> GetList()
         {
             var result = await Mediator.Send(new GetOgrencisQuery());
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest(result.Message);
+        }
+        [Produces("application/json", "text/plain")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IQueryable<OzlukBilgileriDto>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+        [HttpGet("getOzlukBilgileri")]
+        public async Task<IActionResult> GetOzlukBilgileri()
+        {
+            var result = await Mediator.Send(new GetOgrenciOzlukBilgileriDto());
             if (result.Success)
             {
                 return Ok(result.Data);

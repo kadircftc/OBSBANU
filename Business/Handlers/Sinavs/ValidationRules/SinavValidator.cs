@@ -9,7 +9,7 @@ namespace Business.Handlers.Sinavs.ValidationRules
     {
         public CreateSinavValidator()
         {
-            RuleFor(x => x.SınavTuruId).NotEmpty();
+
             RuleFor(x => x.DerslikId).NotEmpty();
             RuleFor(x => x.OgrElmID).NotEmpty();
             RuleFor(x => x.EtkiOrani).NotEmpty();

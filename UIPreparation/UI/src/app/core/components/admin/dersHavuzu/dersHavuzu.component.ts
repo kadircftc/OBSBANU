@@ -6,6 +6,12 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'app/core/components/admin/login/services/auth.service';
 import { AlertifyService } from 'app/core/services/alertify.service';
 import { LookUpService } from 'app/core/services/lookUp.service';
+import { ST_DersDili } from '../sT_DersDili/models/ST_DersDili';
+import { ST_DersDiliService } from '../sT_DersDili/services/ST_DersDili.service';
+import { ST_DersSeviyesi } from '../sT_DersSeviyesi/models/ST_DersSeviyesi';
+import { ST_DersSeviyesiService } from '../sT_DersSeviyesi/services/ST_DersSeviyesi.service';
+import { ST_DersTuru } from '../sT_DersTuru/models/ST_DersTuru';
+import { ST_DersTuruService } from '../sT_DersTuru/services/ST_DersTuru.service';
 import { DersHavuzu } from './models/DersHavuzu';
 import { DersHavuzuService } from './services/DersHavuzu.service';
 
@@ -21,9 +27,12 @@ export class DersHavuzuComponent implements AfterViewInit, OnInit {
 	dataSource: MatTableDataSource<any>;
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;
-	displayedColumns: string[] = ['id','createdDate','updatedDate','deletedDate','dersDiliId','dersSeviyesiId','dersturuId','dersKodu','dersAdi','teorik','uygulama','kredi','eCTS', 'update','delete'];
+	displayedColumns: string[] = ['id','dersAdi','dersDiliId','dersSeviyesiId','dersturuId','dersKodu','teorik','uygulama','kredi','eCTS','createdDate','updatedDate','deletedDate', 'update','delete'];
 
 	dersHavuzuList:DersHavuzu[];
+	dersDiliList:ST_DersDili[];
+	dersSeviyesiList:ST_DersSeviyesi[];
+	dersTuruList:ST_DersTuru[];
 	dersHavuzu:DersHavuzu=new DersHavuzu();
 
 	dersHavuzuAddForm: FormGroup;
@@ -31,15 +40,19 @@ export class DersHavuzuComponent implements AfterViewInit, OnInit {
 
 	dersHavuzuId:number;
 
-	constructor(private dersHavuzuService:DersHavuzuService, private lookupService:LookUpService,private alertifyService:AlertifyService,private formBuilder: FormBuilder, private authService:AuthService) { }
+	constructor(private dersHavuzuService:DersHavuzuService,
+		private dersDiliService:ST_DersDiliService,private dersSeviyesiService:ST_DersSeviyesiService,private dersTuruService:ST_DersTuruService, private lookupService:LookUpService,private alertifyService:AlertifyService,private formBuilder: FormBuilder, private authService:AuthService) { }
 
     ngAfterViewInit(): void {
         this.getDersHavuzuList();
     }
 
 	ngOnInit() {
-
 		this.createDersHavuzuAddForm();
+		this.getDersDiliList();
+		this.getDersSeviyesiList();
+		this.getDersTuruList();
+
 	}
 
 
@@ -49,6 +62,23 @@ export class DersHavuzuComponent implements AfterViewInit, OnInit {
 			this.dataSource = new MatTableDataSource(data);
             this.configDataTable();
 		});
+	}
+
+	getDersDiliList(){
+		this.dersDiliService.getST_DersDiliList().subscribe(data=>{
+			this.dersDiliList=data
+		})
+	}
+
+	getDersSeviyesiList(){
+		this.dersSeviyesiService.getST_DersSeviyesiList().subscribe(data=>{
+			this.dersSeviyesiList=data;
+		})
+	}
+	getDersTuruList(){
+		this.dersTuruService.getST_DersTuruList().subscribe(data=>{
+			this.dersTuruList=data
+		})
 	}
 
 	save(){

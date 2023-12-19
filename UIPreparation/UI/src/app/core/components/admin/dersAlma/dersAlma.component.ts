@@ -21,7 +21,7 @@ export class DersAlmaComponent implements AfterViewInit, OnInit {
 	dataSource: MatTableDataSource<any>;
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;
-	displayedColumns: string[] = ['id','createdDate','updatedDate','deletedDate','dersAcmaId','ogrenciId','dersDurumId', 'update','delete'];
+	displayedColumns: string[] = ['id','dersAcmaId','ogrenciId','dersDurumId','createdDate','updatedDate','deletedDate', 'update','delete'];
 
 	dersAlmaList:DersAlma[];
 	dersAlma:DersAlma=new DersAlma();

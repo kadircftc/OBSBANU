@@ -40,6 +40,10 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
 
         }
 
+        public ProjectDbContext()
+        {
+        }
+
         public DbSet<OperationClaim> OperationClaims { get; set; }
         public DbSet<UserClaim> UserClaims { get; set; }
         public DbSet<Group> Groups { get; set; }
@@ -54,7 +58,6 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
         public DbSet<Ogrenci> Ogrenci { get; set; }
         public DbSet<Bolum> Bolums { get; set; }
         public DbSet<Ogrenci> Ogrencis { get; set; }
-        public DbSet<OgretimElemani> OgretimElemani { get; set; }
         public DbSet<Derslik> Derslik { get; set; }
         public DbSet<DersHavuzu> DersHavuzu { get; set; }
         public DbSet<Mufredat> Mufredat { get; set; }
@@ -63,7 +66,6 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
         public DbSet<Sinav> Sinav { get; set; }
         public DbSet<Degerlendirme> Degerlendirme { get; set; }
         public DbSet<DersProgrami> DersProgrami { get; set; }
-        public DbSet<Danismanlik> Danismanlik { get; set; }
         public DbSet<ST_AkademikDonem> ST_AkademikDonem { get; set; }
         public DbSet<ST_AkademikYil> ST_AkademikYil { get; set; }
         public DbSet<ST_DersAlmaDurumu> ST_DersAlmaDurumu { get; set; }
@@ -77,6 +79,7 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
         public DbSet<ST_OgretimTuru> ST_OgretimTuru { get; set; }
         public DbSet<ST_ProgramTuru> ST_ProgramTuru { get; set; }
         public DbSet<ST_SinavTuru> ST_SinavTuru { get; set; }
+        public DbSet<Danismanlik> Danismanlik { get; set; }
         public DbSet<Danismanlik> Danismanliks { get; set; }
         public DbSet<ST_ProgramTuru> ST_ProgramTurus { get; set; }
         public DbSet<ST_SinavTuru> ST_SinavTurus { get; set; }
@@ -92,7 +95,7 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
         public DbSet<ST_AkademikYil> ST_AkademikYils { get; set; }
         public DbSet<ST_AkademikDonem> ST_AkademikDonems { get; set; }
         public DbSet<Sinav> Sinavs { get; set; }
-        public DbSet<OgretimElemani> OgretimElemanis { get; set; }
+        public DbSet<OgretimElemani> OgretimElemani { get; set; }
         public DbSet<Mufredat> Mufredats { get; set; }
         public DbSet<DersProgrami> DersProgramis { get; set; }
         public DbSet<Derslik> Dersliks { get; set; }

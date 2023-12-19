@@ -27,17 +27,17 @@
 	
                    <ng-container matColumnDef="createdDate">
                      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'CreatedDate'|translate}}</th>
-                     <td mat-cell *matCellDef="let element">{{element.createdDate}}</td>
+                     <td mat-cell *matCellDef="let element">{{element.createdDate|date:'short'}}</td>
 				   </ng-container>
 	
                    <ng-container matColumnDef="updatedDate">
                      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'UpdatedDate'|translate}}</th>
-                     <td mat-cell *matCellDef="let element">{{element.updatedDate}}</td>
+                     <td mat-cell *matCellDef="let element">{{element.updatedDate|date:'short'}}</td>
 				   </ng-container>
 	
                    <ng-container matColumnDef="deletedDate">
                      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'DeletedDate'|translate}}</th>
-                     <td mat-cell *matCellDef="let element">{{element.deletedDate}}</td>
+                     <td mat-cell *matCellDef="let element">{{element.deletedDate|date:'short'}}</td>
 				   </ng-container>
 	
                    <ng-container matColumnDef="bolumId">
@@ -57,7 +57,7 @@
 	
                    <ng-container matColumnDef="ayrilmaTarihi">
                      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'AyrilmaTarihi'|translate}}</th>
-                     <td mat-cell *matCellDef="let element">{{element.ayrilmaTarihi}}</td>
+                     <td mat-cell *matCellDef="let element">{{element.ayrilmaTarihi|date:'short'}}</td>
 				   </ng-container>
 	
                    <ng-container matColumnDef="adi">
@@ -78,13 +78,13 @@
                    <ng-container matColumnDef="cinsiyet">
                      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'Cinsiyet'|translate}}</th>
                      <td mat-cell *matCellDef="let element"> 
-                        <mat-checkbox [checked]="element.cinsiyet" [disabled]="true"></mat-checkbox>
+                   {{manOrWomen(element.cinsiyet)}}
                      </td>
 				   </ng-container>
 	
                    <ng-container matColumnDef="dogumTarihi">
                      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'DogumTarihi'|translate}}</th>
-                     <td mat-cell *matCellDef="let element">{{element.dogumTarihi}}</td>
+                     <td mat-cell *matCellDef="let element">{{element.dogumTarihi|date | date: 'dd-MM-yyyy'}}</td>
 				   </ng-container>
 	
                    <ng-container matColumnDef="userId">
@@ -204,9 +204,11 @@
               </mat-form-field>
             </div>
           </div><div class="row">
-            <div class="col col-md-2">
-                       <mat-checkbox  formControlName="cinsiyet" id="cinsiyet" name="cinsiyet" > cinsiyet
-                      </mat-checkbox>
+            <div class="col col-md-12">
+              <select class="browser-default custom-select" formControlName="cinsiyet">
+								<option [value]=0>Erkek</option>
+								<option [value]=1>Kız</option>
+							</select>
             </div>
           </div>
 					<div class="row">
@@ -223,7 +225,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<select class="browser-default custom-select" formControlName="userId">
-								<option *ngFor="let item of userList" [value]="item.id"> {{item.fullName}}</option>
+								<option *ngFor="let item of userList" [value]="item.userId"> {{item.fullName}}</option>
 							</select>
 						</div>
 					</div>

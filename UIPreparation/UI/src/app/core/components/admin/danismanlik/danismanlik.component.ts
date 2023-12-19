@@ -6,6 +6,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'app/core/components/admin/login/services/auth.service';
 import { AlertifyService } from 'app/core/services/alertify.service';
 import { LookUpService } from 'app/core/services/lookUp.service';
+import { OgrenciService } from '../ogrenci/services/Ogrenci.service';
+import { OgretimElemani } from '../ogretimElemani/models/OgretimElemani';
+import { OgretimElemaniService } from '../ogretimElemani/services/OgretimElemani.service';
 import { Danismanlik } from './models/Danismanlik';
 import { DanismanlikService } from './services/Danismanlik.service';
 
@@ -21,17 +24,18 @@ export class DanismanlikComponent implements AfterViewInit, OnInit {
 	dataSource: MatTableDataSource<any>;
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;
-	displayedColumns: string[] = ['id', 'createdDate', 'updatedDate', 'deletedDate', 'ogrElmID', 'ogrenciId', 'update', 'delete'];
+	displayedColumns: string[] = ['id','ogrElmID', 'ogrenciId', 'createdDate', 'updatedDate', 'deletedDate',  'update', 'delete'];
 
 	danismanlikList: Danismanlik[];
 	danismanlik: Danismanlik = new Danismanlik();
-
+	ogretimElemaniList:OgretimElemani[];
+	ogrenciList:OgretimElemani[];
 	danismanlikAddForm: FormGroup;
 
 
 	danismanlikId: number;
 
-	constructor(private danismanlikService: DanismanlikService, private lookupService: LookUpService, private alertifyService: AlertifyService, private formBuilder: FormBuilder, private authService: AuthService) { }
+	constructor(private danismanlikService: DanismanlikService,private ogrenciService:OgrenciService,private ogretimElemanıService:OgretimElemaniService, private lookupService: LookUpService, private alertifyService: AlertifyService, private formBuilder: FormBuilder, private authService: AuthService) { }
 
 	ngAfterViewInit(): void {
 		this.getDanismanlikList();
@@ -40,6 +44,8 @@ export class DanismanlikComponent implements AfterViewInit, OnInit {
 	ngOnInit() {
 
 		this.createDanismanlikAddForm();
+		this.getOgretimElemaniList();
+		this.getOgrenciList();
 	}
 
 
@@ -51,6 +57,17 @@ export class DanismanlikComponent implements AfterViewInit, OnInit {
 		});
 	}
 
+	getOgretimElemaniList(){
+		this.ogretimElemanıService.getOgretimElemaniList().subscribe(data=>{
+			this.ogretimElemaniList=data;
+		})
+	}
+
+	getOgrenciList(){
+		this.ogrenciService.getOgrenciList().subscribe(data=>{
+			this.ogrenciList=data
+		})
+	}
 	save() {
 
 		if (this.danismanlikAddForm.valid) {

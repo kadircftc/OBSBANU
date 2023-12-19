@@ -142,14 +142,14 @@
 					<div class="row">
 						<div class="col-md-12">
 							<select class="browser-default custom-select" formControlName="bolumId">
-								<option *ngFor="let item of ogretimElemanilookUp" [value]="item.id"> {{item.label}}</option>
+								<option *ngFor="let item of bolumList" [value]="item.id"> {{item.bolumAdi}}</option>
 							</select>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
 							<select class="browser-default custom-select" formControlName="userId">
-								<option *ngFor="let item of ogretimElemanilookUp" [value]="item.id"> {{item.label}}</option>
+								<option *ngFor="let item of userList" [value]="item.id"> {{item.email}}</option>
 							</select>
 						</div>
 					</div>

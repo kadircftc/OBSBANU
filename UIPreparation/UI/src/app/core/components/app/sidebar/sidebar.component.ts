@@ -47,6 +47,7 @@ export const USERROUTES: RouteInfo[] = [
   { path: '/sT_OgretimTuru', title: 'ST_OgretimTuru', icon: 'update', class: '', claim: "GetST_OgretimTurusQuery" },
   { path: '/sT_ProgramTuru', title: 'ST_ProgramTuru', icon: 'update', class: '', claim: "GetST_ProgramTurusQuery" },
   { path: '/sT_SinavTuru', title: 'ST_SinavTuru', icon: 'update', class: '', claim: "GetST_SinavTurusQuery" },
+  { path: '/#', title: 's', icon: '', class: '', claim: "GetST_SinavTurusQuery" },
 ];
 
 @Component({

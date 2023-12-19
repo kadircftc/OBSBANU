@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Business.Handlers.Ogrencis.ValidationRules;
 using System;
+using ServiceStack;
 
 namespace Business.Handlers.Ogrencis.Commands
 {
@@ -54,10 +55,12 @@ namespace Business.Handlers.Ogrencis.Commands
             [SecuredOperation(Priority = 1)]
             public async Task<IResult> Handle(CreateOgrenciCommand request, CancellationToken cancellationToken)
             {
-                var isThereOgrenciRecord = _ogrenciRepository.Query().Any(u => u.OgrenciNo == request.OgrenciNo&&u.TcKimlikNo==request.TcKimlikNo);
+                var isThereOgrenciRecord = _ogrenciRepository.Query().Any(u => u.OgrenciNo == request.OgrenciNo && u.TcKimlikNo==request.TcKimlikNo);
 
                 if (isThereOgrenciRecord == true)
                     return new ErrorResult(Messages.NameAlreadyExist);
+
+             
 
                 var addedOgrenci = new Ogrenci
                 {
@@ -65,14 +68,12 @@ namespace Business.Handlers.Ogrencis.Commands
                     BolumId = request.BolumId,
                     OgrenciNo = request.OgrenciNo,
                     DurumId = request.DurumId,
-                    AyrilmaTarihi = request.AyrilmaTarihi,
                     Adi = request.Adi,
                     Soyadi = request.Soyadi,
                     TcKimlikNo = request.TcKimlikNo,
                     Cinsiyet = request.Cinsiyet,
                     DogumTarihi = request.DogumTarihi,
                     UserId = request.UserId,
-
                 };
 
                 _ogrenciRepository.Add(addedOgrenci);

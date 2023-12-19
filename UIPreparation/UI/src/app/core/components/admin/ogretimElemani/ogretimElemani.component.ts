@@ -6,6 +6,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'app/core/components/admin/login/services/auth.service';
 import { AlertifyService } from 'app/core/services/alertify.service';
 import { LookUpService } from 'app/core/services/lookUp.service';
+import { Bolum } from '../bolum/models/Bolum';
+import { BolumService } from '../bolum/services/Bolum.service';
+import { User } from '../user/models/user';
+import { UserService } from '../user/services/user.service';
 import { OgretimElemani } from './models/OgretimElemani';
 import { OgretimElemaniService } from './services/OgretimElemani.service';
 
@@ -17,29 +21,32 @@ declare var jQuery: any;
 	styleUrls: ['./ogretimElemani.component.scss']
 })
 export class OgretimElemaniComponent implements AfterViewInit, OnInit {
-	
+
 	dataSource: MatTableDataSource<any>;
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;
-	displayedColumns: string[] = ['id','createdDate','updatedDate','deletedDate','bolumId','userId','kurumSicilNo','unvan','adi','soyadi','tCKimlikNo','cinsiyet','dogumTarihi', 'update','delete'];
+	displayedColumns: string[] = ['id', 'createdDate', 'updatedDate', 'deletedDate', 'bolumId', 'userId', 'kurumSicilNo', 'unvan', 'adi', 'soyadi', 'tCKimlikNo', 'cinsiyet', 'dogumTarihi', 'update', 'delete'];
 
-	ogretimElemaniList:OgretimElemani[];
-	ogretimElemani:OgretimElemani=new OgretimElemani();
-
+	ogretimElemaniList: OgretimElemani[];
+	ogretimElemani: OgretimElemani = new OgretimElemani();
+	bolumList:Bolum[];
+	userList:User[];
 	ogretimElemaniAddForm: FormGroup;
 
 
-	ogretimElemaniId:number;
+	ogretimElemaniId: number;
 
-	constructor(private ogretimElemaniService:OgretimElemaniService, private lookupService:LookUpService,private alertifyService:AlertifyService,private formBuilder: FormBuilder, private authService:AuthService) { }
+	constructor(private ogretimElemaniService: OgretimElemaniService,private userService:UserService, private lookupService: LookUpService,private bolumService:BolumService, private alertifyService: AlertifyService, private formBuilder: FormBuilder, private authService: AuthService) { }
 
-    ngAfterViewInit(): void {
-        this.getOgretimElemaniList();
-    }
+	ngAfterViewInit(): void {
+		this.getOgretimElemaniList();
+	}
 
 	ngOnInit() {
 
 		this.createOgretimElemaniAddForm();
+		this.getBolumList();
+		this.getUserList();
 	}
 
 
@@ -47,11 +54,23 @@ export class OgretimElemaniComponent implements AfterViewInit, OnInit {
 		this.ogretimElemaniService.getOgretimElemaniList().subscribe(data => {
 			this.ogretimElemaniList = data;
 			this.dataSource = new MatTableDataSource(data);
-            this.configDataTable();
+			this.configDataTable();
 		});
 	}
 
-	save(){
+	getBolumList(){
+		this.bolumService.getBolumList().subscribe(data=>{
+			this.bolumList=data;
+		});
+	}
+
+	getUserList(){
+		this.userService.getUserList().subscribe(data=>{
+			this.userList=data;
+		});
+	}
+
+	save() {
 
 		if (this.ogretimElemaniAddForm.valid) {
 			this.ogretimElemani = Object.assign({}, this.ogretimElemaniAddForm.value)
@@ -64,7 +83,7 @@ export class OgretimElemaniComponent implements AfterViewInit, OnInit {
 
 	}
 
-	addOgretimElemani(){
+	addOgretimElemani() {
 
 		this.ogretimElemaniService.addOgretimElemani(this.ogretimElemani).subscribe(data => {
 			this.getOgretimElemaniList();
@@ -77,14 +96,14 @@ export class OgretimElemaniComponent implements AfterViewInit, OnInit {
 
 	}
 
-	updateOgretimElemani(){
+	updateOgretimElemani() {
 
 		this.ogretimElemaniService.updateOgretimElemani(this.ogretimElemani).subscribe(data => {
 
-			var index=this.ogretimElemaniList.findIndex(x=>x.id==this.ogretimElemani.id);
-			this.ogretimElemaniList[index]=this.ogretimElemani;
+			var index = this.ogretimElemaniList.findIndex(x => x.id == this.ogretimElemani.id);
+			this.ogretimElemaniList[index] = this.ogretimElemani;
 			this.dataSource = new MatTableDataSource(this.ogretimElemaniList);
-            this.configDataTable();
+			this.configDataTable();
 			this.ogretimElemani = new OgretimElemani();
 			jQuery('#ogretimelemani').modal('hide');
 			this.alertifyService.success(data);
@@ -95,34 +114,34 @@ export class OgretimElemaniComponent implements AfterViewInit, OnInit {
 	}
 
 	createOgretimElemaniAddForm() {
-		this.ogretimElemaniAddForm = this.formBuilder.group({		
-			id : [0],
+		this.ogretimElemaniAddForm = this.formBuilder.group({
+			id: [0],
 
-bolumId : [0, Validators.required],
-userId : [0, Validators.required],
-kurumSicilNo : ["", Validators.required],
-unvan : ["", Validators.required],
-adi : ["", Validators.required],
-soyadi : ["", Validators.required],
-tCKimlikNo : ["", Validators.required],
-cinsiyet : [false, Validators.required],
-dogumTarihi : [null, Validators.required]
+			bolumId: [0, Validators.required],
+			userId: [0, Validators.required],
+			kurumSicilNo: ["", Validators.required],
+			unvan: ["", Validators.required],
+			adi: ["", Validators.required],
+			soyadi: ["", Validators.required],
+			tCKimlikNo: ["", Validators.required],
+			cinsiyet: [false, Validators.required],
+			dogumTarihi: [null, Validators.required]
 		})
 	}
 
-	deleteOgretimElemani(ogretimElemaniId:number){
-		this.ogretimElemaniService.deleteOgretimElemani(ogretimElemaniId).subscribe(data=>{
+	deleteOgretimElemani(ogretimElemaniId: number) {
+		this.ogretimElemaniService.deleteOgretimElemani(ogretimElemaniId).subscribe(data => {
 			this.alertifyService.success(data.toString());
-			this.ogretimElemaniList=this.ogretimElemaniList.filter(x=> x.id!=ogretimElemaniId);
+			this.ogretimElemaniList = this.ogretimElemaniList.filter(x => x.id != ogretimElemaniId);
 			this.dataSource = new MatTableDataSource(this.ogretimElemaniList);
 			this.configDataTable();
 		})
 	}
 
-	getOgretimElemaniById(ogretimElemaniId:number){
+	getOgretimElemaniById(ogretimElemaniId: number) {
 		this.clearFormGroup(this.ogretimElemaniAddForm);
-		this.ogretimElemaniService.getOgretimElemaniById(ogretimElemaniId).subscribe(data=>{
-			this.ogretimElemani=data;
+		this.ogretimElemaniService.getOgretimElemaniById(ogretimElemaniId).subscribe(data => {
+			this.ogretimElemani = data;
 			this.ogretimElemaniAddForm.patchValue(data);
 		})
 	}
@@ -140,7 +159,7 @@ dogumTarihi : [null, Validators.required]
 		});
 	}
 
-	checkClaim(claim:string):boolean{
+	checkClaim(claim: string): boolean {
 		return this.authService.claimGuard(claim)
 	}
 
@@ -158,4 +177,4 @@ dogumTarihi : [null, Validators.required]
 		}
 	}
 
-  }
+}

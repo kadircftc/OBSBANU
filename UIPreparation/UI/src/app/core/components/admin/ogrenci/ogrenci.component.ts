@@ -93,6 +93,14 @@ export class OgrenciComponent implements AfterViewInit, OnInit {
 
 	}
 
+	manOrWomen(gender: number) {
+		if (gender == 0)
+			return 'Erkek'
+		else
+			return 'Kız'
+	}
+
+
 	addOgrenci() {
 
 		this.ogrenciService.addOgrenci(this.ogrenci).subscribe(data => {
@@ -132,7 +140,6 @@ export class OgrenciComponent implements AfterViewInit, OnInit {
 			adi: ["", Validators.required],
 			soyadi: ["", Validators.required],
 			tcKimlikNo: ["", Validators.required],
-			cinsiyet: [false],
 			dogumTarihi: [null, Validators.required],
 			userId: [0, Validators.required]
 		})
