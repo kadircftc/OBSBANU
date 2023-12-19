@@ -22,7 +22,7 @@ namespace Business.Handlers.Ogrencis.Commands
     /// </summary>
     public class CreateOgrenciCommand : IRequest<IResult>
     {
-
+        public int Id { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public System.DateTime UpdatedDate { get; set; }
         public System.DateTime DeletedDate { get; set; }
@@ -54,16 +54,14 @@ namespace Business.Handlers.Ogrencis.Commands
             [SecuredOperation(Priority = 1)]
             public async Task<IResult> Handle(CreateOgrenciCommand request, CancellationToken cancellationToken)
             {
-                var isThereOgrenciRecord = _ogrenciRepository.Query().Any(u => u.CreatedDate == request.CreatedDate);
+                var isThereOgrenciRecord = _ogrenciRepository.Query().Any(u => u.OgrenciNo == request.OgrenciNo&&u.TcKimlikNo==request.TcKimlikNo);
 
                 if (isThereOgrenciRecord == true)
                     return new ErrorResult(Messages.NameAlreadyExist);
 
                 var addedOgrenci = new Ogrenci
                 {
-                    CreatedDate = request.CreatedDate,
-                    UpdatedDate = request.UpdatedDate,
-                    DeletedDate = request.DeletedDate,
+                    CreatedDate = DateTime.Now,
                     BolumId = request.BolumId,
                     OgrenciNo = request.OgrenciNo,
                     DurumId = request.DurumId,

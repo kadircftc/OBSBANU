@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Core.Aspects.Autofac.Validation;
 using Business.Handlers.DersAlmas.ValidationRules;
-
+using System;
 
 namespace Business.Handlers.DersAlmas.Commands
 {
@@ -49,9 +49,8 @@ namespace Business.Handlers.DersAlmas.Commands
                 var isThereDersAlmaRecord = await _dersAlmaRepository.GetAsync(u => u.Id == request.Id);
 
 
-                isThereDersAlmaRecord.CreatedDate = request.CreatedDate;
-                isThereDersAlmaRecord.UpdatedDate = request.UpdatedDate;
-                isThereDersAlmaRecord.DeletedDate = request.DeletedDate;
+
+                isThereDersAlmaRecord.UpdatedDate = DateTime.Now;
                 isThereDersAlmaRecord.DersAcmaId = request.DersAcmaId;
                 isThereDersAlmaRecord.OgrenciId = request.OgrenciId;
                 isThereDersAlmaRecord.DersDurumId = request.DersDurumId;

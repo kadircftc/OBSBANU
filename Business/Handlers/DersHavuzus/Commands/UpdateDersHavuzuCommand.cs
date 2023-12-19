@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Core.Aspects.Autofac.Validation;
 using Business.Handlers.DersHavuzus.ValidationRules;
-
+using System;
 
 namespace Business.Handlers.DersHavuzus.Commands
 {
@@ -55,9 +55,8 @@ namespace Business.Handlers.DersHavuzus.Commands
                 var isThereDersHavuzuRecord = await _dersHavuzuRepository.GetAsync(u => u.Id == request.Id);
 
 
-                isThereDersHavuzuRecord.CreatedDate = request.CreatedDate;
-                isThereDersHavuzuRecord.UpdatedDate = request.UpdatedDate;
-                isThereDersHavuzuRecord.DeletedDate = request.DeletedDate;
+
+                isThereDersHavuzuRecord.UpdatedDate = DateTime.Now;
                 isThereDersHavuzuRecord.DersDiliId = request.DersDiliId;
                 isThereDersHavuzuRecord.DersSeviyesiId = request.DersSeviyesiId;
                 isThereDersHavuzuRecord.DersturuId = request.DersturuId;

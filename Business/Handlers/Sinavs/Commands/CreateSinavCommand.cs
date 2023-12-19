@@ -13,6 +13,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 using Business.Handlers.Sinavs.ValidationRules;
+using System;
 
 namespace Business.Handlers.Sinavs.Commands
 {
@@ -21,7 +22,7 @@ namespace Business.Handlers.Sinavs.Commands
     /// </summary>
     public class CreateSinavCommand : IRequest<IResult>
     {
-
+        public int Id { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public System.DateTime UpdatedDate { get; set; }
         public System.DateTime DeletedDate { get; set; }
@@ -49,16 +50,14 @@ namespace Business.Handlers.Sinavs.Commands
             [SecuredOperation(Priority = 1)]
             public async Task<IResult> Handle(CreateSinavCommand request, CancellationToken cancellationToken)
             {
-                var isThereSinavRecord = _sinavRepository.Query().Any(u => u.CreatedDate == request.CreatedDate);
+                var isThereSinavRecord = _sinavRepository.Query().Any(u => u.Id == request.Id);
 
                 if (isThereSinavRecord == true)
                     return new ErrorResult(Messages.NameAlreadyExist);
 
                 var addedSinav = new Sinav
                 {
-                    CreatedDate = request.CreatedDate,
-                    UpdatedDate = request.UpdatedDate,
-                    DeletedDate = request.DeletedDate,
+                    CreatedDate = DateTime.Now,
                     DersAcmaId = request.DersAcmaId,
                     SınavTuruId = request.SınavTuruId,
                     DerslikId = request.DerslikId,

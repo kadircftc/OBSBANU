@@ -61,7 +61,7 @@ export class AuthService {
       }
     }
     );
-    await this.delay(100);
+    await this.delay(500);
     if (this.userData == null) {
     console.log("hatalı parola");
       if (this.langText == "tr-TR" || this.langText == null) {

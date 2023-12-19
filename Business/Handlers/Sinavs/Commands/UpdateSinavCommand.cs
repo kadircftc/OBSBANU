@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Core.Aspects.Autofac.Validation;
 using Business.Handlers.Sinavs.ValidationRules;
-
+using System;
 
 namespace Business.Handlers.Sinavs.Commands
 {
@@ -52,9 +52,7 @@ namespace Business.Handlers.Sinavs.Commands
                 var isThereSinavRecord = await _sinavRepository.GetAsync(u => u.Id == request.Id);
 
 
-                isThereSinavRecord.CreatedDate = request.CreatedDate;
-                isThereSinavRecord.UpdatedDate = request.UpdatedDate;
-                isThereSinavRecord.DeletedDate = request.DeletedDate;
+                isThereSinavRecord.UpdatedDate =DateTime.Now;
                 isThereSinavRecord.DersAcmaId = request.DersAcmaId;
                 isThereSinavRecord.SınavTuruId = request.SınavTuruId;
                 isThereSinavRecord.DerslikId = request.DerslikId;

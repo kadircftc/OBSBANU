@@ -1,14 +1,13 @@
-import { Component, AfterViewInit, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { AuthService } from 'app/core/components/admin/login/services/auth.service';
 import { AlertifyService } from 'app/core/services/alertify.service';
 import { LookUpService } from 'app/core/services/lookUp.service';
-import { AuthService } from 'app/core/components/admin/login/services/auth.service';
 import { Danismanlik } from './models/Danismanlik';
 import { DanismanlikService } from './services/Danismanlik.service';
-import { environment } from 'environments/environment';
 
 declare var jQuery: any;
 
@@ -18,25 +17,25 @@ declare var jQuery: any;
 	styleUrls: ['./danismanlik.component.scss']
 })
 export class DanismanlikComponent implements AfterViewInit, OnInit {
-	
+
 	dataSource: MatTableDataSource<any>;
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;
-	displayedColumns: string[] = ['id','createdDate','updatedDate','deletedDate','ogrElmID','ogrenciId', 'update','delete'];
+	displayedColumns: string[] = ['id', 'createdDate', 'updatedDate', 'deletedDate', 'ogrElmID', 'ogrenciId', 'update', 'delete'];
 
-	danismanlikList:Danismanlik[];
-	danismanlik:Danismanlik=new Danismanlik();
+	danismanlikList: Danismanlik[];
+	danismanlik: Danismanlik = new Danismanlik();
 
 	danismanlikAddForm: FormGroup;
 
 
-	danismanlikId:number;
+	danismanlikId: number;
 
-	constructor(private danismanlikService:DanismanlikService, private lookupService:LookUpService,private alertifyService:AlertifyService,private formBuilder: FormBuilder, private authService:AuthService) { }
+	constructor(private danismanlikService: DanismanlikService, private lookupService: LookUpService, private alertifyService: AlertifyService, private formBuilder: FormBuilder, private authService: AuthService) { }
 
-    ngAfterViewInit(): void {
-        this.getDanismanlikList();
-    }
+	ngAfterViewInit(): void {
+		this.getDanismanlikList();
+	}
 
 	ngOnInit() {
 
@@ -48,11 +47,11 @@ export class DanismanlikComponent implements AfterViewInit, OnInit {
 		this.danismanlikService.getDanismanlikList().subscribe(data => {
 			this.danismanlikList = data;
 			this.dataSource = new MatTableDataSource(data);
-            this.configDataTable();
+			this.configDataTable();
 		});
 	}
 
-	save(){
+	save() {
 
 		if (this.danismanlikAddForm.valid) {
 			this.danismanlik = Object.assign({}, this.danismanlikAddForm.value)
@@ -65,7 +64,7 @@ export class DanismanlikComponent implements AfterViewInit, OnInit {
 
 	}
 
-	addDanismanlik(){
+	addDanismanlik() {
 
 		this.danismanlikService.addDanismanlik(this.danismanlik).subscribe(data => {
 			this.getDanismanlikList();
@@ -78,14 +77,14 @@ export class DanismanlikComponent implements AfterViewInit, OnInit {
 
 	}
 
-	updateDanismanlik(){
+	updateDanismanlik() {
 
 		this.danismanlikService.updateDanismanlik(this.danismanlik).subscribe(data => {
 
-			var index=this.danismanlikList.findIndex(x=>x.id==this.danismanlik.id);
-			this.danismanlikList[index]=this.danismanlik;
+			var index = this.danismanlikList.findIndex(x => x.id == this.danismanlik.id);
+			this.danismanlikList[index] = this.danismanlik;
 			this.dataSource = new MatTableDataSource(this.danismanlikList);
-            this.configDataTable();
+			this.configDataTable();
 			this.danismanlik = new Danismanlik();
 			jQuery('#danismanlik').modal('hide');
 			this.alertifyService.success(data);
@@ -96,29 +95,26 @@ export class DanismanlikComponent implements AfterViewInit, OnInit {
 	}
 
 	createDanismanlikAddForm() {
-		this.danismanlikAddForm = this.formBuilder.group({		
-			id : [0],
-createdDate : [null, Validators.required],
-updatedDate : [null, Validators.required],
-deletedDate : [null, Validators.required],
-ogrElmID : [0, Validators.required],
-ogrenciId : [0, Validators.required]
+		this.danismanlikAddForm = this.formBuilder.group({
+			id: [0],
+			ogrElmID: [0, Validators.required],
+			ogrenciId: [0, Validators.required]
 		})
 	}
 
-	deleteDanismanlik(danismanlikId:number){
-		this.danismanlikService.deleteDanismanlik(danismanlikId).subscribe(data=>{
+	deleteDanismanlik(danismanlikId: number) {
+		this.danismanlikService.deleteDanismanlik(danismanlikId).subscribe(data => {
 			this.alertifyService.success(data.toString());
-			this.danismanlikList=this.danismanlikList.filter(x=> x.id!=danismanlikId);
+			this.danismanlikList = this.danismanlikList.filter(x => x.id != danismanlikId);
 			this.dataSource = new MatTableDataSource(this.danismanlikList);
 			this.configDataTable();
 		})
 	}
 
-	getDanismanlikById(danismanlikId:number){
+	getDanismanlikById(danismanlikId: number) {
 		this.clearFormGroup(this.danismanlikAddForm);
-		this.danismanlikService.getDanismanlikById(danismanlikId).subscribe(data=>{
-			this.danismanlik=data;
+		this.danismanlikService.getDanismanlikById(danismanlikId).subscribe(data => {
+			this.danismanlik = data;
 			this.danismanlikAddForm.patchValue(data);
 		})
 	}
@@ -136,7 +132,7 @@ ogrenciId : [0, Validators.required]
 		});
 	}
 
-	checkClaim(claim:string):boolean{
+	checkClaim(claim: string): boolean {
 		return this.authService.claimGuard(claim)
 	}
 
@@ -154,4 +150,4 @@ ogrenciId : [0, Validators.required]
 		}
 	}
 
-  }
+}

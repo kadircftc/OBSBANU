@@ -9,7 +9,7 @@ using DataAccess.Abstract;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-
+using System;
 
 namespace Business.Handlers.Sinavs.Commands
 {
@@ -38,7 +38,9 @@ namespace Business.Handlers.Sinavs.Commands
             {
                 var sinavToDelete = _sinavRepository.Get(p => p.Id == request.Id);
 
-                _sinavRepository.Delete(sinavToDelete);
+                sinavToDelete.DeletedDate = DateTime.Now;
+
+                _sinavRepository.Update(sinavToDelete);
                 await _sinavRepository.SaveChangesAsync();
                 return new SuccessResult(Messages.Deleted);
             }

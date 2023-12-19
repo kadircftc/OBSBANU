@@ -1,8 +1,8 @@
-﻿import { HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 import { OgretimElemani } from '../models/OgretimElemani';
-import { environment } from 'environments/environment';
 
 
 @Injectable({
@@ -15,25 +15,25 @@ export class OgretimElemaniService {
 
   getOgretimElemaniList(): Observable<OgretimElemani[]> {
 
-    return this.httpClient.get<OgretimElemani[]>(environment.getApiUrl + '/ogretimElemanis/getall')
+    return this.httpClient.get<OgretimElemani[]>(environment.getApiUrl + '/OgretimElemanis/getall')
   }
 
   getOgretimElemaniById(id: number): Observable<OgretimElemani> {
-    return this.httpClient.get<OgretimElemani>(environment.getApiUrl + '/ogretimElemanis/getbyid?id='+id)
+    return this.httpClient.get<OgretimElemani>(environment.getApiUrl + '/OgretimElemanis/getbyid?id='+id)
   }
 
   addOgretimElemani(ogretimElemani: OgretimElemani): Observable<any> {
 
-    return this.httpClient.post(environment.getApiUrl + '/ogretimElemanis/', ogretimElemani, { responseType: 'text' });
+    return this.httpClient.post(environment.getApiUrl + '/OgretimElemanis/', ogretimElemani, { responseType: 'text' });
   }
 
   updateOgretimElemani(ogretimElemani: OgretimElemani): Observable<any> {
-    return this.httpClient.put(environment.getApiUrl + '/ogretimElemanis/', ogretimElemani, { responseType: 'text' });
+    return this.httpClient.put(environment.getApiUrl + '/OgretimElemanis/', ogretimElemani, { responseType: 'text' });
 
   }
 
   deleteOgretimElemani(id: number) {
-    return this.httpClient.request('delete', environment.getApiUrl + '/ogretimElemanis/', { body: { id: id } });
+    return this.httpClient.request('delete', environment.getApiUrl + '/OgretimElemanis/', { body: { id: id } });
   }
 
 

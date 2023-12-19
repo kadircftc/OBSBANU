@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Core.Aspects.Autofac.Validation;
 using Business.Handlers.Degerlendirmes.ValidationRules;
-
+using System;
 
 namespace Business.Handlers.Degerlendirmes.Commands
 {
@@ -49,9 +49,8 @@ namespace Business.Handlers.Degerlendirmes.Commands
                 var isThereDegerlendirmeRecord = await _degerlendirmeRepository.GetAsync(u => u.Id == request.Id);
 
 
-                isThereDegerlendirmeRecord.CreatedDate = request.CreatedDate;
-                isThereDegerlendirmeRecord.UpdatedDate = request.UpdatedDate;
-                isThereDegerlendirmeRecord.DeletedDate = request.DeletedDate;
+
+                isThereDegerlendirmeRecord.UpdatedDate = DateTime.Now;
                 isThereDegerlendirmeRecord.SinavId = request.SinavId;
                 isThereDegerlendirmeRecord.OgrenciId = request.OgrenciId;
                 isThereDegerlendirmeRecord.SinavNotu = request.SinavNotu;

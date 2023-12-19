@@ -9,7 +9,7 @@ using DataAccess.Abstract;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-
+using System;
 
 namespace Business.Handlers.DersProgramis.Commands
 {
@@ -38,7 +38,9 @@ namespace Business.Handlers.DersProgramis.Commands
             {
                 var dersProgramiToDelete = _dersProgramiRepository.Get(p => p.Id == request.Id);
 
-                _dersProgramiRepository.Delete(dersProgramiToDelete);
+                dersProgramiToDelete.DeletedDate=DateTime.Now;
+
+                _dersProgramiRepository.Update(dersProgramiToDelete);
                 await _dersProgramiRepository.SaveChangesAsync();
                 return new SuccessResult(Messages.Deleted);
             }

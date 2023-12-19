@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Core.Aspects.Autofac.Validation;
 using Business.Handlers.DersProgramis.ValidationRules;
-
+using System;
 
 namespace Business.Handlers.DersProgramis.Commands
 {
@@ -50,9 +50,7 @@ namespace Business.Handlers.DersProgramis.Commands
                 var isThereDersProgramiRecord = await _dersProgramiRepository.GetAsync(u => u.Id == request.Id);
 
 
-                isThereDersProgramiRecord.CreatedDate = request.CreatedDate;
-                isThereDersProgramiRecord.UpdatedDate = request.UpdatedDate;
-                isThereDersProgramiRecord.DeletedDate = request.DeletedDate;
+                isThereDersProgramiRecord.UpdatedDate = DateTime.Now;
                 isThereDersProgramiRecord.DersAcmaId = request.DersAcmaId;
                 isThereDersProgramiRecord.DerslikId = request.DerslikId;
                 isThereDersProgramiRecord.DersGunuId = request.DersGunuId;

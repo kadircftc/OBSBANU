@@ -9,7 +9,7 @@ using DataAccess.Abstract;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-
+using System;
 
 namespace Business.Handlers.Degerlendirmes.Commands
 {
@@ -38,7 +38,9 @@ namespace Business.Handlers.Degerlendirmes.Commands
             {
                 var degerlendirmeToDelete = _degerlendirmeRepository.Get(p => p.Id == request.Id);
 
-                _degerlendirmeRepository.Delete(degerlendirmeToDelete);
+                degerlendirmeToDelete.DeletedDate=DateTime.Now;
+
+                _degerlendirmeRepository.Update(degerlendirmeToDelete);
                 await _degerlendirmeRepository.SaveChangesAsync();
                 return new SuccessResult(Messages.Deleted);
             }

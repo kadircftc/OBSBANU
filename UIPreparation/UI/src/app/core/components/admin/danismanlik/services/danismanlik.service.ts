@@ -1,8 +1,8 @@
-﻿import { HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 import { Danismanlik } from '../models/Danismanlik';
-import { environment } from 'environments/environment';
 
 
 @Injectable({
@@ -15,25 +15,25 @@ export class DanismanlikService {
 
   getDanismanlikList(): Observable<Danismanlik[]> {
 
-    return this.httpClient.get<Danismanlik[]>(environment.getApiUrl + '/danismanliks/getall')
+    return this.httpClient.get<Danismanlik[]>(environment.getApiUrl + '/Danismanliks/getall')
   }
 
   getDanismanlikById(id: number): Observable<Danismanlik> {
-    return this.httpClient.get<Danismanlik>(environment.getApiUrl + '/danismanliks/getbyid?id='+id)
+    return this.httpClient.get<Danismanlik>(environment.getApiUrl + '/Danismanliks/getbyid?id='+id)
   }
 
   addDanismanlik(danismanlik: Danismanlik): Observable<any> {
 
-    return this.httpClient.post(environment.getApiUrl + '/danismanliks/', danismanlik, { responseType: 'text' });
+    return this.httpClient.post(environment.getApiUrl + '/Danismanliks/', danismanlik, { responseType: 'text' });
   }
 
   updateDanismanlik(danismanlik: Danismanlik): Observable<any> {
-    return this.httpClient.put(environment.getApiUrl + '/danismanliks/', danismanlik, { responseType: 'text' });
+    return this.httpClient.put(environment.getApiUrl + '/Danismanliks/', danismanlik, { responseType: 'text' });
 
   }
 
   deleteDanismanlik(id: number) {
-    return this.httpClient.request('delete', environment.getApiUrl + '/danismanliks/', { body: { id: id } });
+    return this.httpClient.request('delete', environment.getApiUrl + '/Danismanliks/', { body: { id: id } });
   }
 
 

@@ -9,7 +9,7 @@ using DataAccess.Abstract;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-
+using System;
 
 namespace Business.Handlers.Danismanliks.Commands
 {
@@ -38,7 +38,9 @@ namespace Business.Handlers.Danismanliks.Commands
             {
                 var danismanlikToDelete = _danismanlikRepository.Get(p => p.Id == request.Id);
 
-                _danismanlikRepository.Delete(danismanlikToDelete);
+                danismanlikToDelete.DeletedDate=DateTime.Now;
+
+                _danismanlikRepository.Update(danismanlikToDelete);
                 await _danismanlikRepository.SaveChangesAsync();
                 return new SuccessResult(Messages.Deleted);
             }

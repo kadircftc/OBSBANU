@@ -9,7 +9,7 @@ using DataAccess.Abstract;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-
+using System;
 
 namespace Business.Handlers.Bolums.Commands
 {
@@ -37,8 +37,10 @@ namespace Business.Handlers.Bolums.Commands
             public async Task<IResult> Handle(DeleteBolumCommand request, CancellationToken cancellationToken)
             {
                 var bolumToDelete = _bolumRepository.Get(p => p.Id == request.Id);
+                    
+                bolumToDelete.DeletedDate=DateTime.Now;
 
-                _bolumRepository.Delete(bolumToDelete);
+                _bolumRepository.Update(bolumToDelete);
                 await _bolumRepository.SaveChangesAsync();
                 return new SuccessResult(Messages.Deleted);
             }

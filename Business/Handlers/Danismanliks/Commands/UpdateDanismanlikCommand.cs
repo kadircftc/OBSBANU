@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Core.Aspects.Autofac.Validation;
 using Business.Handlers.Danismanliks.ValidationRules;
-
+using System;
 
 namespace Business.Handlers.Danismanliks.Commands
 {
@@ -48,9 +48,7 @@ namespace Business.Handlers.Danismanliks.Commands
                 var isThereDanismanlikRecord = await _danismanlikRepository.GetAsync(u => u.Id == request.Id);
 
 
-                isThereDanismanlikRecord.CreatedDate = request.CreatedDate;
-                isThereDanismanlikRecord.UpdatedDate = request.UpdatedDate;
-                isThereDanismanlikRecord.DeletedDate = request.DeletedDate;
+                isThereDanismanlikRecord.UpdatedDate =DateTime.Now;
                 isThereDanismanlikRecord.OgrElmID = request.OgrElmID;
                 isThereDanismanlikRecord.OgrenciId = request.OgrenciId;
 

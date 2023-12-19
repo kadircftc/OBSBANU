@@ -1,8 +1,8 @@
-﻿import { HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 import { Mufredat } from '../models/Mufredat';
-import { environment } from 'environments/environment';
 
 
 @Injectable({
@@ -15,25 +15,25 @@ export class MufredatService {
 
   getMufredatList(): Observable<Mufredat[]> {
 
-    return this.httpClient.get<Mufredat[]>(environment.getApiUrl + '/mufredats/getall')
+    return this.httpClient.get<Mufredat[]>(environment.getApiUrl + '/Mufredats/getall')
   }
 
   getMufredatById(id: number): Observable<Mufredat> {
-    return this.httpClient.get<Mufredat>(environment.getApiUrl + '/mufredats/getbyid?id='+id)
+    return this.httpClient.get<Mufredat>(environment.getApiUrl + '/Mufredats/getbyid?id='+id)
   }
 
   addMufredat(mufredat: Mufredat): Observable<any> {
 
-    return this.httpClient.post(environment.getApiUrl + '/mufredats/', mufredat, { responseType: 'text' });
+    return this.httpClient.post(environment.getApiUrl + '/Mufredats/', mufredat, { responseType: 'text' });
   }
 
   updateMufredat(mufredat: Mufredat): Observable<any> {
-    return this.httpClient.put(environment.getApiUrl + '/mufredats/', mufredat, { responseType: 'text' });
+    return this.httpClient.put(environment.getApiUrl + '/Mufredats/', mufredat, { responseType: 'text' });
 
   }
 
   deleteMufredat(id: number) {
-    return this.httpClient.request('delete', environment.getApiUrl + '/mufredats/', { body: { id: id } });
+    return this.httpClient.request('delete', environment.getApiUrl + '/Mufredats/', { body: { id: id } });
   }
 
 

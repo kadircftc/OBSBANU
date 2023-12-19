@@ -1,14 +1,13 @@
-import { Component, AfterViewInit, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { AuthService } from 'app/core/components/admin/login/services/auth.service';
 import { AlertifyService } from 'app/core/services/alertify.service';
 import { LookUpService } from 'app/core/services/lookUp.service';
-import { AuthService } from 'app/core/components/admin/login/services/auth.service';
 import { Degerlendirme } from './models/Degerlendirme';
 import { DegerlendirmeService } from './services/Degerlendirme.service';
-import { environment } from 'environments/environment';
 
 declare var jQuery: any;
 
@@ -18,25 +17,25 @@ declare var jQuery: any;
 	styleUrls: ['./degerlendirme.component.scss']
 })
 export class DegerlendirmeComponent implements AfterViewInit, OnInit {
-	
+
 	dataSource: MatTableDataSource<any>;
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;
-	displayedColumns: string[] = ['id','createdDate','updatedDate','deletedDate','sinavId','ogrenciId','sinavNotu', 'update','delete'];
+	displayedColumns: string[] = ['id', 'createdDate', 'updatedDate', 'deletedDate', 'sinavId', 'ogrenciId', 'sinavNotu', 'update', 'delete'];
 
-	degerlendirmeList:Degerlendirme[];
-	degerlendirme:Degerlendirme=new Degerlendirme();
+	degerlendirmeList: Degerlendirme[];
+	degerlendirme: Degerlendirme = new Degerlendirme();
 
 	degerlendirmeAddForm: FormGroup;
 
 
-	degerlendirmeId:number;
+	degerlendirmeId: number;
 
-	constructor(private degerlendirmeService:DegerlendirmeService, private lookupService:LookUpService,private alertifyService:AlertifyService,private formBuilder: FormBuilder, private authService:AuthService) { }
+	constructor(private degerlendirmeService: DegerlendirmeService, private lookupService: LookUpService, private alertifyService: AlertifyService, private formBuilder: FormBuilder, private authService: AuthService) { }
 
-    ngAfterViewInit(): void {
-        this.getDegerlendirmeList();
-    }
+	ngAfterViewInit(): void {
+		this.getDegerlendirmeList();
+	}
 
 	ngOnInit() {
 
@@ -48,11 +47,11 @@ export class DegerlendirmeComponent implements AfterViewInit, OnInit {
 		this.degerlendirmeService.getDegerlendirmeList().subscribe(data => {
 			this.degerlendirmeList = data;
 			this.dataSource = new MatTableDataSource(data);
-            this.configDataTable();
+			this.configDataTable();
 		});
 	}
 
-	save(){
+	save() {
 
 		if (this.degerlendirmeAddForm.valid) {
 			this.degerlendirme = Object.assign({}, this.degerlendirmeAddForm.value)
@@ -65,7 +64,7 @@ export class DegerlendirmeComponent implements AfterViewInit, OnInit {
 
 	}
 
-	addDegerlendirme(){
+	addDegerlendirme() {
 
 		this.degerlendirmeService.addDegerlendirme(this.degerlendirme).subscribe(data => {
 			this.getDegerlendirmeList();
@@ -78,14 +77,14 @@ export class DegerlendirmeComponent implements AfterViewInit, OnInit {
 
 	}
 
-	updateDegerlendirme(){
+	updateDegerlendirme() {
 
 		this.degerlendirmeService.updateDegerlendirme(this.degerlendirme).subscribe(data => {
 
-			var index=this.degerlendirmeList.findIndex(x=>x.id==this.degerlendirme.id);
-			this.degerlendirmeList[index]=this.degerlendirme;
+			var index = this.degerlendirmeList.findIndex(x => x.id == this.degerlendirme.id);
+			this.degerlendirmeList[index] = this.degerlendirme;
 			this.dataSource = new MatTableDataSource(this.degerlendirmeList);
-            this.configDataTable();
+			this.configDataTable();
 			this.degerlendirme = new Degerlendirme();
 			jQuery('#degerlendirme').modal('hide');
 			this.alertifyService.success(data);
@@ -96,30 +95,28 @@ export class DegerlendirmeComponent implements AfterViewInit, OnInit {
 	}
 
 	createDegerlendirmeAddForm() {
-		this.degerlendirmeAddForm = this.formBuilder.group({		
-			id : [0],
-createdDate : [null, Validators.required],
-updatedDate : [null, Validators.required],
-deletedDate : [null, Validators.required],
-sinavId : [0, Validators.required],
-ogrenciId : [0, Validators.required],
-sinavNotu : [0, Validators.required]
+		this.degerlendirmeAddForm = this.formBuilder.group({
+			id: [0],
+
+			sinavId: [0, Validators.required],
+			ogrenciId: [0, Validators.required],
+			sinavNotu: [0, Validators.required]
 		})
 	}
 
-	deleteDegerlendirme(degerlendirmeId:number){
-		this.degerlendirmeService.deleteDegerlendirme(degerlendirmeId).subscribe(data=>{
+	deleteDegerlendirme(degerlendirmeId: number) {
+		this.degerlendirmeService.deleteDegerlendirme(degerlendirmeId).subscribe(data => {
 			this.alertifyService.success(data.toString());
-			this.degerlendirmeList=this.degerlendirmeList.filter(x=> x.id!=degerlendirmeId);
+			this.degerlendirmeList = this.degerlendirmeList.filter(x => x.id != degerlendirmeId);
 			this.dataSource = new MatTableDataSource(this.degerlendirmeList);
 			this.configDataTable();
 		})
 	}
 
-	getDegerlendirmeById(degerlendirmeId:number){
+	getDegerlendirmeById(degerlendirmeId: number) {
 		this.clearFormGroup(this.degerlendirmeAddForm);
-		this.degerlendirmeService.getDegerlendirmeById(degerlendirmeId).subscribe(data=>{
-			this.degerlendirme=data;
+		this.degerlendirmeService.getDegerlendirmeById(degerlendirmeId).subscribe(data => {
+			this.degerlendirme = data;
 			this.degerlendirmeAddForm.patchValue(data);
 		})
 	}
@@ -137,7 +134,7 @@ sinavNotu : [0, Validators.required]
 		});
 	}
 
-	checkClaim(claim:string):boolean{
+	checkClaim(claim: string): boolean {
 		return this.authService.claimGuard(claim)
 	}
 
@@ -155,4 +152,4 @@ sinavNotu : [0, Validators.required]
 		}
 	}
 
-  }
+}

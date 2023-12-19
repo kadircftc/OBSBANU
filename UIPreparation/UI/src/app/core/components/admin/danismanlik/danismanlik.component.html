@@ -101,39 +101,8 @@
         <div class="separator"></div>
         <form *ngIf="danismanlikAddForm" [formGroup]="danismanlikAddForm" (ngSubmit)="save()">
           
-					<div class="row">
-            <div class="col col-md-12">
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="createdDate" type="date" id="createdDate" name="createdDate"
-                       formControlName="createdDate" />
-                <div class="alert alert-danger"
-                     *ngIf="danismanlikAddForm.get('createdDate')!.hasError('createdDate') && danismanlikAddForm.get('createdDate')!.dirty">
-                </div>
-              </mat-form-field>
-            </div>
-          </div>
-					<div class="row">
-            <div class="col col-md-12">
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="updatedDate" type="date" id="updatedDate" name="updatedDate"
-                       formControlName="updatedDate" />
-                <div class="alert alert-danger"
-                     *ngIf="danismanlikAddForm.get('updatedDate')!.hasError('updatedDate') && danismanlikAddForm.get('updatedDate')!.dirty">
-                </div>
-              </mat-form-field>
-            </div>
-          </div>
-					<div class="row">
-            <div class="col col-md-12">
-              <mat-form-field class="example-full-width">
-                <input matInput placeholder="deletedDate" type="date" id="deletedDate" name="deletedDate"
-                       formControlName="deletedDate" />
-                <div class="alert alert-danger"
-                     *ngIf="danismanlikAddForm.get('deletedDate')!.hasError('deletedDate') && danismanlikAddForm.get('deletedDate')!.dirty">
-                </div>
-              </mat-form-field>
-            </div>
-          </div>
+				
+				
 					<div class="row">
             <div class="col col-md-12">
               <mat-form-field class="example-full-width">

@@ -56,9 +56,8 @@ namespace Business.Handlers.Ogrencis.Commands
                 var isThereOgrenciRecord = await _ogrenciRepository.GetAsync(u => u.Id == request.Id);
 
 
-                isThereOgrenciRecord.CreatedDate = request.CreatedDate;
-                isThereOgrenciRecord.UpdatedDate = request.UpdatedDate;
-                isThereOgrenciRecord.DeletedDate = request.DeletedDate;
+
+                isThereOgrenciRecord.UpdatedDate = DateTime.Now;
                 isThereOgrenciRecord.BolumId = request.BolumId;
                 isThereOgrenciRecord.OgrenciNo = request.OgrenciNo;
                 isThereOgrenciRecord.DurumId = request.DurumId;

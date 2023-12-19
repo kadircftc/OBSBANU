@@ -30,7 +30,10 @@ export const ADMINROUTES: RouteInfo[] = [
   { path: '/mufredat', title: 'Mufredat', icon: 'update', class: '', claim: "GetMufredatsQuery" },
   { path: '/ogrenci', title: 'Ogrenci', icon: 'update', class: '', claim: "GetOgrencisQuery" },
   { path: '/ogretimElemani', title: 'OgretimElemani', icon: 'update', class: '', claim: "GetOgretimElemanisQuery" },
-  { path: '/sinav', title: 'Sinav', icon: 'update', class: '', claim: "GetSinavsQuery" },
+  { path: '/sinav', title: 'Sinav', icon: 'update', class: '', claim: "GetSinavsQuery" }
+];
+
+export const USERROUTES: RouteInfo[] = [ 
   { path: '/sT_AkademikDonem', title: 'ST_AkademikDonem', icon: 'update', class: '', claim: "GetST_AkademikDonemsQuery" },
   { path: '/sT_AkademikYil', title: 'ST_AkademikYil', icon: 'update', class: '', claim: "GetST_AkademikYilsQuery" },
   { path: '/sT_DersAlmaDurumu', title: 'ST_DersAlmaDurumu', icon: 'update', class: '', claim: "GetST_DersAlmaDurumusQuery" },
@@ -44,10 +47,6 @@ export const ADMINROUTES: RouteInfo[] = [
   { path: '/sT_OgretimTuru', title: 'ST_OgretimTuru', icon: 'update', class: '', claim: "GetST_OgretimTurusQuery" },
   { path: '/sT_ProgramTuru', title: 'ST_ProgramTuru', icon: 'update', class: '', claim: "GetST_ProgramTurusQuery" },
   { path: '/sT_SinavTuru', title: 'ST_SinavTuru', icon: 'update', class: '', claim: "GetST_SinavTurusQuery" },
-];
-
-export const USERROUTES: RouteInfo[] = [ 
-  //{ path: '/log', title: 'Logs', icon: 'update', class: '', claim: "GetLogDtoQuery" }
 ];
 
 @Component({

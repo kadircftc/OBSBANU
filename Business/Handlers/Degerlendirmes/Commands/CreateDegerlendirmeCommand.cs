@@ -13,6 +13,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 using Business.Handlers.Degerlendirmes.ValidationRules;
+using System;
 
 namespace Business.Handlers.Degerlendirmes.Commands
 {
@@ -21,7 +22,7 @@ namespace Business.Handlers.Degerlendirmes.Commands
     /// </summary>
     public class CreateDegerlendirmeCommand : IRequest<IResult>
     {
-
+        public int Id { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public System.DateTime UpdatedDate { get; set; }
         public System.DateTime DeletedDate { get; set; }
@@ -46,16 +47,14 @@ namespace Business.Handlers.Degerlendirmes.Commands
             [SecuredOperation(Priority = 1)]
             public async Task<IResult> Handle(CreateDegerlendirmeCommand request, CancellationToken cancellationToken)
             {
-                var isThereDegerlendirmeRecord = _degerlendirmeRepository.Query().Any(u => u.CreatedDate == request.CreatedDate);
+                var isThereDegerlendirmeRecord = _degerlendirmeRepository.Query().Any(u => u.Id == request.Id);
 
                 if (isThereDegerlendirmeRecord == true)
                     return new ErrorResult(Messages.NameAlreadyExist);
 
                 var addedDegerlendirme = new Degerlendirme
                 {
-                    CreatedDate = request.CreatedDate,
-                    UpdatedDate = request.UpdatedDate,
-                    DeletedDate = request.DeletedDate,
+                    CreatedDate = DateTime.Now,
                     SinavId = request.SinavId,
                     OgrenciId = request.OgrenciId,
                     SinavNotu = request.SinavNotu,

@@ -1,14 +1,13 @@
-import { Component, AfterViewInit, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { AuthService } from 'app/core/components/admin/login/services/auth.service';
 import { AlertifyService } from 'app/core/services/alertify.service';
 import { LookUpService } from 'app/core/services/lookUp.service';
-import { AuthService } from 'app/core/components/admin/login/services/auth.service';
 import { DersProgrami } from './models/DersProgrami';
 import { DersProgramiService } from './services/DersProgrami.service';
-import { environment } from 'environments/environment';
 
 declare var jQuery: any;
 
@@ -98,9 +97,6 @@ export class DersProgramiComponent implements AfterViewInit, OnInit {
 	createDersProgramiAddForm() {
 		this.dersProgramiAddForm = this.formBuilder.group({		
 			id : [0],
-createdDate : [null, Validators.required],
-updatedDate : [null, Validators.required],
-deletedDate : [null, Validators.required],
 dersAcmaId : [0, Validators.required],
 derslikId : [0, Validators.required],
 dersGunuId : [0, Validators.required],

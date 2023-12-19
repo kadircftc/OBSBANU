@@ -1,14 +1,19 @@
-import { Component, AfterViewInit, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { AuthService } from 'app/core/components/admin/login/services/auth.service';
 import { AlertifyService } from 'app/core/services/alertify.service';
 import { LookUpService } from 'app/core/services/lookUp.service';
-import { AuthService } from 'app/core/components/admin/login/services/auth.service';
+import { Bolum } from '../bolum/models/Bolum';
+import { BolumService } from '../bolum/services/Bolum.service';
+import { ST_OgrenciDurum } from '../sT_OgrenciDurum/models/ST_OgrenciDurum';
+import { ST_OgrenciDurumService } from '../sT_OgrenciDurum/services/ST_OgrenciDurum.service';
+import { User } from '../user/models/user';
+import { UserService } from '../user/services/user.service';
 import { Ogrenci } from './models/Ogrenci';
 import { OgrenciService } from './services/Ogrenci.service';
-import { environment } from 'environments/environment';
 
 declare var jQuery: any;
 
@@ -18,29 +23,35 @@ declare var jQuery: any;
 	styleUrls: ['./ogrenci.component.scss']
 })
 export class OgrenciComponent implements AfterViewInit, OnInit {
-	
+
 	dataSource: MatTableDataSource<any>;
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;
-	displayedColumns: string[] = ['id','createdDate','updatedDate','deletedDate','bolumId','ogrenciNo','durumId','ayrilmaTarihi','adi','soyadi','tcKimlikNo','cinsiyet','dogumTarihi','userId', 'update','delete'];
+	displayedColumns: string[] = ['id', 'bolumId', 'ogrenciNo', 'durumId', 'ayrilmaTarihi', 'adi', 'soyadi', 'tcKimlikNo', 'cinsiyet', 'dogumTarihi', 'userId', 'createdDate', 'updatedDate', 'deletedDate', 'update', 'delete'];
 
-	ogrenciList:Ogrenci[];
-	ogrenci:Ogrenci=new Ogrenci();
-
+	ogrenciList: Ogrenci[];
+	ogrenci: Ogrenci = new Ogrenci();
+	ogrenciDurumList: ST_OgrenciDurum[];
+	bolumList: Bolum[];
+	userList: User[];
 	ogrenciAddForm: FormGroup;
 
 
-	ogrenciId:number;
+	ogrenciId: number;
 
-	constructor(private ogrenciService:OgrenciService, private lookupService:LookUpService,private alertifyService:AlertifyService,private formBuilder: FormBuilder, private authService:AuthService) { }
+	constructor(private ogrenciService: OgrenciService, private lookupService: LookUpService, private ogrenciDurumService: ST_OgrenciDurumService, private userService: UserService
+		, private bolumService: BolumService, private alertifyService: AlertifyService, private formBuilder: FormBuilder, private authService: AuthService) { }
 
-    ngAfterViewInit(): void {
-        this.getOgrenciList();
-    }
+	ngAfterViewInit(): void {
+		this.getOgrenciList();
+	}
 
 	ngOnInit() {
 
 		this.createOgrenciAddForm();
+		this.getOgrenciDurumList();
+		this.getBolumList();
+		this.getUserList();
 	}
 
 
@@ -48,11 +59,28 @@ export class OgrenciComponent implements AfterViewInit, OnInit {
 		this.ogrenciService.getOgrenciList().subscribe(data => {
 			this.ogrenciList = data;
 			this.dataSource = new MatTableDataSource(data);
-            this.configDataTable();
+			this.configDataTable();
 		});
 	}
 
-	save(){
+	getOgrenciDurumList() {
+		this.ogrenciDurumService.getST_OgrenciDurumList().subscribe(data => {
+			this.ogrenciDurumList = data
+		})
+	}
+
+	getUserList() {
+		this.userService.getUserList().subscribe(data => {
+			this.userList = data.filter(u => u.notes == "Öğrenci");
+		})
+	}
+
+	getBolumList() {
+		this.bolumService.getBolumList().subscribe(data => {
+			this.bolumList = data
+		})
+	}
+	save() {
 
 		if (this.ogrenciAddForm.valid) {
 			this.ogrenci = Object.assign({}, this.ogrenciAddForm.value)
@@ -65,7 +93,7 @@ export class OgrenciComponent implements AfterViewInit, OnInit {
 
 	}
 
-	addOgrenci(){
+	addOgrenci() {
 
 		this.ogrenciService.addOgrenci(this.ogrenci).subscribe(data => {
 			this.getOgrenciList();
@@ -78,14 +106,14 @@ export class OgrenciComponent implements AfterViewInit, OnInit {
 
 	}
 
-	updateOgrenci(){
+	updateOgrenci() {
 
 		this.ogrenciService.updateOgrenci(this.ogrenci).subscribe(data => {
 
-			var index=this.ogrenciList.findIndex(x=>x.id==this.ogrenci.id);
-			this.ogrenciList[index]=this.ogrenci;
+			var index = this.ogrenciList.findIndex(x => x.id == this.ogrenci.id);
+			this.ogrenciList[index] = this.ogrenci;
 			this.dataSource = new MatTableDataSource(this.ogrenciList);
-            this.configDataTable();
+			this.configDataTable();
 			this.ogrenci = new Ogrenci();
 			jQuery('#ogrenci').modal('hide');
 			this.alertifyService.success(data);
@@ -96,37 +124,33 @@ export class OgrenciComponent implements AfterViewInit, OnInit {
 	}
 
 	createOgrenciAddForm() {
-		this.ogrenciAddForm = this.formBuilder.group({		
-			id : [0],
-createdDate : [null, Validators.required],
-updatedDate : [null, Validators.required],
-deletedDate : [null, Validators.required],
-bolumId : [0, Validators.required],
-ogrenciNo : ["", Validators.required],
-durumId : [0, Validators.required],
-ayrilmaTarihi : [null, Validators.required],
-adi : ["", Validators.required],
-soyadi : ["", Validators.required],
-tcKimlikNo : ["", Validators.required],
-cinsiyet : [false, Validators.required],
-dogumTarihi : [null, Validators.required],
-userId : [0, Validators.required]
+		this.ogrenciAddForm = this.formBuilder.group({
+			id: [0],
+			bolumId: [0, Validators.required],
+			ogrenciNo: ["", Validators.required],
+			durumId: [0, Validators.required],
+			adi: ["", Validators.required],
+			soyadi: ["", Validators.required],
+			tcKimlikNo: ["", Validators.required],
+			cinsiyet: [false],
+			dogumTarihi: [null, Validators.required],
+			userId: [0, Validators.required]
 		})
 	}
 
-	deleteOgrenci(ogrenciId:number){
-		this.ogrenciService.deleteOgrenci(ogrenciId).subscribe(data=>{
+	deleteOgrenci(ogrenciId: number) {
+		this.ogrenciService.deleteOgrenci(ogrenciId).subscribe(data => {
 			this.alertifyService.success(data.toString());
-			this.ogrenciList=this.ogrenciList.filter(x=> x.id!=ogrenciId);
+			this.ogrenciList = this.ogrenciList.filter(x => x.id != ogrenciId);
 			this.dataSource = new MatTableDataSource(this.ogrenciList);
 			this.configDataTable();
 		})
 	}
 
-	getOgrenciById(ogrenciId:number){
+	getOgrenciById(ogrenciId: number) {
 		this.clearFormGroup(this.ogrenciAddForm);
-		this.ogrenciService.getOgrenciById(ogrenciId).subscribe(data=>{
-			this.ogrenci=data;
+		this.ogrenciService.getOgrenciById(ogrenciId).subscribe(data => {
+			this.ogrenci = data;
 			this.ogrenciAddForm.patchValue(data);
 		})
 	}
@@ -144,7 +168,7 @@ userId : [0, Validators.required]
 		});
 	}
 
-	checkClaim(claim:string):boolean{
+	checkClaim(claim: string): boolean {
 		return this.authService.claimGuard(claim)
 	}
 
@@ -162,4 +186,4 @@ userId : [0, Validators.required]
 		}
 	}
 
-  }
+}

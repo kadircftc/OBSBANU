@@ -13,6 +13,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 using Business.Handlers.DersAcmas.ValidationRules;
+using System;
 
 namespace Business.Handlers.DersAcmas.Commands
 {
@@ -21,7 +22,7 @@ namespace Business.Handlers.DersAcmas.Commands
     /// </summary>
     public class CreateDersAcmaCommand : IRequest<IResult>
     {
-
+        public int Id { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public System.DateTime UpdatedDate { get; set; }
         public System.DateTime DeletedDate { get; set; }
@@ -48,16 +49,14 @@ namespace Business.Handlers.DersAcmas.Commands
             [SecuredOperation(Priority = 1)]
             public async Task<IResult> Handle(CreateDersAcmaCommand request, CancellationToken cancellationToken)
             {
-                var isThereDersAcmaRecord = _dersAcmaRepository.Query().Any(u => u.CreatedDate == request.CreatedDate);
+                var isThereDersAcmaRecord = _dersAcmaRepository.Query().Any(u => u.Id == request.Id);
 
                 if (isThereDersAcmaRecord == true)
                     return new ErrorResult(Messages.NameAlreadyExist);
 
                 var addedDersAcma = new DersAcma
                 {
-                    CreatedDate = request.CreatedDate,
-                    UpdatedDate = request.UpdatedDate,
-                    DeletedDate = request.DeletedDate,
+                    CreatedDate = DateTime.Now,
                     AkademikYilId = request.AkademikYilId,
                     AkademikDonemId = request.AkademikDonemId,
                     MufredatId = request.MufredatId,

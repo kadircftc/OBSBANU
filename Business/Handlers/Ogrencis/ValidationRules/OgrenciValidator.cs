@@ -11,11 +11,9 @@ namespace Business.Handlers.Ogrencis.ValidationRules
         {
             RuleFor(x => x.OgrenciNo).NotEmpty();
             RuleFor(x => x.DurumId).NotEmpty();
-            RuleFor(x => x.AyrilmaTarihi).NotEmpty();
             RuleFor(x => x.Adi).NotEmpty();
             RuleFor(x => x.Soyadi).NotEmpty();
             RuleFor(x => x.TcKimlikNo).NotEmpty();
-            RuleFor(x => x.Cinsiyet).NotEmpty();
             RuleFor(x => x.DogumTarihi).NotEmpty();
             RuleFor(x => x.UserId).NotEmpty();
 
@@ -27,11 +25,9 @@ namespace Business.Handlers.Ogrencis.ValidationRules
         {
             RuleFor(x => x.OgrenciNo).NotEmpty();
             RuleFor(x => x.DurumId).NotEmpty();
-            RuleFor(x => x.AyrilmaTarihi).NotEmpty();
             RuleFor(x => x.Adi).NotEmpty();
             RuleFor(x => x.Soyadi).NotEmpty();
             RuleFor(x => x.TcKimlikNo).NotEmpty();
-            RuleFor(x => x.Cinsiyet).NotEmpty();
             RuleFor(x => x.DogumTarihi).NotEmpty();
             RuleFor(x => x.UserId).NotEmpty();
 

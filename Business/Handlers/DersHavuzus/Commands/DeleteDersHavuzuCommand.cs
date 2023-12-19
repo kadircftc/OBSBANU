@@ -9,7 +9,7 @@ using DataAccess.Abstract;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-
+using System;
 
 namespace Business.Handlers.DersHavuzus.Commands
 {
@@ -38,7 +38,9 @@ namespace Business.Handlers.DersHavuzus.Commands
             {
                 var dersHavuzuToDelete = _dersHavuzuRepository.Get(p => p.Id == request.Id);
 
-                _dersHavuzuRepository.Delete(dersHavuzuToDelete);
+                dersHavuzuToDelete.DeletedDate = DateTime.Now;
+
+                _dersHavuzuRepository.Update(dersHavuzuToDelete);
                 await _dersHavuzuRepository.SaveChangesAsync();
                 return new SuccessResult(Messages.Deleted);
             }

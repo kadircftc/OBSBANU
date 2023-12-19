@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Core.Aspects.Autofac.Validation;
 using Business.Handlers.Dersliks.ValidationRules;
-
+using System;
 
 namespace Business.Handlers.Dersliks.Commands
 {
@@ -49,9 +49,8 @@ namespace Business.Handlers.Dersliks.Commands
                 var isThereDerslikRecord = await _derslikRepository.GetAsync(u => u.Id == request.Id);
 
 
-                isThereDerslikRecord.CreatedDate = request.CreatedDate;
-                isThereDerslikRecord.UpdatedDate = request.UpdatedDate;
-                isThereDerslikRecord.DeletedDate = request.DeletedDate;
+
+                isThereDerslikRecord.UpdatedDate = DateTime.Now;
                 isThereDerslikRecord.DerslikTuruId = request.DerslikTuruId;
                 isThereDerslikRecord.DerslikAdi = request.DerslikAdi;
                 isThereDerslikRecord.Kapasite = request.Kapasite;

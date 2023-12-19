@@ -9,7 +9,7 @@ using DataAccess.Abstract;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-
+using System;
 
 namespace Business.Handlers.Dersliks.Commands
 {
@@ -38,7 +38,9 @@ namespace Business.Handlers.Dersliks.Commands
             {
                 var derslikToDelete = _derslikRepository.Get(p => p.Id == request.Id);
 
-                _derslikRepository.Delete(derslikToDelete);
+                derslikToDelete.DeletedDate = DateTime.Now;
+
+                _derslikRepository.Update(derslikToDelete);
                 await _derslikRepository.SaveChangesAsync();
                 return new SuccessResult(Messages.Deleted);
             }

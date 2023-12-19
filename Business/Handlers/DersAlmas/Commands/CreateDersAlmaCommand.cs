@@ -13,6 +13,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 using Business.Handlers.DersAlmas.ValidationRules;
+using System;
 
 namespace Business.Handlers.DersAlmas.Commands
 {
@@ -21,7 +22,7 @@ namespace Business.Handlers.DersAlmas.Commands
     /// </summary>
     public class CreateDersAlmaCommand : IRequest<IResult>
     {
-
+        public int Id { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public System.DateTime UpdatedDate { get; set; }
         public System.DateTime DeletedDate { get; set; }
@@ -46,16 +47,14 @@ namespace Business.Handlers.DersAlmas.Commands
             [SecuredOperation(Priority = 1)]
             public async Task<IResult> Handle(CreateDersAlmaCommand request, CancellationToken cancellationToken)
             {
-                var isThereDersAlmaRecord = _dersAlmaRepository.Query().Any(u => u.CreatedDate == request.CreatedDate);
+                var isThereDersAlmaRecord = _dersAlmaRepository.Query().Any(u => u.Id == request.Id);
 
                 if (isThereDersAlmaRecord == true)
                     return new ErrorResult(Messages.NameAlreadyExist);
 
                 var addedDersAlma = new DersAlma
                 {
-                    CreatedDate = request.CreatedDate,
-                    UpdatedDate = request.UpdatedDate,
-                    DeletedDate = request.DeletedDate,
+                    CreatedDate = DateTime.Now,
                     DersAcmaId = request.DersAcmaId,
                     OgrenciId = request.OgrenciId,
                     DersDurumId = request.DersDurumId,

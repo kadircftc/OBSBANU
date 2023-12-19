@@ -13,6 +13,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 using Business.Handlers.OgretimElemanis.ValidationRules;
+using System;
 
 namespace Business.Handlers.OgretimElemanis.Commands
 {
@@ -21,7 +22,7 @@ namespace Business.Handlers.OgretimElemanis.Commands
     /// </summary>
     public class CreateOgretimElemaniCommand : IRequest<IResult>
     {
-
+        public int Id { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public System.DateTime UpdatedDate { get; set; }
         public System.DateTime DeletedDate { get; set; }
@@ -52,16 +53,14 @@ namespace Business.Handlers.OgretimElemanis.Commands
             [SecuredOperation(Priority = 1)]
             public async Task<IResult> Handle(CreateOgretimElemaniCommand request, CancellationToken cancellationToken)
             {
-                var isThereOgretimElemaniRecord = _ogretimElemaniRepository.Query().Any(u => u.CreatedDate == request.CreatedDate);
+                var isThereOgretimElemaniRecord = _ogretimElemaniRepository.Query().Any(u => u.Id == request.Id);
 
                 if (isThereOgretimElemaniRecord == true)
                     return new ErrorResult(Messages.NameAlreadyExist);
 
                 var addedOgretimElemani = new OgretimElemani
                 {
-                    CreatedDate = request.CreatedDate,
-                    UpdatedDate = request.UpdatedDate,
-                    DeletedDate = request.DeletedDate,
+                    CreatedDate = DateTime.Now,
                     BolumId = request.BolumId,
                     UserId = request.UserId,
                     KurumSicilNo = request.KurumSicilNo,

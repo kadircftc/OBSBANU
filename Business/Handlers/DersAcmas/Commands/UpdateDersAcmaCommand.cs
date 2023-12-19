@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Core.Aspects.Autofac.Validation;
 using Business.Handlers.DersAcmas.ValidationRules;
-
+using System;
 
 namespace Business.Handlers.DersAcmas.Commands
 {
@@ -51,9 +51,8 @@ namespace Business.Handlers.DersAcmas.Commands
                 var isThereDersAcmaRecord = await _dersAcmaRepository.GetAsync(u => u.Id == request.Id);
 
 
-                isThereDersAcmaRecord.CreatedDate = request.CreatedDate;
-                isThereDersAcmaRecord.UpdatedDate = request.UpdatedDate;
-                isThereDersAcmaRecord.DeletedDate = request.DeletedDate;
+
+                isThereDersAcmaRecord.UpdatedDate = DateTime.Now;
                 isThereDersAcmaRecord.AkademikYilId = request.AkademikYilId;
                 isThereDersAcmaRecord.AkademikDonemId = request.AkademikDonemId;
                 isThereDersAcmaRecord.MufredatId = request.MufredatId;

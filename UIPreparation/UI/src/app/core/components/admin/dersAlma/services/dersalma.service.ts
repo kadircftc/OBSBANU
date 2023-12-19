@@ -1,8 +1,8 @@
-﻿import { HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 import { DersAlma } from '../models/DersAlma';
-import { environment } from 'environments/environment';
 
 
 @Injectable({
@@ -15,25 +15,25 @@ export class DersAlmaService {
 
   getDersAlmaList(): Observable<DersAlma[]> {
 
-    return this.httpClient.get<DersAlma[]>(environment.getApiUrl + '/dersAlmas/getall')
+    return this.httpClient.get<DersAlma[]>(environment.getApiUrl + '/DersAlmas/getall')
   }
 
   getDersAlmaById(id: number): Observable<DersAlma> {
-    return this.httpClient.get<DersAlma>(environment.getApiUrl + '/dersAlmas/getbyid?id='+id)
+    return this.httpClient.get<DersAlma>(environment.getApiUrl + '/DersAlmas/getbyid?id='+id)
   }
 
   addDersAlma(dersAlma: DersAlma): Observable<any> {
 
-    return this.httpClient.post(environment.getApiUrl + '/dersAlmas/', dersAlma, { responseType: 'text' });
+    return this.httpClient.post(environment.getApiUrl + '/DersAlmas/', dersAlma, { responseType: 'text' });
   }
 
   updateDersAlma(dersAlma: DersAlma): Observable<any> {
-    return this.httpClient.put(environment.getApiUrl + '/dersAlmas/', dersAlma, { responseType: 'text' });
+    return this.httpClient.put(environment.getApiUrl + '/DersAlmas/', dersAlma, { responseType: 'text' });
 
   }
 
   deleteDersAlma(id: number) {
-    return this.httpClient.request('delete', environment.getApiUrl + '/dersAlmas/', { body: { id: id } });
+    return this.httpClient.request('delete', environment.getApiUrl + '/DersAlmas/', { body: { id: id } });
   }
 
 

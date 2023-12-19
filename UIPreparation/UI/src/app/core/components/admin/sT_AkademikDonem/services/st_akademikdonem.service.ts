@@ -1,8 +1,8 @@
-﻿import { HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 import { ST_AkademikDonem } from '../models/ST_AkademikDonem';
-import { environment } from 'environments/environment';
 
 
 @Injectable({
@@ -15,25 +15,25 @@ export class ST_AkademikDonemService {
 
   getST_AkademikDonemList(): Observable<ST_AkademikDonem[]> {
 
-    return this.httpClient.get<ST_AkademikDonem[]>(environment.getApiUrl + '/sT_AkademikDonems/getall')
+    return this.httpClient.get<ST_AkademikDonem[]>(environment.getApiUrl + '/ST_AkademikDonems/getall')
   }
 
   getST_AkademikDonemById(id: number): Observable<ST_AkademikDonem> {
-    return this.httpClient.get<ST_AkademikDonem>(environment.getApiUrl + '/sT_AkademikDonems/getbyid?id='+id)
+    return this.httpClient.get<ST_AkademikDonem>(environment.getApiUrl + '/ST_AkademikDonems/getbyid?id='+id)
   }
 
   addST_AkademikDonem(sT_AkademikDonem: ST_AkademikDonem): Observable<any> {
 
-    return this.httpClient.post(environment.getApiUrl + '/sT_AkademikDonems/', sT_AkademikDonem, { responseType: 'text' });
+    return this.httpClient.post(environment.getApiUrl + '/ST_AkademikDonems/', sT_AkademikDonem, { responseType: 'text' });
   }
 
   updateST_AkademikDonem(sT_AkademikDonem: ST_AkademikDonem): Observable<any> {
-    return this.httpClient.put(environment.getApiUrl + '/sT_AkademikDonems/', sT_AkademikDonem, { responseType: 'text' });
+    return this.httpClient.put(environment.getApiUrl + '/ST_AkademikDonems/', sT_AkademikDonem, { responseType: 'text' });
 
   }
 
   deleteST_AkademikDonem(id: number) {
-    return this.httpClient.request('delete', environment.getApiUrl + '/sT_AkademikDonems/', { body: { id: id } });
+    return this.httpClient.request('delete', environment.getApiUrl + '/ST_AkademikDonems/', { body: { id: id } });
   }
 
 

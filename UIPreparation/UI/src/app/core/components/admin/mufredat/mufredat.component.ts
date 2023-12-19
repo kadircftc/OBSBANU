@@ -1,14 +1,13 @@
-import { Component, AfterViewInit, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { AuthService } from 'app/core/components/admin/login/services/auth.service';
 import { AlertifyService } from 'app/core/services/alertify.service';
 import { LookUpService } from 'app/core/services/lookUp.service';
-import { AuthService } from 'app/core/components/admin/login/services/auth.service';
 import { Mufredat } from './models/Mufredat';
 import { MufredatService } from './services/Mufredat.service';
-import { environment } from 'environments/environment';
 
 declare var jQuery: any;
 
@@ -98,9 +97,7 @@ export class MufredatComponent implements AfterViewInit, OnInit {
 	createMufredatAddForm() {
 		this.mufredatAddForm = this.formBuilder.group({		
 			id : [0],
-createdDate : [null, Validators.required],
-updatedDate : [null, Validators.required],
-deletedDate : [null, Validators.required],
+
 bolumId : [0, Validators.required],
 dersId : [0, Validators.required],
 akedemikYilId : [0, Validators.required],

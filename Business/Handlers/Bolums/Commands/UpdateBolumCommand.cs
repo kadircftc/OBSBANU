@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Core.Aspects.Autofac.Validation;
 using Business.Handlers.Bolums.ValidationRules;
-
+using System;
 
 namespace Business.Handlers.Bolums.Commands
 {
@@ -50,10 +50,8 @@ namespace Business.Handlers.Bolums.Commands
             {
                 var isThereBolumRecord = await _bolumRepository.GetAsync(u => u.Id == request.Id);
 
-
-                isThereBolumRecord.CreatedDate = request.CreatedDate;
-                isThereBolumRecord.UpdatedDate = request.UpdatedDate;
-                isThereBolumRecord.DeletedDate = request.DeletedDate;
+         
+                isThereBolumRecord.UpdatedDate = DateTime.Now;
                 isThereBolumRecord.ProgramTuruId = request.ProgramTuruId;
                 isThereBolumRecord.OgretimTuruId = request.OgretimTuruId;
                 isThereBolumRecord.OgretimDiliId = request.OgretimDiliId;

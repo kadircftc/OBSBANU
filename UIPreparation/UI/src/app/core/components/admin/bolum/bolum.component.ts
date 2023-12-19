@@ -1,14 +1,19 @@
-import { Component, AfterViewInit, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { AuthService } from 'app/core/components/admin/login/services/auth.service';
 import { AlertifyService } from 'app/core/services/alertify.service';
 import { LookUpService } from 'app/core/services/lookUp.service';
-import { AuthService } from 'app/core/components/admin/login/services/auth.service';
+import { ST_OgretimDili } from '../sT_OgretimDili/models/ST_OgretimDili';
+import { ST_OgretimDiliService } from '../sT_OgretimDili/services/ST_OgretimDili.service';
+import { ST_OgretimTuru } from '../sT_OgretimTuru/models/ST_OgretimTuru';
+import { ST_OgretimTuruService } from '../sT_OgretimTuru/services/ST_OgretimTuru.service';
+import { ST_ProgramTuru } from '../sT_ProgramTuru/models/ST_ProgramTuru';
+import { ST_ProgramTuruService } from '../sT_ProgramTuru/services/ST_ProgramTuru.service';
 import { Bolum } from './models/Bolum';
 import { BolumService } from './services/Bolum.service';
-import { environment } from 'environments/environment';
 
 declare var jQuery: any;
 
@@ -18,41 +23,68 @@ declare var jQuery: any;
 	styleUrls: ['./bolum.component.scss']
 })
 export class BolumComponent implements AfterViewInit, OnInit {
-	
+
 	dataSource: MatTableDataSource<any>;
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;
-	displayedColumns: string[] = ['id','createdDate','updatedDate','deletedDate','programTuruId','ogretimTuruId','ogretimDiliId','bolumAdi','webAdresi', 'update','delete'];
+	displayedColumns: string[] = ['id', 'programTuruId', 'ogretimTuruId', 'ogretimDiliId', 'bolumAdi', 'webAdresi', 'createdDate', 'updatedDate', 'deletedDate', 'update', 'delete'];
 
-	bolumList:Bolum[];
-	bolum:Bolum=new Bolum();
+	bolumList: Bolum[];
+	bolum: Bolum = new Bolum();
+	programTuruList: ST_ProgramTuru[];
+	ogretimDiliList: ST_OgretimDili[];
+	ogretimTuruList: ST_OgretimTuru[];
 
 	bolumAddForm: FormGroup;
 
 
-	bolumId:number;
+	bolumId: number;
 
-	constructor(private bolumService:BolumService, private lookupService:LookUpService,private alertifyService:AlertifyService,private formBuilder: FormBuilder, private authService:AuthService) { }
+	constructor(private bolumService: BolumService, private programTuruService: ST_ProgramTuruService, private ogretimDiliService: ST_OgretimDiliService, private ogretimTuruService: ST_OgretimTuruService,
+		 private lookupService: LookUpService, private alertifyService: AlertifyService, private formBuilder: FormBuilder, private authService: AuthService) { }
 
-    ngAfterViewInit(): void {
-        this.getBolumList();
-    }
+	ngAfterViewInit(): void {
+		this.getBolumList();
+	}
 
 	ngOnInit() {
 
 		this.createBolumAddForm();
+		this.getProgramTuru();
+		this.getOgretimDili();
+		this.getOgretimTuru();
 	}
+
+
+	getProgramTuru() {
+		this.programTuruService.getST_ProgramTuruList().subscribe(data => {
+			this.programTuruList = data
+		});
+	}
+
+	getOgretimTuru(){
+		this.ogretimTuruService.getST_OgretimTuruList().subscribe(data =>{
+			this.ogretimTuruList = data
+		})
+	}
+
+	getOgretimDili() {
+		this.ogretimDiliService.getST_OgretimDiliList().subscribe(data => {
+			this.ogretimDiliList = data
+		});
+	}
+
 
 
 	getBolumList() {
 		this.bolumService.getBolumList().subscribe(data => {
 			this.bolumList = data;
 			this.dataSource = new MatTableDataSource(data);
-            this.configDataTable();
+			this.configDataTable();
 		});
 	}
 
-	save(){
+	save() {
 
 		if (this.bolumAddForm.valid) {
 			this.bolum = Object.assign({}, this.bolumAddForm.value)
@@ -65,7 +97,7 @@ export class BolumComponent implements AfterViewInit, OnInit {
 
 	}
 
-	addBolum(){
+	addBolum() {
 
 		this.bolumService.addBolum(this.bolum).subscribe(data => {
 			this.getBolumList();
@@ -78,14 +110,14 @@ export class BolumComponent implements AfterViewInit, OnInit {
 
 	}
 
-	updateBolum(){
+	updateBolum() {
 
 		this.bolumService.updateBolum(this.bolum).subscribe(data => {
 
-			var index=this.bolumList.findIndex(x=>x.id==this.bolum.id);
-			this.bolumList[index]=this.bolum;
+			var index = this.bolumList.findIndex(x => x.id == this.bolum.id);
+			this.bolumList[index] = this.bolum;
 			this.dataSource = new MatTableDataSource(this.bolumList);
-            this.configDataTable();
+			this.configDataTable();
 			this.bolum = new Bolum();
 			jQuery('#bolum').modal('hide');
 			this.alertifyService.success(data);
@@ -96,32 +128,29 @@ export class BolumComponent implements AfterViewInit, OnInit {
 	}
 
 	createBolumAddForm() {
-		this.bolumAddForm = this.formBuilder.group({		
-			id : [0],
-createdDate : [null, Validators.required],
-updatedDate : [null, Validators.required],
-deletedDate : [null, Validators.required],
-programTuruId : [0, Validators.required],
-ogretimTuruId : [0, Validators.required],
-ogretimDiliId : [0, Validators.required],
-bolumAdi : ["", Validators.required],
-webAdresi : ["", Validators.required]
+		this.bolumAddForm = this.formBuilder.group({
+			id: [0],
+			programTuruId: [0, Validators.required],
+			ogretimTuruId: [0, Validators.required],
+			ogretimDiliId: [0, Validators.required],
+			bolumAdi: ["", Validators.required],
+			webAdresi: ["", Validators.required]
 		})
 	}
 
-	deleteBolum(bolumId:number){
-		this.bolumService.deleteBolum(bolumId).subscribe(data=>{
+	deleteBolum(bolumId: number) {
+		this.bolumService.deleteBolum(bolumId).subscribe(data => {
 			this.alertifyService.success(data.toString());
-			this.bolumList=this.bolumList.filter(x=> x.id!=bolumId);
+			this.bolumList = this.bolumList.filter(x => x.id != bolumId);
 			this.dataSource = new MatTableDataSource(this.bolumList);
 			this.configDataTable();
 		})
 	}
 
-	getBolumById(bolumId:number){
+	getBolumById(bolumId: number) {
 		this.clearFormGroup(this.bolumAddForm);
-		this.bolumService.getBolumById(bolumId).subscribe(data=>{
-			this.bolum=data;
+		this.bolumService.getBolumById(bolumId).subscribe(data => {
+			this.bolum = data;
 			this.bolumAddForm.patchValue(data);
 		})
 	}
@@ -139,7 +168,7 @@ webAdresi : ["", Validators.required]
 		});
 	}
 
-	checkClaim(claim:string):boolean{
+	checkClaim(claim: string): boolean {
 		return this.authService.claimGuard(claim)
 	}
 
@@ -157,4 +186,4 @@ webAdresi : ["", Validators.required]
 		}
 	}
 
-  }
+}

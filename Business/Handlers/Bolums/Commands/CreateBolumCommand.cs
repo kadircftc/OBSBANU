@@ -13,6 +13,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 using Business.Handlers.Bolums.ValidationRules;
+using System;
 
 namespace Business.Handlers.Bolums.Commands
 {
@@ -21,7 +22,7 @@ namespace Business.Handlers.Bolums.Commands
     /// </summary>
     public class CreateBolumCommand : IRequest<IResult>
     {
-
+        public int Id { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public System.DateTime UpdatedDate { get; set; }
         public System.DateTime DeletedDate { get; set; }
@@ -48,16 +49,14 @@ namespace Business.Handlers.Bolums.Commands
             [SecuredOperation(Priority = 1)]
             public async Task<IResult> Handle(CreateBolumCommand request, CancellationToken cancellationToken)
             {
-                var isThereBolumRecord = _bolumRepository.Query().Any(u => u.CreatedDate == request.CreatedDate);
+                var isThereBolumRecord = _bolumRepository.Query().Any(u => u.Id == request.Id);
 
                 if (isThereBolumRecord == true)
                     return new ErrorResult(Messages.NameAlreadyExist);
 
                 var addedBolum = new Bolum
                 {
-                    CreatedDate = request.CreatedDate,
-                    UpdatedDate = request.UpdatedDate,
-                    DeletedDate = request.DeletedDate,
+                    CreatedDate=DateTime.Now,
                     ProgramTuruId = request.ProgramTuruId,
                     OgretimTuruId = request.OgretimTuruId,
                     OgretimDiliId = request.OgretimDiliId,

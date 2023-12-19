@@ -9,7 +9,7 @@ using DataAccess.Abstract;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-
+using System;
 
 namespace Business.Handlers.Ogrencis.Commands
 {
@@ -38,7 +38,9 @@ namespace Business.Handlers.Ogrencis.Commands
             {
                 var ogrenciToDelete = _ogrenciRepository.Get(p => p.Id == request.Id);
 
-                _ogrenciRepository.Delete(ogrenciToDelete);
+                ogrenciToDelete.DeletedDate = DateTime.Now;
+
+                _ogrenciRepository.Update(ogrenciToDelete);
                 await _ogrenciRepository.SaveChangesAsync();
                 return new SuccessResult(Messages.Deleted);
             }

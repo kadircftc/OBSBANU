@@ -1,14 +1,15 @@
-import { Component, AfterViewInit, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { AuthService } from 'app/core/components/admin/login/services/auth.service';
 import { AlertifyService } from 'app/core/services/alertify.service';
 import { LookUpService } from 'app/core/services/lookUp.service';
-import { AuthService } from 'app/core/components/admin/login/services/auth.service';
+import { ST_DerslikTuru } from '../sT_DerslikTuru/models/ST_DerslikTuru';
+import { ST_DerslikTuruService } from '../sT_DerslikTuru/services/ST_DerslikTuru.service';
 import { Derslik } from './models/Derslik';
 import { DerslikService } from './services/Derslik.service';
-import { environment } from 'environments/environment';
 
 declare var jQuery: any;
 
@@ -18,29 +19,31 @@ declare var jQuery: any;
 	styleUrls: ['./derslik.component.scss']
 })
 export class DerslikComponent implements AfterViewInit, OnInit {
-	
+
 	dataSource: MatTableDataSource<any>;
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;
-	displayedColumns: string[] = ['id','createdDate','updatedDate','deletedDate','derslikTuruId','derslikAdi','kapasite', 'update','delete'];
+	displayedColumns: string[] = ['id', 'createdDate', 'updatedDate', 'deletedDate', 'derslikTuruId', 'derslikAdi', 'kapasite', 'update', 'delete'];
 
-	derslikList:Derslik[];
-	derslik:Derslik=new Derslik();
+	derslikList: Derslik[];
+	derslikTuruList: ST_DerslikTuru[];
+	derslik: Derslik = new Derslik();
 
 	derslikAddForm: FormGroup;
 
 
-	derslikId:number;
+	derslikId: number;
 
-	constructor(private derslikService:DerslikService, private lookupService:LookUpService,private alertifyService:AlertifyService,private formBuilder: FormBuilder, private authService:AuthService) { }
+	constructor(private derslikService: DerslikService, private derslikTuruService: ST_DerslikTuruService, private lookupService: LookUpService, private alertifyService: AlertifyService, private formBuilder: FormBuilder, private authService: AuthService) { }
 
-    ngAfterViewInit(): void {
-        this.getDerslikList();
-    }
+	ngAfterViewInit(): void {
+		this.getDerslikList();
+	}
 
 	ngOnInit() {
 
 		this.createDerslikAddForm();
+		this.getDerslikTuru();
 	}
 
 
@@ -48,11 +51,17 @@ export class DerslikComponent implements AfterViewInit, OnInit {
 		this.derslikService.getDerslikList().subscribe(data => {
 			this.derslikList = data;
 			this.dataSource = new MatTableDataSource(data);
-            this.configDataTable();
+			this.configDataTable();
 		});
 	}
 
-	save(){
+	getDerslikTuru() {
+		this.derslikTuruService.getST_DerslikTuruList().subscribe(data => {
+			this.derslikTuruList = data
+		});
+	}
+
+	save() {
 
 		if (this.derslikAddForm.valid) {
 			this.derslik = Object.assign({}, this.derslikAddForm.value)
@@ -65,7 +74,7 @@ export class DerslikComponent implements AfterViewInit, OnInit {
 
 	}
 
-	addDerslik(){
+	addDerslik() {
 
 		this.derslikService.addDerslik(this.derslik).subscribe(data => {
 			this.getDerslikList();
@@ -78,14 +87,14 @@ export class DerslikComponent implements AfterViewInit, OnInit {
 
 	}
 
-	updateDerslik(){
+	updateDerslik() {
 
 		this.derslikService.updateDerslik(this.derslik).subscribe(data => {
 
-			var index=this.derslikList.findIndex(x=>x.id==this.derslik.id);
-			this.derslikList[index]=this.derslik;
+			var index = this.derslikList.findIndex(x => x.id == this.derslik.id);
+			this.derslikList[index] = this.derslik;
 			this.dataSource = new MatTableDataSource(this.derslikList);
-            this.configDataTable();
+			this.configDataTable();
 			this.derslik = new Derslik();
 			jQuery('#derslik').modal('hide');
 			this.alertifyService.success(data);
@@ -96,30 +105,27 @@ export class DerslikComponent implements AfterViewInit, OnInit {
 	}
 
 	createDerslikAddForm() {
-		this.derslikAddForm = this.formBuilder.group({		
-			id : [0],
-createdDate : [null, Validators.required],
-updatedDate : [null, Validators.required],
-deletedDate : [null, Validators.required],
-derslikTuruId : [0, Validators.required],
-derslikAdi : ["", Validators.required],
-kapasite : [0, Validators.required]
+		this.derslikAddForm = this.formBuilder.group({
+			id: [0],
+			derslikTuruId: [0, Validators.required],
+			derslikAdi: ["", Validators.required],
+			kapasite: [0, Validators.required]
 		})
 	}
 
-	deleteDerslik(derslikId:number){
-		this.derslikService.deleteDerslik(derslikId).subscribe(data=>{
+	deleteDerslik(derslikId: number) {
+		this.derslikService.deleteDerslik(derslikId).subscribe(data => {
 			this.alertifyService.success(data.toString());
-			this.derslikList=this.derslikList.filter(x=> x.id!=derslikId);
+			this.derslikList = this.derslikList.filter(x => x.id != derslikId);
 			this.dataSource = new MatTableDataSource(this.derslikList);
 			this.configDataTable();
 		})
 	}
 
-	getDerslikById(derslikId:number){
+	getDerslikById(derslikId: number) {
 		this.clearFormGroup(this.derslikAddForm);
-		this.derslikService.getDerslikById(derslikId).subscribe(data=>{
-			this.derslik=data;
+		this.derslikService.getDerslikById(derslikId).subscribe(data => {
+			this.derslik = data;
 			this.derslikAddForm.patchValue(data);
 		})
 	}
@@ -137,7 +143,7 @@ kapasite : [0, Validators.required]
 		});
 	}
 
-	checkClaim(claim:string):boolean{
+	checkClaim(claim: string): boolean {
 		return this.authService.claimGuard(claim)
 	}
 
@@ -155,4 +161,4 @@ kapasite : [0, Validators.required]
 		}
 	}
 
-  }
+}

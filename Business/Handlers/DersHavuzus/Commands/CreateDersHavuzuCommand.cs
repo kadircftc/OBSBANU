@@ -13,6 +13,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 using Business.Handlers.DersHavuzus.ValidationRules;
+using System;
 
 namespace Business.Handlers.DersHavuzus.Commands
 {
@@ -21,7 +22,7 @@ namespace Business.Handlers.DersHavuzus.Commands
     /// </summary>
     public class CreateDersHavuzuCommand : IRequest<IResult>
     {
-
+        public int Id { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public System.DateTime UpdatedDate { get; set; }
         public System.DateTime DeletedDate { get; set; }
@@ -52,16 +53,14 @@ namespace Business.Handlers.DersHavuzus.Commands
             [SecuredOperation(Priority = 1)]
             public async Task<IResult> Handle(CreateDersHavuzuCommand request, CancellationToken cancellationToken)
             {
-                var isThereDersHavuzuRecord = _dersHavuzuRepository.Query().Any(u => u.CreatedDate == request.CreatedDate);
+                var isThereDersHavuzuRecord = _dersHavuzuRepository.Query().Any(u => u.Id == request.Id);
 
                 if (isThereDersHavuzuRecord == true)
                     return new ErrorResult(Messages.NameAlreadyExist);
 
                 var addedDersHavuzu = new DersHavuzu
                 {
-                    CreatedDate = request.CreatedDate,
-                    UpdatedDate = request.UpdatedDate,
-                    DeletedDate = request.DeletedDate,
+                    CreatedDate = DateTime.Now,
                     DersDiliId = request.DersDiliId,
                     DersSeviyesiId = request.DersSeviyesiId,
                     DersturuId = request.DersturuId,

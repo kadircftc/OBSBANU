@@ -9,7 +9,7 @@ using DataAccess.Abstract;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-
+using System;
 
 namespace Business.Handlers.OgretimElemanis.Commands
 {
@@ -38,7 +38,9 @@ namespace Business.Handlers.OgretimElemanis.Commands
             {
                 var ogretimElemaniToDelete = _ogretimElemaniRepository.Get(p => p.Id == request.Id);
 
-                _ogretimElemaniRepository.Delete(ogretimElemaniToDelete);
+                ogretimElemaniToDelete.DeletedDate = DateTime.Now;
+
+                _ogretimElemaniRepository.Update(ogretimElemaniToDelete);
                 await _ogretimElemaniRepository.SaveChangesAsync();
                 return new SuccessResult(Messages.Deleted);
             }

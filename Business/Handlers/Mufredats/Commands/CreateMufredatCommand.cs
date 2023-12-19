@@ -13,6 +13,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 using Business.Handlers.Mufredats.ValidationRules;
+using System;
 
 namespace Business.Handlers.Mufredats.Commands
 {
@@ -21,7 +22,7 @@ namespace Business.Handlers.Mufredats.Commands
     /// </summary>
     public class CreateMufredatCommand : IRequest<IResult>
     {
-
+        public int Id { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public System.DateTime UpdatedDate { get; set; }
         public System.DateTime DeletedDate { get; set; }
@@ -48,16 +49,14 @@ namespace Business.Handlers.Mufredats.Commands
             [SecuredOperation(Priority = 1)]
             public async Task<IResult> Handle(CreateMufredatCommand request, CancellationToken cancellationToken)
             {
-                var isThereMufredatRecord = _mufredatRepository.Query().Any(u => u.CreatedDate == request.CreatedDate);
+                var isThereMufredatRecord = _mufredatRepository.Query().Any(u => u.Id == request.Id);
 
                 if (isThereMufredatRecord == true)
                     return new ErrorResult(Messages.NameAlreadyExist);
 
                 var addedMufredat = new Mufredat
                 {
-                    CreatedDate = request.CreatedDate,
-                    UpdatedDate = request.UpdatedDate,
-                    DeletedDate = request.DeletedDate,
+                    CreatedDate = DateTime.Now,
                     BolumId = request.BolumId,
                     DersId = request.DersId,
                     AkedemikYilId = request.AkedemikYilId,

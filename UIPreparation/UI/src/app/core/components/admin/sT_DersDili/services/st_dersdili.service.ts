@@ -1,8 +1,8 @@
-﻿import { HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 import { ST_DersDili } from '../models/ST_DersDili';
-import { environment } from 'environments/environment';
 
 
 @Injectable({
@@ -15,25 +15,25 @@ export class ST_DersDiliService {
 
   getST_DersDiliList(): Observable<ST_DersDili[]> {
 
-    return this.httpClient.get<ST_DersDili[]>(environment.getApiUrl + '/sT_DersDilis/getall')
+    return this.httpClient.get<ST_DersDili[]>(environment.getApiUrl + '/ST_DersDilis/getall')
   }
 
   getST_DersDiliById(id: number): Observable<ST_DersDili> {
-    return this.httpClient.get<ST_DersDili>(environment.getApiUrl + '/sT_DersDilis/getbyid?id='+id)
+    return this.httpClient.get<ST_DersDili>(environment.getApiUrl + '/ST_DersDilis/getbyid?id='+id)
   }
 
   addST_DersDili(sT_DersDili: ST_DersDili): Observable<any> {
 
-    return this.httpClient.post(environment.getApiUrl + '/sT_DersDilis/', sT_DersDili, { responseType: 'text' });
+    return this.httpClient.post(environment.getApiUrl + '/ST_DersDilis/', sT_DersDili, { responseType: 'text' });
   }
 
   updateST_DersDili(sT_DersDili: ST_DersDili): Observable<any> {
-    return this.httpClient.put(environment.getApiUrl + '/sT_DersDilis/', sT_DersDili, { responseType: 'text' });
+    return this.httpClient.put(environment.getApiUrl + '/ST_DersDilis/', sT_DersDili, { responseType: 'text' });
 
   }
 
   deleteST_DersDili(id: number) {
-    return this.httpClient.request('delete', environment.getApiUrl + '/sT_DersDilis/', { body: { id: id } });
+    return this.httpClient.request('delete', environment.getApiUrl + '/ST_DersDilis/', { body: { id: id } });
   }
 
 

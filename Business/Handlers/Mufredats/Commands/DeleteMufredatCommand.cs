@@ -9,7 +9,7 @@ using DataAccess.Abstract;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-
+using System;
 
 namespace Business.Handlers.Mufredats.Commands
 {
@@ -38,7 +38,9 @@ namespace Business.Handlers.Mufredats.Commands
             {
                 var mufredatToDelete = _mufredatRepository.Get(p => p.Id == request.Id);
 
-                _mufredatRepository.Delete(mufredatToDelete);
+                mufredatToDelete.DeletedDate=DateTime.Now;
+
+                _mufredatRepository.Update(mufredatToDelete);
                 await _mufredatRepository.SaveChangesAsync();
                 return new SuccessResult(Messages.Deleted);
             }

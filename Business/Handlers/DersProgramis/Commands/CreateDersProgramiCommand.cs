@@ -13,6 +13,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 using Business.Handlers.DersProgramis.ValidationRules;
+using System;
 
 namespace Business.Handlers.DersProgramis.Commands
 {
@@ -21,7 +22,7 @@ namespace Business.Handlers.DersProgramis.Commands
     /// </summary>
     public class CreateDersProgramiCommand : IRequest<IResult>
     {
-
+        public int Id { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public System.DateTime UpdatedDate { get; set; }
         public System.DateTime DeletedDate { get; set; }
@@ -47,16 +48,14 @@ namespace Business.Handlers.DersProgramis.Commands
             [SecuredOperation(Priority = 1)]
             public async Task<IResult> Handle(CreateDersProgramiCommand request, CancellationToken cancellationToken)
             {
-                var isThereDersProgramiRecord = _dersProgramiRepository.Query().Any(u => u.CreatedDate == request.CreatedDate);
+                var isThereDersProgramiRecord = _dersProgramiRepository.Query().Any(u => u.Id == request.Id);
 
                 if (isThereDersProgramiRecord == true)
                     return new ErrorResult(Messages.NameAlreadyExist);
 
                 var addedDersProgrami = new DersProgrami
                 {
-                    CreatedDate = request.CreatedDate,
-                    UpdatedDate = request.UpdatedDate,
-                    DeletedDate = request.DeletedDate,
+                    CreatedDate = DateTime.Now,
                     DersAcmaId = request.DersAcmaId,
                     DerslikId = request.DerslikId,
                     DersGunuId = request.DersGunuId,

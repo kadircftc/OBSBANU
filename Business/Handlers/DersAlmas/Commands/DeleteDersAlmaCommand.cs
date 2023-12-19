@@ -9,7 +9,7 @@ using DataAccess.Abstract;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-
+using System;
 
 namespace Business.Handlers.DersAlmas.Commands
 {
@@ -38,7 +38,9 @@ namespace Business.Handlers.DersAlmas.Commands
             {
                 var dersAlmaToDelete = _dersAlmaRepository.Get(p => p.Id == request.Id);
 
-                _dersAlmaRepository.Delete(dersAlmaToDelete);
+                dersAlmaToDelete.DeletedDate=DateTime.Now;
+
+                _dersAlmaRepository.Update(dersAlmaToDelete);
                 await _dersAlmaRepository.SaveChangesAsync();
                 return new SuccessResult(Messages.Deleted);
             }

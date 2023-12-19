@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Core.Aspects.Autofac.Validation;
 using Business.Handlers.Mufredats.ValidationRules;
-
+using System;
 
 namespace Business.Handlers.Mufredats.Commands
 {
@@ -51,9 +51,7 @@ namespace Business.Handlers.Mufredats.Commands
                 var isThereMufredatRecord = await _mufredatRepository.GetAsync(u => u.Id == request.Id);
 
 
-                isThereMufredatRecord.CreatedDate = request.CreatedDate;
-                isThereMufredatRecord.UpdatedDate = request.UpdatedDate;
-                isThereMufredatRecord.DeletedDate = request.DeletedDate;
+                isThereMufredatRecord.UpdatedDate = DateTime.Now;
                 isThereMufredatRecord.BolumId = request.BolumId;
                 isThereMufredatRecord.DersId = request.DersId;
                 isThereMufredatRecord.AkedemikYilId = request.AkedemikYilId;

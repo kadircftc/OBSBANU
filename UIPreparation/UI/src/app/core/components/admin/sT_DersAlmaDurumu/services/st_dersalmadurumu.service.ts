@@ -1,8 +1,8 @@
-﻿import { HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 import { ST_DersAlmaDurumu } from '../models/ST_DersAlmaDurumu';
-import { environment } from 'environments/environment';
 
 
 @Injectable({
@@ -15,25 +15,25 @@ export class ST_DersAlmaDurumuService {
 
   getST_DersAlmaDurumuList(): Observable<ST_DersAlmaDurumu[]> {
 
-    return this.httpClient.get<ST_DersAlmaDurumu[]>(environment.getApiUrl + '/sT_DersAlmaDurumus/getall')
+    return this.httpClient.get<ST_DersAlmaDurumu[]>(environment.getApiUrl + '/ST_DersAlmaDurumus/getall')
   }
 
   getST_DersAlmaDurumuById(id: number): Observable<ST_DersAlmaDurumu> {
-    return this.httpClient.get<ST_DersAlmaDurumu>(environment.getApiUrl + '/sT_DersAlmaDurumus/getbyid?id='+id)
+    return this.httpClient.get<ST_DersAlmaDurumu>(environment.getApiUrl + '/ST_DersAlmaDurumus/getbyid?id='+id)
   }
 
   addST_DersAlmaDurumu(sT_DersAlmaDurumu: ST_DersAlmaDurumu): Observable<any> {
 
-    return this.httpClient.post(environment.getApiUrl + '/sT_DersAlmaDurumus/', sT_DersAlmaDurumu, { responseType: 'text' });
+    return this.httpClient.post(environment.getApiUrl + '/ST_DersAlmaDurumus/', sT_DersAlmaDurumu, { responseType: 'text' });
   }
 
   updateST_DersAlmaDurumu(sT_DersAlmaDurumu: ST_DersAlmaDurumu): Observable<any> {
-    return this.httpClient.put(environment.getApiUrl + '/sT_DersAlmaDurumus/', sT_DersAlmaDurumu, { responseType: 'text' });
+    return this.httpClient.put(environment.getApiUrl + '/ST_DersAlmaDurumus/', sT_DersAlmaDurumu, { responseType: 'text' });
 
   }
 
   deleteST_DersAlmaDurumu(id: number) {
-    return this.httpClient.request('delete', environment.getApiUrl + '/sT_DersAlmaDurumus/', { body: { id: id } });
+    return this.httpClient.request('delete', environment.getApiUrl + '/ST_DersAlmaDurumus/', { body: { id: id } });
   }
 
 

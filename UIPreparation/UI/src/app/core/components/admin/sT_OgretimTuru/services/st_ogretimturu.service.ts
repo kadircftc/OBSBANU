@@ -1,8 +1,8 @@
-﻿import { HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 import { ST_OgretimTuru } from '../models/ST_OgretimTuru';
-import { environment } from 'environments/environment';
 
 
 @Injectable({
@@ -15,25 +15,25 @@ export class ST_OgretimTuruService {
 
   getST_OgretimTuruList(): Observable<ST_OgretimTuru[]> {
 
-    return this.httpClient.get<ST_OgretimTuru[]>(environment.getApiUrl + '/sT_OgretimTurus/getall')
+    return this.httpClient.get<ST_OgretimTuru[]>(environment.getApiUrl + '/ST_OgretimTurus/getall')
   }
 
   getST_OgretimTuruById(id: number): Observable<ST_OgretimTuru> {
-    return this.httpClient.get<ST_OgretimTuru>(environment.getApiUrl + '/sT_OgretimTurus/getbyid?id='+id)
+    return this.httpClient.get<ST_OgretimTuru>(environment.getApiUrl + '/ST_OgretimTurus/getbyid?id='+id)
   }
 
   addST_OgretimTuru(sT_OgretimTuru: ST_OgretimTuru): Observable<any> {
 
-    return this.httpClient.post(environment.getApiUrl + '/sT_OgretimTurus/', sT_OgretimTuru, { responseType: 'text' });
+    return this.httpClient.post(environment.getApiUrl + '/ST_OgretimTurus/', sT_OgretimTuru, { responseType: 'text' });
   }
 
   updateST_OgretimTuru(sT_OgretimTuru: ST_OgretimTuru): Observable<any> {
-    return this.httpClient.put(environment.getApiUrl + '/sT_OgretimTurus/', sT_OgretimTuru, { responseType: 'text' });
+    return this.httpClient.put(environment.getApiUrl + '/ST_OgretimTurus/', sT_OgretimTuru, { responseType: 'text' });
 
   }
 
   deleteST_OgretimTuru(id: number) {
-    return this.httpClient.request('delete', environment.getApiUrl + '/sT_OgretimTurus/', { body: { id: id } });
+    return this.httpClient.request('delete', environment.getApiUrl + '/ST_OgretimTurus/', { body: { id: id } });
   }
 
 

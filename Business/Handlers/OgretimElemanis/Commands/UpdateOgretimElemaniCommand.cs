@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using Core.Aspects.Autofac.Validation;
 using Business.Handlers.OgretimElemanis.ValidationRules;
-
+using System;
 
 namespace Business.Handlers.OgretimElemanis.Commands
 {
@@ -54,10 +54,7 @@ namespace Business.Handlers.OgretimElemanis.Commands
             {
                 var isThereOgretimElemaniRecord = await _ogretimElemaniRepository.GetAsync(u => u.Id == request.Id);
 
-
-                isThereOgretimElemaniRecord.CreatedDate = request.CreatedDate;
-                isThereOgretimElemaniRecord.UpdatedDate = request.UpdatedDate;
-                isThereOgretimElemaniRecord.DeletedDate = request.DeletedDate;
+                isThereOgretimElemaniRecord.UpdatedDate = DateTime.Now;
                 isThereOgretimElemaniRecord.BolumId = request.BolumId;
                 isThereOgretimElemaniRecord.UserId = request.UserId;
                 isThereOgretimElemaniRecord.KurumSicilNo = request.KurumSicilNo;
