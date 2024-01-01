@@ -109,7 +109,7 @@ export class DerslikComponent implements AfterViewInit, OnInit {
 			id: [0],
 			derslikTuruId: [0, Validators.required],
 			derslikAdi: ["", Validators.required],
-			kapasite: [0, Validators.required]
+			kapasite: [null, Validators.required]
 		})
 	}
 

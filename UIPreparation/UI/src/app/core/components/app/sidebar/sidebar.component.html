@@ -20,7 +20,7 @@
 </div>
 <div class="sidebar-wrapper">
   <div class="nav-container">
-    <ul class="nav">
+    <ul class="nav" *ngIf="checkClaim('Management')">
       <li routerLinkActive="active">
         <a data-toggle="collapse" class="nav-link" href="#Management">
           <i class="material-icons">widgets</i>
@@ -49,8 +49,8 @@
       </li>
 	</ul>
 	
-	<ul class="nav">
-		<li routerLinkActive="active">
+	<ul class="nav" *ngIf="checkClaim('Constants')">
+		<li routerLinkActive="active"> 
 		  <a data-toggle="collapse" class="nav-link" href="#AppMenu">
 			<i class="material-icons">extension</i>
 			<p>
@@ -77,5 +77,62 @@
 		  </div>
 		</li>
 	  </ul>
+    <ul class="nav" *ngIf="checkClaim('Student')">
+      <li routerLinkActive="active"> 
+        <a data-toggle="collapse" class="nav-link" href="#StudentMenu">
+        <i class="material-icons">extension</i>
+        <p>
+          {{ "Genel İşlemler" | translate }}
+          <b class="caret"></b>
+        </p>
+        </a>
+        <div class="collapse" id="StudentMenu">
+        <ul class="nav">
+          <li
+          *ngFor="let menuItem of studentMenuItems"
+          class="{{ menuItem.class }} nav-item"
+          >
+          <a
+            *ngIf="checkClaim(menuItem.claim)"
+            class="nav-link"
+            [routerLink]="[menuItem.path]"
+          >
+            <i class="material-icons">{{ menuItem.icon }}</i>
+            <p>{{ menuItem.title | translate }}</p>
+          </a>
+          </li>
+        </ul>
+        </div>
+      </li>
+      </ul>
+
+      <ul class="nav" *ngIf="checkClaim('TeachingStaff')">
+        <li routerLinkActive="active"> 
+          <a data-toggle="collapse" class="nav-link" href="#TeachingStaffMenu">
+          <i class="material-icons">extension</i>
+          <p>
+            {{ "Genel İşlemler" | translate }}
+            <b class="caret"></b>
+          </p>
+          </a>
+          <div class="collapse" id="TeachingStaffMenu">
+          <ul class="nav">
+            <li
+            *ngFor="let menuItem of teachingStaffMenuItems"
+            class="{{ menuItem.class }} nav-item"
+            >
+            <a
+              *ngIf="checkClaim(menuItem.claim)"
+              class="nav-link"
+              [routerLink]="[menuItem.path]"
+            >
+              <i class="material-icons">{{ menuItem.icon }}</i>
+              <p>{{ menuItem.title | translate }}</p>
+            </a>
+            </li>
+          </ul>
+          </div>
+        </li>
+        </ul>
   </div>
 </div>

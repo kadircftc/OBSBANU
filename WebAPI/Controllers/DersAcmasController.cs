@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Entities.Concrete;
 using System.Collections.Generic;
+using Entities.Dtos;
 
 namespace WebAPI.Controllers
 {
@@ -50,6 +51,20 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var result = await Mediator.Send(new GetDersAcmaQuery { Id = id });
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest(result.Message);
+        }
+
+        [Produces("application/json", "text/plain")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DersAcmaDto))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+        [HttpGet("getDersAcmaDto")]
+        public async Task<IActionResult> GetDersAcmaDto()
+        {
+            var result = await Mediator.Send(new GetDersAcmaDtoQuery());
             if (result.Success)
             {
                 return Ok(result.Data);

@@ -33,6 +33,8 @@ export class OgretimElemaniComponent implements AfterViewInit, OnInit {
 	userList:User[];
 	ogretimElemaniAddForm: FormGroup;
 
+	genderList:any=[];
+
 
 	ogretimElemaniId: number;
 
@@ -47,6 +49,10 @@ export class OgretimElemaniComponent implements AfterViewInit, OnInit {
 		this.createOgretimElemaniAddForm();
 		this.getBolumList();
 		this.getUserList();
+		this.genderList = [
+			{ genderName: 'Erkek', genderBool: false },
+			{ genderName: 'Kadın', genderBool: true }
+		  ];
 	}
 
 
@@ -116,7 +122,6 @@ export class OgretimElemaniComponent implements AfterViewInit, OnInit {
 	createOgretimElemaniAddForm() {
 		this.ogretimElemaniAddForm = this.formBuilder.group({
 			id: [0],
-
 			bolumId: [0, Validators.required],
 			userId: [0, Validators.required],
 			kurumSicilNo: ["", Validators.required],

@@ -105,6 +105,9 @@
 				
 					<div class="row">
             <div class="col col-md-12">
+              <div class="d-flex justify-content-start align-items-center">
+                <span class="mr-2">Öğretim Elemanı:</span>
+              </div>
               <select class="browser-default custom-select" formControlName="ogrElmID">
 								<option *ngFor="let item of ogretimElemaniList" [value]="item.id"> {{item.adi}} {{item.soyadi}}</option>
 							</select>
@@ -112,6 +115,9 @@
           </div>
 					<div class="row">
 						<div class="col-md-12">
+              <div class="d-flex justify-content-start align-items-center">
+                <span class="mr-2">Öğrenci:</span>
+              </div>
 							<select class="browser-default custom-select" formControlName="ogrenciId">
 								<option *ngFor="let item of ogrenciList" [value]="item.id"> {{item.adi}} {{item.soyadi}}</option>
 							</select>

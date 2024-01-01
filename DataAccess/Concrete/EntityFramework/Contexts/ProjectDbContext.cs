@@ -103,6 +103,7 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
         public DbSet<DersAlma> DersAlmas { get; set; }
         public DbSet<DersAcma> DersAcmas { get; set; }
         public DbSet<Degerlendirme> Degerlendirmes { get; set; }
+      
        
 
 

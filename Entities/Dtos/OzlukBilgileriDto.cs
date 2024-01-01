@@ -12,12 +12,14 @@ namespace Entities.Dtos
         public string Adi { get; set; }
         public string Soyadi { get; set; }
         public string TcKimlikNo { get; set; }
-        public DateTime DogumTarihi { get; set; }
+        public string DogumTarihi { get; set; }
         public string BolumAdi { get; set; }
         public string OgrNo { get; set; }
-        public DateTime KayitTarihi { get; set; }
+        public string KayitTarihi { get; set; }
         public string Durum { get; set; }
-        public DateTime AyrilmaTarihi { get; set; }
+        public string AyrilmaTarihi { get; set; }
+        public string  KurumSicilNo { get; set; }
+        public string Unvan { get; set; }
         public string DanismanAdi { get; set; }
         public string DanismanSoyadi { get; set; }
         public string Adres { get; set; }

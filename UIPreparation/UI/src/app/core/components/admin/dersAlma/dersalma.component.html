@@ -4,7 +4,7 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header card-header-danger">
-            <h4 class="card-title ">{{'DersAlmaList'| translate}}</h4>
+            <h4 class="card-title ">{{'Ders Alma'| translate}}</h4>
             <a *ngIf="checkClaim('CreateDersAlmaCommand')" class="pull-right" data-toggle="modal" data-target="#dersalma"> <i style="color:white"  title="{{'Add'| translate}}" class="far fa-plus-square fa-2x"></i></a>
           </div>
           <div class="card-body">
@@ -101,7 +101,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"
           (click)="clearFormGroup(dersAlmaAddForm)"><span aria-hidden="true">&times;</span></button>
         <h4 class="margin-top">
-           {{'DersAlmaForm'| translate}}
+           {{'Ders Alma'| translate}}
         </h4>
         <div class="separator"></div>
         <form *ngIf="dersAlmaAddForm" [formGroup]="dersAlmaAddForm" (ngSubmit)="save()">
@@ -109,6 +109,9 @@
 					
 					<div class="row">
 						<div class="col-md-12">
+              <div class="d-flex justify-content-start align-items-center">
+                <span class="mr-2">Ders Açma Id:</span>
+              </div>
 							<select class="browser-default custom-select" formControlName="dersAcmaId">
 								<option *ngFor="let item of dersAlmalookUp" [value]="item.id"> {{item.label}}</option>
 							</select>
@@ -116,6 +119,9 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12">
+              <div class="d-flex justify-content-start align-items-center">
+                <span class="mr-2">Öğrenci:</span>
+              </div>
 							<select class="browser-default custom-select" formControlName="ogrenciId">
 								<option *ngFor="let item of dersAlmalookUp" [value]="item.id"> {{item.label}}</option>
 							</select>
@@ -123,6 +129,9 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12">
+              <div class="d-flex justify-content-start align-items-center">
+                <span class="mr-2">Ders Durumu:</span>
+              </div>
 							<select class="browser-default custom-select" formControlName="dersDurumId">
 								<option *ngFor="let item of dersAlmalookUp" [value]="item.id"> {{item.label}}</option>
 							</select>

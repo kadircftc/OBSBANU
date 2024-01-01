@@ -90,6 +90,7 @@ namespace Business
         public void ConfigureDevelopmentServices(IServiceCollection services)
         {
             ConfigureServices(services);
+            services.AddTransient<IST_SinavTuruRepository, ST_SinavTuruRepository>();
             services.AddTransient<IDegerlendirmeRepository, DegerlendirmeRepository>();
             services.AddTransient<IDersAcmaRepository, DersAcmaRepository>();
             services.AddTransient<IDersAlmaRepository, DersAlmaRepository>();
@@ -110,7 +111,7 @@ namespace Business
             services.AddTransient<IST_OgrenciDurumRepository, ST_OgrenciDurumRepository>();
             services.AddTransient<IST_OgretimDiliRepository, ST_OgretimDiliRepository>();
             services.AddTransient<IST_OgretimTuruRepository, ST_OgretimTuruRepository>();
-            services.AddTransient<IST_SinavTuruRepository, ST_SinavTuruRepository>();
+            
             services.AddTransient<IST_ProgramTuruRepository, ST_ProgramTuruRepository>();
             services.AddTransient<IST_ProgramTuruRepository, ST_ProgramTuruRepository>();
             services.AddTransient<IDanismanlikRepository, DanismanlikRepository>();
@@ -140,6 +141,7 @@ namespace Business
         public void ConfigureStagingServices(IServiceCollection services)
         {
             ConfigureServices(services);
+            services.AddTransient<IST_SinavTuruRepository, ST_SinavTuruRepository>();
             services.AddTransient<IDegerlendirmeRepository, DegerlendirmeRepository>();
             services.AddTransient<IDersAcmaRepository, DersAcmaRepository>();
             services.AddTransient<IDersAlmaRepository, DersAlmaRepository>();
@@ -160,7 +162,7 @@ namespace Business
             services.AddTransient<IST_OgrenciDurumRepository, ST_OgrenciDurumRepository>();
             services.AddTransient<IST_OgretimDiliRepository, ST_OgretimDiliRepository>();
             services.AddTransient<IST_OgretimTuruRepository, ST_OgretimTuruRepository>();
-            services.AddTransient<IST_SinavTuruRepository, ST_SinavTuruRepository>();
+           
             services.AddTransient<IST_ProgramTuruRepository, ST_ProgramTuruRepository>();
             services.AddTransient<IST_ProgramTuruRepository, ST_ProgramTuruRepository>();
             services.AddTransient<IDanismanlikRepository, DanismanlikRepository>();
@@ -189,6 +191,7 @@ namespace Business
         public void ConfigureProductionServices(IServiceCollection services)
         {
             ConfigureServices(services);
+            services.AddTransient<IST_SinavTuruRepository, ST_SinavTuruRepository>();
             services.AddTransient<IDegerlendirmeRepository, DegerlendirmeRepository>();
             services.AddTransient<IDersAcmaRepository, DersAcmaRepository>();
             services.AddTransient<IDersAlmaRepository, DersAlmaRepository>();
@@ -209,7 +212,6 @@ namespace Business
             services.AddTransient<IST_OgrenciDurumRepository, ST_OgrenciDurumRepository>();
             services.AddTransient<IST_OgretimDiliRepository, ST_OgretimDiliRepository>();
             services.AddTransient<IST_OgretimTuruRepository, ST_OgretimTuruRepository>();
-            services.AddTransient<IST_SinavTuruRepository, ST_SinavTuruRepository>();
             services.AddTransient<IST_ProgramTuruRepository, ST_ProgramTuruRepository>();
             services.AddTransient<IST_ProgramTuruRepository, ST_ProgramTuruRepository>();
             services.AddTransient<IDanismanlikRepository, DanismanlikRepository>();
@@ -219,7 +221,6 @@ namespace Business
             services.AddTransient<ILogRepository, LogRepository>();
             services.AddTransient<ITranslateRepository, TranslateRepository>();
             services.AddTransient<ILanguageRepository, LanguageRepository>();
-
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUserClaimRepository, UserClaimRepository>();
             services.AddTransient<IOperationClaimRepository, OperationClaimRepository>();

@@ -24,6 +24,8 @@ export class AuthService {
   claims: string[];
   langText: string;
   userData: TokenModel;
+  userId:number;
+
 
   constructor(private httpClient: HttpClient, private storageService: LocalStorageService,
     private router: Router, private alertifyService: AlertifyService, private sharedService: SharedService) {
@@ -44,10 +46,8 @@ export class AuthService {
         this.storageService.setItem("refreshToken", data.data.refreshToken)
         this.claims = data.data.claims;
         this.userData = data;
-
         var decode = this.jwtHelper.decodeToken(this.storageService.getToken());
-
-
+        this.userId= this.userData.data.userId;
         var propUserName = Object.keys(decode).filter(x => x.endsWith("/name"))[0];
         this.userName = decode[propUserName];
         this.sharedService.sendChangeUserNameEvent();
@@ -77,6 +77,9 @@ export class AuthService {
   }
   getUserName(): string {
     return this.userName;
+  }
+  getUserId(): number {
+    return this.userId;
   }
 
   setClaims() {
@@ -110,7 +113,7 @@ export class AuthService {
   }
 
   getCurrentUserId() {
-    this.jwtHelper.decodeToken(this.storageService.getToken()).userId;
+  this.jwtHelper.decodeToken(this.storageService.getToken()).userId;
   }
 
   claimGuard(claim: string): boolean {

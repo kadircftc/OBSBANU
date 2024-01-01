@@ -137,6 +137,9 @@
         <form *ngIf="dersHavuzuAddForm" [formGroup]="dersHavuzuAddForm" (ngSubmit)="save()">
 					<div class="row">
 						<div class="col-md-12">
+              <div class="d-flex justify-content-start align-items-center">
+                <span class="mr-2">Ders Dili:</span>
+              </div>
 							<select class="browser-default custom-select" formControlName="dersDiliId">
 								<option *ngFor="let item of dersDiliList" [value]="item.id"> {{item.ad}}</option>
 							</select>
@@ -144,6 +147,9 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12">
+              <div class="d-flex justify-content-start align-items-center">
+                <span class="mr-2">Ders Seviyesi:</span>
+              </div>
 							<select class="browser-default custom-select" formControlName="dersSeviyesiId">
 								<option *ngFor="let item of dersSeviyesiList" [value]="item.id"> {{item.ad}}</option>
 							</select>
@@ -151,6 +157,9 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12">
+              <div class="d-flex justify-content-start align-items-center">
+                <span class="mr-2">Ders Türü:</span>
+              </div>
 							<select class="browser-default custom-select" formControlName="dersturuId">
 								<option *ngFor="let item of dersTuruList" [value]="item.id"> {{item.ad}}</option>
 							</select>
@@ -159,7 +168,7 @@
 					<div class="row">
             <div class="col col-md-12">
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="dersKodu" type="text" id="dersKodu" name="dersKodu"
+                <input matInput placeholder="Ders Kodu" type="text" id="dersKodu" name="dersKodu"
                        formControlName="dersKodu" />
                 <div class="alert alert-danger"
                      *ngIf="dersHavuzuAddForm.get('dersKodu')!.hasError('dersKodu') && dersHavuzuAddForm.get('dersKodu')!.dirty">
@@ -170,7 +179,7 @@
 					<div class="row">
             <div class="col col-md-12">
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="dersAdi" type="text" id="dersAdi" name="dersAdi"
+                <input matInput placeholder="Ders Adı" type="text" id="dersAdi" name="dersAdi"
                        formControlName="dersAdi" />
                 <div class="alert alert-danger"
                      *ngIf="dersHavuzuAddForm.get('dersAdi')!.hasError('dersAdi') && dersHavuzuAddForm.get('dersAdi')!.dirty">
@@ -180,8 +189,11 @@
           </div>
 					<div class="row">
             <div class="col col-md-12">
+              <div class="d-flex justify-content-start align-items-center">
+                <span class="mr-2">Teorik:</span>
+              </div>
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="teorik" type="text" id="teorik" name="teorik"
+                <input matInput  type="text" id="teorik" name="teorik"
                        formControlName="teorik" />
                 <div class="alert alert-danger"
                      *ngIf="dersHavuzuAddForm.get('teorik')!.hasError('teorik') && dersHavuzuAddForm.get('teorik')!.dirty">
@@ -191,8 +203,11 @@
           </div>
 					<div class="row">
             <div class="col col-md-12">
+              <div class="d-flex justify-content-start align-items-center">
+                <span class="mr-2">Uygulama:</span>
+              </div>
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="uygulama" type="text" id="uygulama" name="uygulama"
+                <input matInput  type="text" id="uygulama" name="uygulama"
                        formControlName="uygulama" />
                 <div class="alert alert-danger"
                      *ngIf="dersHavuzuAddForm.get('uygulama')!.hasError('uygulama') && dersHavuzuAddForm.get('uygulama')!.dirty">
@@ -202,8 +217,11 @@
           </div>
 					<div class="row">
             <div class="col col-md-12">
+              <div class="d-flex justify-content-start align-items-center">
+                <span class="mr-2">Kredi Miktarı:</span>
+              </div>
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="kredi" type="text" id="kredi" name="kredi"
+                <input matInput  type="text" id="kredi" name="kredi"
                        formControlName="kredi" />
                 <div class="alert alert-danger"
                      *ngIf="dersHavuzuAddForm.get('kredi')!.hasError('kredi') && dersHavuzuAddForm.get('kredi')!.dirty">
@@ -213,8 +231,11 @@
           </div>
 					<div class="row">
             <div class="col col-md-12">
+              <div class="d-flex justify-content-start align-items-center">
+                <span class="mr-2">eCTS:</span>
+              </div>
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="eCTS" type="text" id="eCTS" name="eCTS"
+                <input matInput type="text" id="eCTS" name="eCTS"
                        formControlName="eCTS" />
                 <div class="alert alert-danger"
                      *ngIf="dersHavuzuAddForm.get('eCTS')!.hasError('eCTS') && dersHavuzuAddForm.get('eCTS')!.dirty">

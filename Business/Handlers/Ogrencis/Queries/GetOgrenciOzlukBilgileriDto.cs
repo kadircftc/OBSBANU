@@ -21,6 +21,8 @@ namespace Business.Handlers.Ogrencis.Queries
 {
     public class GetOgrenciOzlukBilgileriDto : IRequest<IDataResult<IEnumerable<OzlukBilgileriDto>>>
     {
+        public int userId { get; set; }
+
         public class GetOgrenciOzlukBilgileriDtoHandler : IRequestHandler<GetOgrenciOzlukBilgileriDto, IDataResult<IEnumerable<OzlukBilgileriDto>>>
         {
             private readonly IOgrenciRepository _ogrenciRepository;
@@ -40,7 +42,7 @@ namespace Business.Handlers.Ogrencis.Queries
             [SecuredOperation(Priority = 1)]
             public async Task<IDataResult<IEnumerable<OzlukBilgileriDto>>> Handle(GetOgrenciOzlukBilgileriDto request, CancellationToken cancellationToken)
             {
-                var result = await _ogrenciRepository.GetOzlukBilgileriAsync(_userService.GetCurrentUserId());
+                var result = await _ogrenciRepository.GetOzlukBilgileriAsync(request.userId);
                 return new SuccessDataResult<IEnumerable<OzlukBilgileriDto>>(result, "Ozluk bilgileri getirildi.");
             }
         }

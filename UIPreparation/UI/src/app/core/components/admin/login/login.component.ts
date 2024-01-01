@@ -40,9 +40,11 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
+
     this.auth.login(this.loginUser);
   }
 
+  
   logOut(){
       this.storageService.removeToken();
       this.storageService.removeItem("lang");

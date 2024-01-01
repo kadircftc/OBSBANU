@@ -1,14 +1,13 @@
-import { Component, AfterViewInit, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { AuthService } from 'app/core/components/admin/login/services/auth.service';
 import { AlertifyService } from 'app/core/services/alertify.service';
 import { LookUpService } from 'app/core/services/lookUp.service';
-import { AuthService } from 'app/core/components/admin/login/services/auth.service';
 import { ST_SinavTuru } from './models/ST_SinavTuru';
 import { ST_SinavTuruService } from './services/ST_SinavTuru.service';
-import { environment } from 'environments/environment';
 
 declare var jQuery: any;
 

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 import { Bolum } from '../models/Bolum';
+import { BolumDto } from '../models/bolumDto';
 
 
 @Injectable({
@@ -20,6 +21,10 @@ export class BolumService {
 
   getBolumById(id: number): Observable<Bolum> {
     return this.httpClient.get<Bolum>(environment.getApiUrl + '/Bolums/getbyid?id='+id)
+  }
+
+  getBolumDto():Observable<BolumDto>{
+    return this.httpClient.get<BolumDto>(environment.getApiUrl + '/Bolums/getbolumDto')
   }
 
   addBolum(bolum: Bolum): Observable<any> {

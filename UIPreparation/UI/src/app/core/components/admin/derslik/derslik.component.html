@@ -111,6 +111,9 @@
 				
 					<div class="row">
 						<div class="col-md-12">
+              <div class="d-flex justify-content-start align-items-center">
+                <span class="mr-2">Derslik Türü:</span>
+              </div>
 							<select class="browser-default custom-select" formControlName="derslikTuruId">
 								<option *ngFor="let item of derslikTuruList" [value]="item.id"> {{item.ad}}</option>
 							</select>
@@ -119,7 +122,7 @@
 					<div class="row">
             <div class="col col-md-12">
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="derslikAdi" type="text" id="derslikAdi" name="derslikAdi"
+                <input matInput placeholder="Derslik Adı"  type="text" id="derslikAdi" name="derslikAdi"
                        formControlName="derslikAdi" />
                 <div class="alert alert-danger"
                      *ngIf="derslikAddForm.get('derslikAdi')!.hasError('derslikAdi') && derslikAddForm.get('derslikAdi')!.dirty">
@@ -130,7 +133,7 @@
 					<div class="row">
             <div class="col col-md-12">
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="kapasite" type="text" id="kapasite" name="kapasite"
+                <input matInput placeholder="Kapasite" type="text" id="kapasite" name="kapasite"
                        formControlName="kapasite" />
                 <div class="alert alert-danger"
                      *ngIf="derslikAddForm.get('kapasite')!.hasError('kapasite') && derslikAddForm.get('kapasite')!.dirty">

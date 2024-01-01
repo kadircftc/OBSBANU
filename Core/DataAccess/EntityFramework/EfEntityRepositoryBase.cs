@@ -4,6 +4,7 @@ using Core.Enums;
 using Core.Extensions;
 using Core.Utilities.Results;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using ServiceStack;
 using System;
 using System.Collections.Generic;

@@ -11,4 +11,5 @@ export class Data {
     token:string;
     claims:string[];
     refreshToken:string;
+    userId:number;
 }
