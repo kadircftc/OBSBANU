@@ -9,7 +9,6 @@ import { DerslikComponent } from 'app/core/components/admin/derslik/derslik.comp
 import { DersProgramiComponent } from 'app/core/components/admin/dersProgrami/dersProgrami.component';
 import { GroupComponent } from 'app/core/components/admin/group/group.component';
 import { LanguageComponent } from 'app/core/components/admin/language/language.component';
-import { LogDtoComponent } from 'app/core/components/admin/log/logDto.component';
 import { LoginComponent } from 'app/core/components/admin/login/login.component';
 import { MufredatComponent } from 'app/core/components/admin/mufredat/mufredat.component';
 import { OgrenciComponent } from 'app/core/components/admin/ogrenci/ogrenci.component';
@@ -47,7 +46,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'language',       component: LanguageComponent,canActivate:[LoginGuard]},
     { path: 'translate',      component: TranslateComponent,canActivate:[LoginGuard]},
     { path: 'operationclaim', component: OperationClaimComponent,canActivate:[LoginGuard]},
-    { path: 'log',            component: LogDtoComponent,canActivate:[LoginGuard]},
     { path: 'bolum',            component: BolumComponent,canActivate:[LoginGuard]},
     { path: 'danismanlik',            component: DanismanlikComponent,canActivate:[LoginGuard]},
     { path: 'degerlendirme',            component: DegerlendirmeComponent,canActivate:[LoginGuard]},
