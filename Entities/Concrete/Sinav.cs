@@ -10,7 +10,7 @@ namespace Entities.Concrete
     public class Sinav : BaseEntityModel, IEntity
     {
         public int DersAcmaId { get; set; }
-        public int SınavTuruId { get; set; }
+        public int SinavTuruId { get; set; }
         public int DerslikId { get; set; }
         public int OgrElmID { get; set; }
         public int EtkiOrani { get; set; }

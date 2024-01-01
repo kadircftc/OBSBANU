@@ -31,6 +31,10 @@ import { ST_ProgramTuruComponent } from 'app/core/components/admin/sT_ProgramTur
 import { ST_SinavTuruComponent } from 'app/core/components/admin/sT_SinavTuru/sT_SinavTuru.component';
 import { TranslateComponent } from 'app/core/components/admin/translate/translate.component';
 import { UserComponent } from 'app/core/components/admin/user/user.component';
+import { OgrenciMufredatComponent } from 'app/core/components/ogrenci/ogrenci-mufredat/ogrenci-mufredat.component';
+import { OzlukBilgileriComponent } from 'app/core/components/ogrenci/ozluk-bilgileri/ozluk-bilgileri.component';
+import { OgretimElemaniOzlukBilgileriComponent } from 'app/core/components/ogretimElemani/ogretim-elemani-ozluk-bilgileri/ogretim-elemani-ozluk-bilgileri.component';
+import { SinavNotlandirmaComponent } from 'app/core/components/ogretimElemani/sinav-notlandirma/sinav-notlandirma.component';
 import { LoginGuard } from 'app/core/guards/login-guard';
 import { DashboardComponent } from '../../dashboard/dashboard.component';
 
@@ -40,7 +44,7 @@ import { DashboardComponent } from '../../dashboard/dashboard.component';
 
 export const AdminLayoutRoutes: Routes = [
 
-    { path: 'dashboard',      component: DashboardComponent,canActivate:[LoginGuard] }, 
+    { path: 'dashboard',      component: DashboardComponent,canActivate:[LoginGuard]}, 
     { path: 'user',           component: UserComponent, canActivate:[LoginGuard] },
     { path: 'group',          component: GroupComponent, canActivate:[LoginGuard] },
     { path: 'login',          component: LoginComponent },
@@ -72,5 +76,9 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'sT_OgretimDili',            component: ST_OgretimDiliComponent,canActivate:[LoginGuard]},
     { path: 'sT_OgretimTuru',            component: ST_OgretimTuruComponent,canActivate:[LoginGuard]},
     { path: 'sT_ProgramTuru',            component: ST_ProgramTuruComponent,canActivate:[LoginGuard]},
-    { path: 'sT_SinavTuru',            component: ST_SinavTuruComponent,canActivate:[LoginGuard]}
+    { path: 'sT_SinavTuru',            component: ST_SinavTuruComponent,canActivate:[LoginGuard]},
+    { path: 'ozluk-bilgileri',            component: OzlukBilgileriComponent,canActivate:[LoginGuard]},
+    { path: 'ogrenci-mufredat',            component: OgrenciMufredatComponent,canActivate:[LoginGuard]},
+    { path: 'ogretim-elemani-ozluk-bilgileri',            component: OgretimElemaniOzlukBilgileriComponent,canActivate:[LoginGuard]},
+    { path: 'sinav-notlandirma',            component: SinavNotlandirmaComponent,canActivate:[LoginGuard]},
 ];

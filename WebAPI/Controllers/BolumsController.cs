@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Entities.Concrete;
 using System.Collections.Generic;
+using Business.Handlers.Ogrencis.Queries;
+using Entities.Dtos;
+using System.Linq;
 
 namespace WebAPI.Controllers
 {
@@ -56,7 +59,19 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result.Message);
         }
-
+        [Produces("application/json", "text/plain")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IQueryable<BolumDto>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+        [HttpGet("getBolumDto")]
+        public async Task<IActionResult> GetBolumDto()
+        {
+            var result = await Mediator.Send(new GetBolumDtoQuery());
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest(result.Message);
+        }
         /// <summary>
         /// Add Bolum.
         /// </summary>

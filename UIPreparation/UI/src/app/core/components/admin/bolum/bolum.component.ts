@@ -27,9 +27,10 @@ export class BolumComponent implements AfterViewInit, OnInit {
 	dataSource: MatTableDataSource<any>;
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;
-	displayedColumns: string[] = ['id','bolumAdi', 'programTuruId', 'ogretimTuruId', 'ogretimDiliId', 'webAdresi', 'createdDate', 'updatedDate', 'deletedDate', 'update', 'delete'];
+	displayedColumns: string[] = ['id','bolumAdi', 'programTuruAdi', 'ogretimTuruAdi', 'ogretimDiliAdi', 'webAdresi', 'createdDate', 'updatedDate', 'deletedDate', 'update', 'delete'];
 
 	bolumList: Bolum[];
+	bolumDtoList: any;
 	bolum: Bolum = new Bolum();
 	programTuruList: ST_ProgramTuru[];
 	ogretimDiliList: ST_OgretimDili[];
@@ -44,7 +45,7 @@ export class BolumComponent implements AfterViewInit, OnInit {
 		 private lookupService: LookUpService, private alertifyService: AlertifyService, private formBuilder: FormBuilder, private authService: AuthService) { }
 
 	ngAfterViewInit(): void {
-		this.getBolumList();
+		this.getBolumDtoList();
 	}
 
 	ngOnInit() {
@@ -76,14 +77,22 @@ export class BolumComponent implements AfterViewInit, OnInit {
 
 
 
-	getBolumList() {
-		this.bolumService.getBolumList().subscribe(data => {
-			this.bolumList = data;
-			this.dataSource = new MatTableDataSource(data);
+	// getBolumList() {
+	// 	this.bolumService.getBolumList().subscribe(data => {
+	// 		this.bolumList = data;
+	// 		this.dataSource = new MatTableDataSource(data);
+	// 		this.configDataTable();
+	// 	});
+	// }
+
+	getBolumDtoList() {
+		this.bolumService.getBolumDto().subscribe(data => {
+			this.bolumDtoList = data;
+			console.log(this.bolumDtoList);
+			this.dataSource = new MatTableDataSource(this.bolumDtoList);
 			this.configDataTable();
 		});
 	}
-
 	save() {
 
 		if (this.bolumAddForm.valid) {
@@ -100,7 +109,7 @@ export class BolumComponent implements AfterViewInit, OnInit {
 	addBolum() {
 
 		this.bolumService.addBolum(this.bolum).subscribe(data => {
-			this.getBolumList();
+			this.getBolumDtoList();
 			this.bolum = new Bolum();
 			jQuery('#bolum').modal('hide');
 			this.alertifyService.success(data);
@@ -113,13 +122,15 @@ export class BolumComponent implements AfterViewInit, OnInit {
 	updateBolum() {
 
 		this.bolumService.updateBolum(this.bolum).subscribe(data => {
-
-			var index = this.bolumList.findIndex(x => x.id == this.bolum.id);
-			this.bolumList[index] = this.bolum;
-			this.dataSource = new MatTableDataSource(this.bolumList);
+		console.log(this.bolum);
+			var index = this.bolumDtoList.findIndex(x => x.id == this.bolum.id);
+			this.bolumDtoList[index] = this.bolum;
+			console.log(this.bolumDtoList[index]);
+			this.dataSource = new MatTableDataSource(this.bolumDtoList);
 			this.configDataTable();
 			this.bolum = new Bolum();
 			jQuery('#bolum').modal('hide');
+			this.getBolumDtoList();
 			this.alertifyService.success(data);
 			this.clearFormGroup(this.bolumAddForm);
 

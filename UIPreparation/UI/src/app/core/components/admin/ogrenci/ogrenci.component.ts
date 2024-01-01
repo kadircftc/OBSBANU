@@ -13,6 +13,7 @@ import { ST_OgrenciDurumService } from '../sT_OgrenciDurum/services/ST_OgrenciDu
 import { User } from '../user/models/user';
 import { UserService } from '../user/services/user.service';
 import { Ogrenci } from './models/Ogrenci';
+import { OgrenciOzlukBilgileriDto } from './models/ogrenciOzlukBilgileriDto';
 import { OgrenciService } from './services/Ogrenci.service';
 
 declare var jQuery: any;
@@ -35,6 +36,7 @@ export class OgrenciComponent implements AfterViewInit, OnInit {
 	bolumList: Bolum[];
 	userList: User[];
 	ogrenciAddForm: FormGroup;
+	ozlukBilgisi: OgrenciOzlukBilgileriDto;
 
 
 	ogrenciId: number;
@@ -80,6 +82,9 @@ export class OgrenciComponent implements AfterViewInit, OnInit {
 			this.bolumList = data
 		})
 	}
+
+	
+
 	save() {
 
 		if (this.ogrenciAddForm.valid) {
@@ -126,7 +131,6 @@ export class OgrenciComponent implements AfterViewInit, OnInit {
 			jQuery('#ogrenci').modal('hide');
 			this.alertifyService.success(data);
 			this.clearFormGroup(this.ogrenciAddForm);
-
 		})
 
 	}

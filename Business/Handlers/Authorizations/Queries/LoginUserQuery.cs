@@ -54,6 +54,7 @@ namespace Business.Handlers.Authorizations.Queries
 
                 var accessToken = _tokenHelper.CreateToken<DArchToken>(user);
                 accessToken.Claims = claims.Select(x => x.Name).ToList();
+                accessToken.UserId=user.UserId;
 
                 user.RefreshToken = accessToken.RefreshToken;
                 _userRepository.Update(user);

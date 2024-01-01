@@ -27,7 +27,7 @@ namespace Business.Handlers.Sinavs.Commands
         public System.DateTime UpdatedDate { get; set; }
         public System.DateTime DeletedDate { get; set; }
         public int DersAcmaId { get; set; }
-        public int SınavTuruId { get; set; }
+        public int SinavTuruId { get; set; }
         public int DerslikId { get; set; }
         public int OgrElmID { get; set; }
         public int EtkiOrani { get; set; }
@@ -59,7 +59,7 @@ namespace Business.Handlers.Sinavs.Commands
                 {
                     CreatedDate = DateTime.Now,
                     DersAcmaId = request.DersAcmaId,
-                    SınavTuruId = request.SınavTuruId,
+                    SinavTuruId = request.SinavTuruId,
                     DerslikId = request.DerslikId,
                     OgrElmID = request.OgrElmID,
                     EtkiOrani = request.EtkiOrani,

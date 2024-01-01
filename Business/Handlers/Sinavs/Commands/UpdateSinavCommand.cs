@@ -26,7 +26,7 @@ namespace Business.Handlers.Sinavs.Commands
         public System.DateTime UpdatedDate { get; set; }
         public System.DateTime DeletedDate { get; set; }
         public int DersAcmaId { get; set; }
-        public int SınavTuruId { get; set; }
+        public int SinavTuruId { get; set; }
         public int DerslikId { get; set; }
         public int OgrElmID { get; set; }
         public int EtkiOrani { get; set; }
@@ -54,7 +54,7 @@ namespace Business.Handlers.Sinavs.Commands
 
                 isThereSinavRecord.UpdatedDate =DateTime.Now;
                 isThereSinavRecord.DersAcmaId = request.DersAcmaId;
-                isThereSinavRecord.SınavTuruId = request.SınavTuruId;
+                isThereSinavRecord.SinavTuruId = request.SinavTuruId;
                 isThereSinavRecord.DerslikId = request.DerslikId;
                 isThereSinavRecord.OgrElmID = request.OgrElmID;
                 isThereSinavRecord.EtkiOrani = request.EtkiOrani;

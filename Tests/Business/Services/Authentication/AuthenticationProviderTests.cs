@@ -50,7 +50,7 @@ namespace Tests.Business.Services.Authentication
 
             _tokenHelper.Setup(x => x.CreateToken<DArchToken>(It.IsAny<User>())).Returns(() => new DArchToken()
             {
-                Expiration = DateTime.Now.AddMinutes(10),
+                Expiration = DateTime.Now.AddHours(1),
                 ExternalUserId = "1111111",
                 OnBehalfOf = "true",
                 Provider = AuthenticationProviderType.Person,
@@ -89,7 +89,7 @@ namespace Tests.Business.Services.Authentication
 
             _tokenHelper.Setup(x => x.CreateToken<DArchToken>(It.IsAny<User>())).Returns(() => new DArchToken()
             {
-                Expiration = DateTime.Now.AddMinutes(10),
+                Expiration = DateTime.Now.AddHours(1),
                 ExternalUserId = "1111111",
                 OnBehalfOf = "true",
                 Provider = AuthenticationProviderType.Person,

@@ -112,6 +112,9 @@
         <form *ngIf="dersProgramiAddForm" [formGroup]="dersProgramiAddForm" (ngSubmit)="save()">
 					<div class="row">
 						<div class="col-md-12">
+              <div class="d-flex justify-content-start align-items-center">
+                <span class="mr-2">Ders Acma Id:</span>
+              </div>
 							<select class="browser-default custom-select" formControlName="dersAcmaId">
 								<option *ngFor="let item of dersProgramilookUp" [value]="item.id"> {{item.label}}</option>
 							</select>
@@ -119,6 +122,9 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12">
+              <div class="d-flex justify-content-start align-items-center">
+                <span class="mr-2">Derslik Id:</span>
+              </div>
 							<select class="browser-default custom-select" formControlName="derslikId">
 								<option *ngFor="let item of dersProgramilookUp" [value]="item.id"> {{item.label}}</option>
 							</select>
@@ -126,15 +132,18 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12">
+              <div class="d-flex justify-content-start align-items-center">
+                <span class="mr-2">Ders Günü:</span>
+              </div>
 							<select class="browser-default custom-select" formControlName="dersGunuId">
 								<option *ngFor="let item of dersProgramilookUp" [value]="item.id"> {{item.label}}</option>
 							</select>
 						</div>
 					</div>
 					<div class="row">
-            <div class="col col-md-12">
+            <div class="col col-md-12 mt-1">
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="dersSaati" type="text" id="dersSaati" name="dersSaati"
+                <input matInput placeholder="Ders Saati" type="text" id="dersSaati" name="dersSaati"
                        formControlName="dersSaati" />
                 <div class="alert alert-danger"
                      *ngIf="dersProgramiAddForm.get('dersSaati')!.hasError('dersSaati') && dersProgramiAddForm.get('dersSaati')!.dirty">
