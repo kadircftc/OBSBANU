@@ -51,6 +51,7 @@ import { ST_SinavTuruComponent } from '../components/admin/sT_SinavTuru/sT_Sinav
 import { TranslateComponent } from '../components/admin/translate/translate.component';
 import { DashboardComponent } from '../components/app/dashboard/dashboard.component';
 import { AdminLayoutRoutes } from '../components/app/layouts/admin-layout/admin-layout.routing';
+import { OzlukBilgileriComponent } from '../components/ogrenci/ozluk-bilgileri/ozluk-bilgileri.component';
 
 
 // export function layoutHttpLoaderFactory(http: HttpClient) {
@@ -118,7 +119,8 @@ import { AdminLayoutRoutes } from '../components/app/layouts/admin-layout/admin-
         ST_OgretimDiliComponent,
         ST_OgretimTuruComponent,
         ST_ProgramTuruComponent,
-        ST_SinavTuruComponent
+        ST_SinavTuruComponent,
+        OzlukBilgileriComponent
 
     ]
 })

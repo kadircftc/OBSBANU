@@ -46,7 +46,7 @@
 				   </ng-container>
 	
                    <ng-container matColumnDef="sinavTuruId">
-                     <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'SınavTuruId'|translate}}</th>
+                     <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'SinavTuruId'|translate}}</th>
                      <td mat-cell *matCellDef="let element">{{element.sinavTuruId}}</td>
 				   </ng-container>
 	
@@ -124,13 +124,19 @@
 				
 					<div class="row">
 						<div class="col-md-12">
+              <div class="d-flex justify-content-start align-items-center">
+                <span class="mr-2">Ders Açma Id:</span>
+              </div>
 							<select class="browser-default custom-select" formControlName="dersAcmaId">
-								<option *ngFor="let item of dersAcmaList" [value]="item.id"> {{item.mufredatId}}</option>
+								<option *ngFor="let item of dersAcmaList" [value]="item.id"> {{item.id}}</option>
 							</select>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
+              <div class="d-flex justify-content-start align-items-center">
+                <span class="mr-2">Sınav Türü Id:</span>
+              </div>
 							<select class="browser-default custom-select" formControlName="sinavTuruId">
 								<option *ngFor="let item of sinavTuruList" [value]="item.id"> {{item.ad}}</option>
 							</select>
@@ -138,15 +144,18 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12">
+              <div class="d-flex justify-content-start align-items-center">
+                <span class="mr-2">Derslik Adı:</span>
+              </div>
 							<select class="browser-default custom-select" formControlName="derslikId">
 								<option *ngFor="let item of derslikList" [value]="item.id"> {{item.derslikAdi}}</option>
 							</select>
 						</div>
 					</div>
 					<div class="row">
-            <div class="col col-md-12">
+            <div class="col col-md-12 mt-1">
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="ogrElmID" type="text" id="ogrElmID" name="ogrElmID"
+                <input matInput placeholder="Öğretim Elemanı Id" type="text" id="ogrElmID" name="ogrElmID"
                        formControlName="ogrElmID" />
                 <div class="alert alert-danger"
                      *ngIf="sinavAddForm.get('ogrElmID')!.hasError('ogrElmID') && sinavAddForm.get('ogrElmID')!.dirty">
@@ -157,7 +166,7 @@
 					<div class="row">
             <div class="col col-md-12">
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="etkiOrani" type="text" id="etkiOrani" name="etkiOrani"
+                <input matInput placeholder="Etki Oranı" type="text" id="etkiOrani" name="etkiOrani"
                        formControlName="etkiOrani" />
                 <div class="alert alert-danger"
                      *ngIf="sinavAddForm.get('etkiOrani')!.hasError('etkiOrani') && sinavAddForm.get('etkiOrani')!.dirty">
@@ -168,7 +177,7 @@
 					<div class="row">
             <div class="col col-md-12">
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="sinavTarihi" type="date" id="sinavTarihi" name="sinavTarihi"
+                <input matInput placeholder="Sınav Tarihi" type="date" id="sinavTarihi" name="sinavTarihi"
                        formControlName="sinavTarihi" />
                 <div class="alert alert-danger"
                      *ngIf="sinavAddForm.get('sinavTarihi')!.hasError('sinavTarihi') && sinavAddForm.get('sinavTarihi')!.dirty">

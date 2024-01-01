@@ -33,9 +33,9 @@ export class SinavComponent implements AfterViewInit, OnInit {
 
 	sinavList: Sinav[];
 	dersAcmaList: DersAcma[];
+	ogrElmList: OgretimElemani[];
 	sinavTuruList: ST_SinavTuru[];
 	derslikList: Derslik[];
-	ogrElmList: OgretimElemani[];
 	sinav: Sinav = new Sinav();
 
 	sinavAddForm: FormGroup;
@@ -43,8 +43,7 @@ export class SinavComponent implements AfterViewInit, OnInit {
 
 	sinavId: number;
 
-	constructor(private sinavService: SinavService, private lookupService: LookUpService, private dersAcmaService: DersAcmaService, private sinavTuruService: ST_SinavTuruService,
-		private derslikService: DerslikService, private ogrElmService: OgretimElemaniService, private alertifyService: AlertifyService, private formBuilder: FormBuilder, private authService: AuthService) { }
+	constructor(private sinavService: SinavService, private dersAcmaService: DersAcmaService, private ogrElmService: OgretimElemaniService, private sT_SinavTuruService: ST_SinavTuruService, private derslikService: DerslikService, private lookupService: LookUpService, private alertifyService: AlertifyService, private formBuilder: FormBuilder, private authService: AuthService) { }
 
 	ngAfterViewInit(): void {
 		this.getSinavList();
@@ -53,13 +52,14 @@ export class SinavComponent implements AfterViewInit, OnInit {
 	ngOnInit() {
 
 		this.createSinavAddForm();
-		this.getDersAcmaList();
 		this.getSinavTuruList();
 		this.getDerslikList();
 		this.getOgrElmList();
+		this.getDersAcmaList();
 	}
 
 
+	//dersacma ogrelm sinavturu derslik
 	getSinavList() {
 		this.sinavService.getSinavList().subscribe(data => {
 			this.sinavList = data;
@@ -68,14 +68,21 @@ export class SinavComponent implements AfterViewInit, OnInit {
 		});
 	}
 
+
 	getDersAcmaList() {
 		this.dersAcmaService.getDersAcmaList().subscribe(data => {
 			this.dersAcmaList = data;
 		})
 	}
 
+	getOgrElmList() {
+		this.ogrElmService.getOgretimElemaniList().subscribe(data => {
+			this.ogrElmList = data;
+		})
+	}
+
 	getSinavTuruList() {
-		this.sinavTuruService.getST_SinavTuruList().subscribe(data => {
+		this.sT_SinavTuruService.getST_SinavTuruList().subscribe(data => {
 			this.sinavTuruList = data;
 		})
 	}
@@ -83,12 +90,6 @@ export class SinavComponent implements AfterViewInit, OnInit {
 	getDerslikList() {
 		this.derslikService.getDerslikList().subscribe(data => {
 			this.derslikList = data;
-		})
-	}
-
-	getOgrElmList() {
-		this.ogrElmService.getOgretimElemaniList().subscribe(data => {
-			this.ogrElmList = data;
 		})
 	}
 

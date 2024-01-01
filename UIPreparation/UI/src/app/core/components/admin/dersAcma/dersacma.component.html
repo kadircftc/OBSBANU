@@ -119,6 +119,9 @@
 					
 					<div class="row">
 						<div class="col-md-12">
+              <div class="d-flex justify-content-start align-items-center">
+                <span class="mr-2">Akademik Yıl:</span>
+              </div>
 							<select class="browser-default custom-select" formControlName="akademikYilId">
 								<option *ngFor="let item of akademikYilList" [value]="item.id"> {{item.ad}}</option>
 							</select>
@@ -126,6 +129,9 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12">
+              <div class="d-flex justify-content-start align-items-center">
+                <span class="mr-2">Akademik Dönem:</span>
+              </div>
 							<select class="browser-default custom-select" formControlName="akademikDonemId">
 								<option *ngFor="let item of akademikDonemList" [value]="item.id"> {{item.ad}}</option>
 							</select>
@@ -133,6 +139,9 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12">
+              <div class="d-flex justify-content-start align-items-center">
+                <span class="mr-2">Müfredat Id:</span>
+              </div>
 							<select class="browser-default custom-select" formControlName="mufredatId">
 								<option *ngFor="let item of mufredatList" [value]="item.id"> {{item.id}}</option>
 							</select>
@@ -140,13 +149,16 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12">
+              <div class="d-flex justify-content-start align-items-center">
+                <span class="mr-2">Öğretim Elemanı:</span>
+              </div>
 							<select class="browser-default custom-select" formControlName="ogrElmId">
 								<option *ngFor="let item of ogrElmList" [value]="item.id"> {{item.adi}} {{item.soyadi}}</option>
 							</select>
 						</div>
 					</div>
 					<div class="row">
-            <div class="col col-md-12">
+            <div class="col col-md-12 my-1">
               <mat-form-field class="example-full-width">
                 <input matInput placeholder="kontenjan" type="text" id="kontenjan" name="kontenjan"
                        formControlName="kontenjan" />

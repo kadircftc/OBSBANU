@@ -8,6 +8,7 @@ using Entities.Dtos;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Core.Entities;
+using System.Collections.Generic;
 
 namespace DataAccess.Concrete.EntityFramework
 {
@@ -18,6 +19,37 @@ namespace DataAccess.Concrete.EntityFramework
         public OgrenciRepository(ProjectDbContext context) : base(context)
         {
             _context = context;
+        }
+
+        public List<OgrenciDto> GetOgrenciDto()
+        {
+            var result = from ogr in _context.Ogrenci
+                         join bolum in _context.Bolum
+                         on ogr.BolumId equals bolum.Id
+                         join ogrDurum in _context.ST_OgrenciDurum
+                         on ogr.DurumId equals ogrDurum.Id
+                         join user in _context.Users
+                         on ogr.UserId equals user.UserId
+                         select new OgrenciDto
+                         {
+                             Id = ogr.Id,
+                             BolumAdi = bolum.BolumAdi,
+                             OgrenciNo = ogr.OgrenciNo,
+                             Durum = ogrDurum.Ad,
+                             AyrilmaTarihi=ogr.AyrilmaTarihi,
+                             Adi=ogr.Adi,
+                             Soyadi=ogr.Soyadi,
+                             TcKimlikNo=ogr.TcKimlikNo,
+                             Cinsiyet=ogr.Cinsiyet ? "Kadın" : "Erkek",
+                             DogumTarihi=ogr.DogumTarihi.ToString(),
+                             Mail=user.Email,
+                             TelefonNo=user.MobilePhones,
+                             Adres=user.Address,
+                             CreatedDate=ogr.CreatedDate,
+                             UpdatedDate=ogr.UpdatedDate,
+                             DeletedDate = ogr.DeletedDate
+                         };
+            return result.ToList();
         }
 
         public async Task<IQueryable<OzlukBilgileriDto>> GetOzlukBilgileriAsync(int userId)
@@ -39,12 +71,12 @@ namespace DataAccess.Concrete.EntityFramework
                              Adi = o.Adi,
                              Soyadi = o.Soyadi,
                              TcKimlikNo = o.TcKimlikNo,
-                             DogumTarihi = o.DogumTarihi,
+                             DogumTarihi = o.DogumTarihi.ToString(),
                              BolumAdi = b.BolumAdi,
                              OgrNo = o.OgrenciNo,
-                             KayitTarihi = o.CreatedDate,
+                             KayitTarihi = o.CreatedDate.ToShortDateString(),
                              Durum = durum.Ad,
-                             AyrilmaTarihi = o.AyrilmaTarihi,
+                             AyrilmaTarihi = o.AyrilmaTarihi.ToShortDateString(),
                              DanismanAdi = ogr.Adi,
                              DanismanSoyadi = ogr.Soyadi,
                              Adres = u.Address,

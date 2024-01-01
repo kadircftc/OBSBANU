@@ -34,7 +34,7 @@ namespace Business.Handlers.Sinavs.Queries
             [SecuredOperation(Priority = 1)]
             public async Task<IDataResult<IEnumerable<Sinav>>> Handle(GetSinavsQuery request, CancellationToken cancellationToken)
             {
-                return new SuccessDataResult<IEnumerable<Sinav>>(await _sinavRepository.GetListAsync());
+                return new SuccessDataResult<IEnumerable<Sinav>>(await _sinavRepository.GetListAsync(),"Listelendi");
             }
         }
     }

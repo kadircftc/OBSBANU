@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Core.DataAccess;
@@ -10,6 +11,7 @@ namespace DataAccess.Abstract
 {
     public interface IOgrenciRepository : IEntityRepository<Ogrenci>
     {
-        Task<IQueryable<OzlukBilgileriDto>> GetOzlukBilgileriAsync(int userId);
+        Task<IQueryable<OzlukBilgileriDto>>  GetOzlukBilgileriAsync(int userId);
+        List<OgrenciDto> GetOgrenciDto();
     }
 }

@@ -17,25 +17,25 @@ declare var jQuery: any;
 	styleUrls: ['./dersProgrami.component.scss']
 })
 export class DersProgramiComponent implements AfterViewInit, OnInit {
-	
+
 	dataSource: MatTableDataSource<any>;
 	@ViewChild(MatPaginator) paginator: MatPaginator;
 	@ViewChild(MatSort) sort: MatSort;
-	displayedColumns: string[] = ['id','createdDate','updatedDate','deletedDate','dersAcmaId','derslikId','dersGunuId','dersSaati', 'update','delete'];
+	displayedColumns: string[] = ['id', 'createdDate', 'updatedDate', 'deletedDate', 'dersAcmaId', 'derslikId', 'dersGunuId', 'dersSaati', 'update', 'delete'];
 
-	dersProgramiList:DersProgrami[];
-	dersProgrami:DersProgrami=new DersProgrami();
+	dersProgramiList: DersProgrami[];
+	dersProgrami: DersProgrami = new DersProgrami();
 
 	dersProgramiAddForm: FormGroup;
 
 
-	dersProgramiId:number;
+	dersProgramiId: number;
 
-	constructor(private dersProgramiService:DersProgramiService, private lookupService:LookUpService,private alertifyService:AlertifyService,private formBuilder: FormBuilder, private authService:AuthService) { }
+	constructor(private dersProgramiService: DersProgramiService, private lookupService: LookUpService, private alertifyService: AlertifyService, private formBuilder: FormBuilder, private authService: AuthService) { }
 
-    ngAfterViewInit(): void {
-        this.getDersProgramiList();
-    }
+	ngAfterViewInit(): void {
+		this.getDersProgramiList();
+	}
 
 	ngOnInit() {
 
@@ -47,11 +47,11 @@ export class DersProgramiComponent implements AfterViewInit, OnInit {
 		this.dersProgramiService.getDersProgramiList().subscribe(data => {
 			this.dersProgramiList = data;
 			this.dataSource = new MatTableDataSource(data);
-            this.configDataTable();
+			this.configDataTable();
 		});
 	}
 
-	save(){
+	save() {
 
 		if (this.dersProgramiAddForm.valid) {
 			this.dersProgrami = Object.assign({}, this.dersProgramiAddForm.value)
@@ -64,7 +64,7 @@ export class DersProgramiComponent implements AfterViewInit, OnInit {
 
 	}
 
-	addDersProgrami(){
+	addDersProgrami() {
 
 		this.dersProgramiService.addDersProgrami(this.dersProgrami).subscribe(data => {
 			this.getDersProgramiList();
@@ -77,14 +77,14 @@ export class DersProgramiComponent implements AfterViewInit, OnInit {
 
 	}
 
-	updateDersProgrami(){
+	updateDersProgrami() {
 
 		this.dersProgramiService.updateDersProgrami(this.dersProgrami).subscribe(data => {
 
-			var index=this.dersProgramiList.findIndex(x=>x.id==this.dersProgrami.id);
-			this.dersProgramiList[index]=this.dersProgrami;
+			var index = this.dersProgramiList.findIndex(x => x.id == this.dersProgrami.id);
+			this.dersProgramiList[index] = this.dersProgrami;
 			this.dataSource = new MatTableDataSource(this.dersProgramiList);
-            this.configDataTable();
+			this.configDataTable();
 			this.dersProgrami = new DersProgrami();
 			jQuery('#dersprogrami').modal('hide');
 			this.alertifyService.success(data);
@@ -95,28 +95,28 @@ export class DersProgramiComponent implements AfterViewInit, OnInit {
 	}
 
 	createDersProgramiAddForm() {
-		this.dersProgramiAddForm = this.formBuilder.group({		
-			id : [0],
-dersAcmaId : [0, Validators.required],
-derslikId : [0, Validators.required],
-dersGunuId : [0, Validators.required],
-dersSaati : [0, Validators.required]
+		this.dersProgramiAddForm = this.formBuilder.group({
+			id: [0],
+			dersAcmaId: [0, Validators.required],
+			derslikId: [0, Validators.required],
+			dersGunuId: [0, Validators.required],
+			dersSaati: [null, Validators.required]
 		})
 	}
 
-	deleteDersProgrami(dersProgramiId:number){
-		this.dersProgramiService.deleteDersProgrami(dersProgramiId).subscribe(data=>{
+	deleteDersProgrami(dersProgramiId: number) {
+		this.dersProgramiService.deleteDersProgrami(dersProgramiId).subscribe(data => {
 			this.alertifyService.success(data.toString());
-			this.dersProgramiList=this.dersProgramiList.filter(x=> x.id!=dersProgramiId);
+			this.dersProgramiList = this.dersProgramiList.filter(x => x.id != dersProgramiId);
 			this.dataSource = new MatTableDataSource(this.dersProgramiList);
 			this.configDataTable();
 		})
 	}
 
-	getDersProgramiById(dersProgramiId:number){
+	getDersProgramiById(dersProgramiId: number) {
 		this.clearFormGroup(this.dersProgramiAddForm);
-		this.dersProgramiService.getDersProgramiById(dersProgramiId).subscribe(data=>{
-			this.dersProgrami=data;
+		this.dersProgramiService.getDersProgramiById(dersProgramiId).subscribe(data => {
+			this.dersProgrami = data;
 			this.dersProgramiAddForm.patchValue(data);
 		})
 	}
@@ -134,7 +134,7 @@ dersSaati : [0, Validators.required]
 		});
 	}
 
-	checkClaim(claim:string):boolean{
+	checkClaim(claim: string): boolean {
 		return this.authService.claimGuard(claim)
 	}
 
@@ -152,4 +152,4 @@ dersSaati : [0, Validators.required]
 		}
 	}
 
-  }
+}

@@ -217,7 +217,7 @@ namespace DataAccess.Migrations.Ms
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DersAcmaId = table.Column<int>(type: "int", nullable: false),
-                    SınavTuruId = table.Column<int>(type: "int", nullable: false),
+                    SinavTuruId = table.Column<int>(type: "int", nullable: false),
                     DerslikId = table.Column<int>(type: "int", nullable: false),
                     OgrElmID = table.Column<int>(type: "int", nullable: false),
                     EtkiOrani = table.Column<int>(type: "int", nullable: false),

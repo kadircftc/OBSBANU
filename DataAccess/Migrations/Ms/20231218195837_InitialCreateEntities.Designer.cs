@@ -1957,7 +1957,7 @@ namespace DataAccess.Migrations.Ms
                     b.Property<DateTime>("SinavTarihi")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("SınavTuruId")
+                    b.Property<int>("SinavTuruId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedDate")

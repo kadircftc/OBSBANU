@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Entities.Concrete;
 using System.Collections.Generic;
+using Entities.Dtos;
 
 namespace WebAPI.Controllers
 {
@@ -36,7 +37,60 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result.Message);
         }
+        [Produces("application/json", "text/plain")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<OzlukBilgileriDto>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+        [HttpGet("getOgretimElemaniOzlukBilgileri")]
+        public async Task<IActionResult> GetOgretimElemaniOzlukBilgileri(int id)
+        {
+            var result = await Mediator.Send(new GetOgretimElemaniOzlukBilgileriQuery {userId=id });
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest(result.Message);
+        }
+        [Produces("application/json", "text/plain")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<MufredatDto>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+        [HttpGet("getOgretimElemaniMufredat")]
+        public async Task<IActionResult> GetOgretimElemaniMufredat(int id)
+        {
+            var result = await Mediator.Send(new GetOgretimElemaniMufredatQuery { Id = id });
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest(result.Message);
+        }
+        [Produces("application/json", "text/plain")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<OzlukBilgileriDto>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+        [HttpGet("getOgretimElemaniVerilenDersler")]
+        public async Task<IActionResult> GetOgretimElemaniVerilenDersler(int id)
+        {
+            var result = await Mediator.Send(new GetOgretimElemaniVerilenDerslerQuery { Id = id });
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest(result.Message);
+        }
 
+        [Produces("application/json", "text/plain")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<OgretimElemaniSınavlarDto>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+        [HttpGet("getOgretimElemaniSinavlar")]
+        public async Task<IActionResult> GetOgretimElemaniSinavlar(int id)
+        {
+            var result = await Mediator.Send(new GetOgretimElemaniSinavlarQuery { Id = id });
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest(result.Message);
+        }
+        
         ///<summary>
         ///It brings the details according to its id.
         ///</summary>

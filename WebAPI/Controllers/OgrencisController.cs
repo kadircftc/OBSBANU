@@ -9,6 +9,7 @@ using Entities.Concrete;
 using System.Collections.Generic;
 using Entities.Dtos;
 using System.Linq;
+using Business.Services.UserService.Abstract;
 
 namespace WebAPI.Controllers
 {
@@ -42,16 +43,29 @@ namespace WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IQueryable<OzlukBilgileriDto>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         [HttpGet("getOzlukBilgileri")]
-        public async Task<IActionResult> GetOzlukBilgileri()
+        public async Task<IActionResult> GetOzlukBilgileri(int id)
         {
-            var result = await Mediator.Send(new GetOgrenciOzlukBilgileriDto());
+           
+            var result = await Mediator.Send(new GetOgrenciOzlukBilgileriDto {userId=id});
             if (result.Success)
             {
                 return Ok(result.Data);
             }
             return BadRequest(result.Message);
         }
-
+        [Produces("application/json", "text/plain")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<OgrenciDto>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+        [HttpGet("getOgrenciDto")]
+        public async Task<IActionResult> GetOgrenciDtoList()
+        {
+            var result = await Mediator.Send(new GetOgrenciDtoQuery());
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest(result.Message);
+        }
         ///<summary>
         ///It brings the details according to its id.
         ///</summary>
