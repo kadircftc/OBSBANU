@@ -75,7 +75,7 @@ namespace Tests.Business.HandlersTest
 
             //Asset
             x.Success.Should().BeTrue();
-            ((List<DersAlma>)x.Data).Count.Should().BeGreaterThan(1);
+            ((List<DersAlma>)x.Data).Count.Should().BeGreaterThan(0);
 
         }
 

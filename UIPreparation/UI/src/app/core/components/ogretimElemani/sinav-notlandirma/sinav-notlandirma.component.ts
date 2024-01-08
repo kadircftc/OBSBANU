@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { LocalStorageService } from 'app/core/services/local-storage.service';
 import { AuthService } from '../../admin/login/services/auth.service';
-import { OgretimElemaniServiceIn } from '../ogretim-elemani-ozluk-bilgileri/services/ogretimElemani.service';
+import { OgretimElemaniServiceIn } from '../services/ogretimElemani.service';
 import { OgretimElemaniSinavDto } from './models/ogretimElemaniSinavlarDto';
+import { DegerlendirmeDto } from './models/sinavOgrenciDto';
 
 @Component({
   selector: 'app-sinav-notlandirma',
@@ -10,30 +12,37 @@ import { OgretimElemaniSinavDto } from './models/ogretimElemaniSinavlarDto';
 })
 export class SinavNotlandirmaComponent implements OnInit {
 
-  sinavList:OgretimElemaniSinavDto[];
+  sinavList: OgretimElemaniSinavDto[];
+  degerlendirmeOgrencileri: DegerlendirmeDto[];
+  isTableShow: string;
 
-
-  constructor(private ogretimElemaniService:OgretimElemaniServiceIn,private authService:AuthService) { }
+  constructor(private ogretimElemaniService: OgretimElemaniServiceIn, private authService: AuthService,private storageService:LocalStorageService) { }
 
   ngOnInit(): void {
     this.getOgretimElemaniSinavlar();
-   
   }
 
 
 
-  getOgretimElemaniSinavlar(){
-    this.ogretimElemaniService.getOgretimElemaniSinav(this.authService.getUserId()).subscribe(data=>{
-      this.sinavList=data;
-      console.log(this.sinavList);
+ async getOgretimElemaniSinavlar() {
+    this.ogretimElemaniService.getOgretimElemaniSinav(this.storageService.getUserId()).subscribe(data => {
+      this.sinavList = data;
     })
+  };
+
+  getSinavOgrencileri(id: number) {
+    this.ogretimElemaniService.getSinavOgrencileri(id).subscribe(data => {
+      this.degerlendirmeOgrencileri = data;
+    });
+  };
+
+
+
+  showTable(sinavTuru:string): void {
+    if(sinavTuru=="Vize")
+    this.isTableShow="Vize";
+    else if(sinavTuru=="Final")
+    this.isTableShow="Final"
+
   }
-
-
-
-
-
-
-
-
 }

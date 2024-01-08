@@ -10,6 +10,10 @@ export class LocalStorageService {
   setToken(token: string) {
     localStorage.setItem("token", token);
   }
+  
+  setUserId(userId:string){
+  localStorage.setItem("userId",userId)
+  }
 
   removeToken(){
     localStorage.removeItem("token");
@@ -23,7 +27,10 @@ export class LocalStorageService {
   getToken():string {
     return localStorage.getItem("token");
   }
-
+  getUserId():number{
+     return parseInt(localStorage.getItem("userId"),10) 
+  }
+ 
   setItem(key:string,data:any){
     localStorage.setItem(key,data);
   }

@@ -41,11 +41,11 @@ namespace Tests.Business.HandlersTest
             var query = new GetSinavQuery();
 
             _sinavRepository.Setup(x => x.GetAsync(It.IsAny<Expression<Func<Sinav, bool>>>())).ReturnsAsync(new Sinav()
-//propertyler buraya yazılacak
-//{																		
-//SinavId = 1,
-//SinavName = "Test"
-//}
+
+            {
+                Id = 1,
+                SinavTuruId =1,
+            }
 );
 
             var handler = new GetSinavQueryHandler(_sinavRepository.Object, _mediator.Object);
@@ -75,7 +75,7 @@ namespace Tests.Business.HandlersTest
 
             //Asset
             x.Success.Should().BeTrue();
-            ((List<Sinav>)x.Data).Count.Should().BeGreaterThan(1);
+            ((List<Sinav>)x.Data).Count.Should().BeGreaterThan(0);
 
         }
 

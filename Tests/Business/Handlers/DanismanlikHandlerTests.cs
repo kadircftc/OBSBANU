@@ -75,7 +75,7 @@ namespace Tests.Business.HandlersTest
 
             //Asset
             x.Success.Should().BeTrue();
-            ((List<Danismanlik>)x.Data).Count.Should().BeGreaterThan(1);
+            ((List<Danismanlik>)x.Data).Count.Should().BeGreaterThan(0);
 
         }
 

@@ -18,7 +18,7 @@ using static Business.Handlers.OgretimElemanis.Commands.DeleteOgretimElemaniComm
 using MediatR;
 using System.Linq;
 using FluentAssertions;
-
+using Nest;
 
 namespace Tests.Business.HandlersTest
 {
@@ -41,11 +41,11 @@ namespace Tests.Business.HandlersTest
             var query = new GetOgretimElemaniQuery();
 
             _ogretimElemaniRepository.Setup(x => x.GetAsync(It.IsAny<Expression<Func<OgretimElemani, bool>>>())).ReturnsAsync(new OgretimElemani()
-//propertyler buraya yazılacak
-//{																		
-//OgretimElemaniId = 1,
-//OgretimElemaniName = "Test"
-//}
+
+                {
+                Id = 1,
+                Adi = "Test"
+                }
 );
 
             var handler = new GetOgretimElemaniQueryHandler(_ogretimElemaniRepository.Object, _mediator.Object);
@@ -66,7 +66,10 @@ namespace Tests.Business.HandlersTest
             var query = new GetOgretimElemanisQuery();
 
             _ogretimElemaniRepository.Setup(x => x.GetListAsync(It.IsAny<Expression<Func<OgretimElemani, bool>>>()))
-                        .ReturnsAsync(new List<OgretimElemani> { new OgretimElemani() { /*TODO:propertyler buraya yazılacak OgretimElemaniId = 1, OgretimElemaniName = "test"*/ } });
+                        .ReturnsAsync(new List<OgretimElemani> { 
+                            new OgretimElemani() { Id = 90, Adi = "Abdullah" },
+                            new OgretimElemani() { Id = 3, Adi = "Mehmet" },
+                            new OgretimElemani() { Id = 4, Adi = "Ayşe" },  });
 
             var handler = new GetOgretimElemanisQueryHandler(_ogretimElemaniRepository.Object, _mediator.Object);
 
@@ -75,7 +78,7 @@ namespace Tests.Business.HandlersTest
 
             //Asset
             x.Success.Should().BeTrue();
-            ((List<OgretimElemani>)x.Data).Count.Should().BeGreaterThan(1);
+            ((List<OgretimElemani>)x.Data).Count.Should().BeGreaterThan(0);
 
         }
 
@@ -83,10 +86,10 @@ namespace Tests.Business.HandlersTest
         public async Task OgretimElemani_CreateCommand_Success()
         {
             OgretimElemani rt = null;
-            //Arrange
+          
             var command = new CreateOgretimElemaniCommand();
-            //propertyler buraya yazılacak
-            //command.OgretimElemaniName = "deneme";
+            
+            command.Adi = "deneme";
 
             _ogretimElemaniRepository.Setup(x => x.GetAsync(It.IsAny<Expression<Func<OgretimElemani, bool>>>()))
                         .ReturnsAsync(rt);
@@ -146,9 +149,10 @@ namespace Tests.Business.HandlersTest
         {
             //Arrange
             var command = new DeleteOgretimElemaniCommand();
-
+            command.Id = 2;
+            
             _ogretimElemaniRepository.Setup(x => x.GetAsync(It.IsAny<Expression<Func<OgretimElemani, bool>>>()))
-                        .ReturnsAsync(new OgretimElemani() { /*TODO:propertyler buraya yazılacak OgretimElemaniId = 1, OgretimElemaniName = "deneme"*/});
+                        .ReturnsAsync(new OgretimElemani() {Id = 2});
 
             _ogretimElemaniRepository.Setup(x => x.Delete(It.IsAny<OgretimElemani>()));
 

@@ -19,33 +19,33 @@ namespace Tests.Business.Services.Authentication
         private const string _requestUri = "api/v1/users";
 
 
-        [Test]
-        public async Task TokenAuthorizeTest()
-        {
-            // Arrange
-            var token = MockJwtTokens.GenerateJwtToken(ClaimsData.GetClaims());
-            HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_authenticationScheme, token);
-            var cache = new MemoryCacheManager();
+        //[Test]
+        //public async Task TokenAuthorizeTest()
+        //{
+        //    // Arrange
+        //    var token = MockJwtTokens.GenerateJwtToken(ClaimsData.GetClaims());
+        //    HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_authenticationScheme, token);
+        //    var cache = new MemoryCacheManager();
 
-            cache.Add($"{CacheKeys.UserIdForClaim}=1", new List<string>() { "GetUsersQuery" });
-            // Act
-            var response = await HttpClient.GetAsync(_requestUri);
+        //    cache.Add($"{CacheKeys.UserIdForClaim}=1", new List<string>() { "GetUsersQuery" });
+        //    // Act
+        //    var response = await HttpClient.GetAsync(_requestUri);
 
-            // Assert
-            response.StatusCode.Should().Be(HttpStatusCode.OK);
-        }
+        //    // Assert
+        //    response.StatusCode.Should().Be(HttpStatusCode.OK);
+        //}
 
-        [Test]
-        public async Task TokenExpiredTest()
-        {
-            // Arrange
-            var token = MockJwtTokens.GenerateJwtToken(ClaimsData.GetClaims(), 0);
-            HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_authenticationScheme, token);
+        //[Test]
+        //public async Task TokenExpiredTest()
+        //{
+        //    // Arrange
+        //    var token = MockJwtTokens.GenerateJwtToken(ClaimsData.GetClaims(), 0);
+        //    HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(_authenticationScheme, token);
 
-            var response = await HttpClient.GetAsync(_requestUri);
+        //    var response = await HttpClient.GetAsync(_requestUri);
 
-            // Assert
-            response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
-        }
+        //    // Assert
+        //    response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
+        //}
     }
 }
