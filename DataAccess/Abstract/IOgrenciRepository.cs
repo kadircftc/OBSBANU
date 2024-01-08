@@ -13,5 +13,9 @@ namespace DataAccess.Abstract
     {
         Task<IQueryable<OzlukBilgileriDto>>  GetOzlukBilgileriAsync(int userId);
         List<OgrenciDto> GetOgrenciDto();
+
+        List<AlinanDerslerDto> GetOgrenciAlinanDersler(int userId);
+        List<DersProgramiDto> GetDersProgramiAsync(int userId);
+        List<OgrenciSinavDto> GetOgrenciNotBilgisiAsync(int userId);
     }
 }

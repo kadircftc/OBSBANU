@@ -35,7 +35,7 @@ namespace DataAccess.Concrete.EntityFramework
                              Adi = o.Adi,
                              Soyadi = o.Soyadi,
                              TcKimlikNo = o.TCKimlikNo,
-                             DogumTarihi = o.DogumTarihi.ToString(),
+                             DogumTarihi = o.DogumTarihi.ToShortDateString(),
                              BolumAdi = b.BolumAdi,
                              KayitTarihi = o.CreatedDate.ToShortDateString(),
                              KurumSicilNo = o.KurumSicilNo,
@@ -131,6 +131,7 @@ namespace DataAccess.Concrete.EntityFramework
                          where ogretimElemani.UserId == userId
                          select new OgretimElemaniSınavlarDto
                          {
+                             SinavId = sinav.Id,
                              DersAdi = dersHavuzu.DersAdi,
                              DersKodu = dersHavuzu.DersKodu,
                              EtkiOrani =sinav.EtkiOrani,
@@ -139,6 +140,27 @@ namespace DataAccess.Concrete.EntityFramework
 
             return result.ToList();
 
+        }
+
+        public List<DegerlendirmeDto> GetOgrenciler(int sinavId)
+        {
+            var result = from sinav in _context.Sinav
+                         join dersAcma in _context.DersAcma
+                         on sinav.DersAcmaId equals dersAcma.Id
+                         join dersAlma in _context.DersAlma
+                         on dersAcma.Id equals dersAlma.DersAcmaId
+                         join ogrenci in _context.Ogrenci
+                         on dersAlma.OgrenciId equals ogrenci.Id
+                         where sinav.Id == sinavId
+                         select new DegerlendirmeDto
+                         {
+                             OgrenciId = ogrenci.Id,
+                             OgrenciNo = ogrenci.OgrenciNo,
+                             OgrenciAdi = ogrenci.Adi,
+                             OgrenciSoyadi = ogrenci.Soyadi,
+
+                         };
+            return result.ToList();
         }
     }
 }

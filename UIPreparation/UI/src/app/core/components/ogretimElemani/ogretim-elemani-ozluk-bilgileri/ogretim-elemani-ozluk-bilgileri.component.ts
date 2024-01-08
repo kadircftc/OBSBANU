@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from '../../admin/login/services/auth.service';
+import { OgretimElemaniServiceIn } from '../services/ogretimElemani.service';
 import { OgretimElemaniOzlukBilgileriDto } from './models/ogretimElemaniOzlukBilgileriDto';
-import { OgretimElemaniServiceIn } from './services/ogretimElemani.service';
 
 @Component({
   selector: 'app-ogretim-elemani-ozluk-bilgileri',
@@ -19,7 +19,6 @@ export class OgretimElemaniOzlukBilgileriComponent implements OnInit {
   ngOnInit(): void {
     this.createOzlukBilgilerForm();
     this.getOzlukBilgileri(11);
-    console.log('dsadas'+this.authService.getUserId())
   }
 
 

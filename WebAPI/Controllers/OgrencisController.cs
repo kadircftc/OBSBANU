@@ -66,6 +66,46 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result.Message);
         }
+        [Produces("application/json", "text/plain")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<AlinanDerslerDto>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+        [HttpGet("getOgrenciAlinanDerslerDto")]
+        public async Task<IActionResult> GetOgrenciAlinanDerslerDto(int id)
+        {
+            var result = await Mediator.Send(new GetOgrenciAlinanDerslerQuery {Id=id });
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest(result.Message);
+        }
+        [Produces("application/json", "text/plain")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<DersProgramiDto>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+        [HttpGet("getOgrenciDersProgramiDto")]
+        public async Task<IActionResult> GetOgrenciDersProgramiDto(int id)
+        {
+            var result = await Mediator.Send(new GetOgrenciDersProgramiQuery { Id = id });
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest(result.Message);
+        }
+        [Produces("application/json", "text/plain")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<DersProgramiDto>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+        [HttpGet("getOgrenciNotBilgisiQuery")]
+        public async Task<IActionResult> GetOgrenciNotBilgisiList(int id)
+        {
+            var result = await Mediator.Send(new GetOgrenciNotBilgisiQuery { Id = id });
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest(result.Message);
+        }
+
         ///<summary>
         ///It brings the details according to its id.
         ///</summary>

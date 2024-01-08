@@ -37,6 +37,8 @@ export class MufredatComponent implements AfterViewInit, OnInit {
 	akademikYilList:ST_AkademikYil[];
 	akademikDonemList:ST_AkademikDonem[];
 	mufredat: Mufredat = new Mufredat();
+	selectedDersHavuzuList:DersHavuzu[];
+	isDersChange:boolean=false;
 
 	mufredatAddForm: FormGroup;
 
@@ -89,7 +91,21 @@ export class MufredatComponent implements AfterViewInit, OnInit {
 			this.akademikDonemList=data
 		})
 	}
-
+	onItemSelect(comboType: string) {
+		this.setComboStatus(comboType);
+	  }
+	
+	  onSelectAll(comboType: string) {
+		this.setComboStatus(comboType);
+	  }
+	  onItemDeSelect(comboType: string) {
+		this.setComboStatus(comboType);
+	  }
+	
+	  setComboStatus(comboType: string) {
+		if (comboType == "Ders") this.isDersChange = true;
+	  }
+	  
 	save() {
 
 		if (this.mufredatAddForm.valid) {

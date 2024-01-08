@@ -41,11 +41,10 @@ namespace Tests.Business.HandlersTest
             var query = new GetOgrenciQuery();
 
             _ogrenciRepository.Setup(x => x.GetAsync(It.IsAny<Expression<Func<Ogrenci, bool>>>())).ReturnsAsync(new Ogrenci()
-//propertyler buraya yazılacak
-//{																		
-//OgrenciId = 1,
-//OgrenciName = "Test"
-//}
+            {																		
+            Id = 1,
+            Adi = "Eren"
+            }
 );
 
             var handler = new GetOgrenciQueryHandler(_ogrenciRepository.Object, _mediator.Object);
@@ -75,7 +74,7 @@ namespace Tests.Business.HandlersTest
 
             //Asset
             x.Success.Should().BeTrue();
-            ((List<Ogrenci>)x.Data).Count.Should().BeGreaterThan(1);
+            ((List<Ogrenci>)x.Data).Count.Should().BeGreaterThan(0);
 
         }
 

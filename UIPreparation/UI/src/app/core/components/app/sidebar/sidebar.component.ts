@@ -51,12 +51,17 @@ export const USERROUTES: RouteInfo[] = [
 ];
 
 export const STUDENTROUTES: RouteInfo[] = [
-  { path: '/ozluk-bilgileri', title: 'Özlük Bilgileri', icon: 'update', class: '', claim: "Student" },
-  { path: '/ogrenci-mufredat', title: 'Müfredat', icon: 'update', class: '', claim: "Student" },
+  { path: '/ozluk-bilgileri', title: 'Özlük Bilgileri', icon: 'update', class: '', claim: "GetOgrenciOzlukBilgileriDto" },
+  { path: '/ogrenci-mufredat', title: 'Müfredat', icon: 'update', class: '', claim: "GetOgrenciBolumMufredatQuery" },
+  { path: '/ogrenci-alinan-dersler', title: 'Alınan Dersler', icon: 'update', class: '', claim: "GetOgrenciAlinanDerslerQuery" },
+  { path: '/ogrenci-ders-programi', title: 'Ders Programı', icon: 'update', class: '', claim: "GetOgrenciDersProgramiQuery" },
 ]
 export const TEACHINGSTAFFROUTES: RouteInfo[] = [
   { path: '/ogretim-elemani-ozluk-bilgileri', title: 'Özlük Bilgileri', icon: 'update', class: '', claim: "TeachingStaff" },
   { path: '/sinav-notlandirma', title: 'Sınav Notlandırma', icon: 'update', class: '', claim: "TeachingStaff" },
+  { path: '/ogretim-elemani-mufredat', title: 'Müfredat', icon: 'update', class: '', claim: "TeachingStaff" },
+
+
 ]
 
 @Component({
@@ -86,7 +91,7 @@ export class SidebarComponent implements OnInit {
   }
 
   isMobileMenu() {
-    if ($(window).width() > 991) {
+    if ($(window).width() > 600) {
       return false;
     }
     return true;

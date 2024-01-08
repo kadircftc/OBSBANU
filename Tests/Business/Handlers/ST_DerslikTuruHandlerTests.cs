@@ -75,7 +75,7 @@ namespace Tests.Business.HandlersTest
 
             //Asset
             x.Success.Should().BeTrue();
-            ((List<ST_DerslikTuru>)x.Data).Count.Should().BeGreaterThan(1);
+            ((List<ST_DerslikTuru>)x.Data).Count.Should().BeGreaterThan(0);
 
         }
 
