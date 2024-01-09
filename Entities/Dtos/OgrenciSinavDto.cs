@@ -15,7 +15,7 @@ namespace Entities.Dtos
         public float? VizeNotu { get; set; }
         public float? FinalNotu { get; set; }
         public float? ButunlemeNotu { get; set; }
-        public float NotOrt { get; set; }
+        public float? NotOrt { get; set; }
         public string HarfNotu { get; set; }
         public string Durumu { get; set; }
         public string OgrenciAktifDonem { get; set; }
