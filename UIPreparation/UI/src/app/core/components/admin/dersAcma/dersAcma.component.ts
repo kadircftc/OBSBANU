@@ -15,6 +15,7 @@ import { ST_AkademikDonemService } from '../sT_AkademikDonem/services/ST_Akademi
 import { ST_AkademikYil } from '../sT_AkademikYil/models/ST_AkademikYil';
 import { ST_AkademikYilService } from '../sT_AkademikYil/services/ST_AkademikYil.service';
 import { DersAcma } from './models/DersAcma';
+import { DersAcmaMufredatDto } from './models/dersAcmaMufredatDto';
 import { DersAcmaService } from './services/DersAcma.service';
 
 declare var jQuery: any;
@@ -38,6 +39,7 @@ export class DersAcmaComponent implements AfterViewInit, OnInit {
 	mufredatList: Mufredat[];
 	ogrElmList: OgretimElemani[];
 	dersAcmaAddForm: FormGroup;
+	mufredatDersList:DersAcmaMufredatDto[];
 
 
 	dersAcmaId: number;
@@ -54,6 +56,7 @@ export class DersAcmaComponent implements AfterViewInit, OnInit {
 		this.getAkademikDonemList();
 		this.getMufredatList();
 		this.getOgrElmList();
+		this.getDersAcmaMufredatList();
 	}
 
 
@@ -65,6 +68,11 @@ export class DersAcmaComponent implements AfterViewInit, OnInit {
 		});
 	}
 
+	getDersAcmaMufredatList(){
+		this.dersAcmaService.getDersAcmaMufredatList().subscribe(data=>{
+			this.mufredatDersList=data
+		});
+	}
 	getAkademikYilList() {
 		this.akademikYilService.getST_AkademikYilList().subscribe(data => {
 			this.akademikYilList = data
