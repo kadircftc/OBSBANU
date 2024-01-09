@@ -1,0 +1,19 @@
+.gecme {
+    background-color: green;
+    color: white;
+}
+
+.kaldı {
+    background-color: red;
+    color: white;
+}
+
+.gecme-text {
+    font-weight: bold;
+    color: green;
+}
+
+.kaldı-text {
+    font-weight: bold;
+    color: red;
+}

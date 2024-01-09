@@ -9,7 +9,6 @@ import { DerslikComponent } from 'app/core/components/admin/derslik/derslik.comp
 import { DersProgramiComponent } from 'app/core/components/admin/dersProgrami/dersProgrami.component';
 import { GroupComponent } from 'app/core/components/admin/group/group.component';
 import { LanguageComponent } from 'app/core/components/admin/language/language.component';
-import { LogDtoComponent } from 'app/core/components/admin/log/logDto.component';
 import { LoginComponent } from 'app/core/components/admin/login/login.component';
 import { MufredatComponent } from 'app/core/components/admin/mufredat/mufredat.component';
 import { OgrenciComponent } from 'app/core/components/admin/ogrenci/ogrenci.component';
@@ -40,6 +39,7 @@ import { OgretimElemaniOzlukBilgileriComponent } from 'app/core/components/ogret
 import { SinavNotlandirmaComponent } from 'app/core/components/ogretimElemani/sinav-notlandirma/sinav-notlandirma.component';
 import { LoginGuard } from 'app/core/guards/login-guard';
 import { DashboardComponent } from '../../dashboard/dashboard.component';
+import { OgrenciNotBilgisiComponent } from 'app/core/components/ogrenci/ogrenci-not-bilgisi/ogrenci-not-bilgisi.component';
 
 
 
@@ -54,7 +54,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'language',       component: LanguageComponent,canActivate:[LoginGuard]},
     { path: 'translate',      component: TranslateComponent,canActivate:[LoginGuard]},
     { path: 'operationclaim', component: OperationClaimComponent,canActivate:[LoginGuard]},
-    { path: 'log',            component: LogDtoComponent,canActivate:[LoginGuard]},
     { path: 'bolum',            component: BolumComponent,canActivate:[LoginGuard]},
     { path: 'danismanlik',            component: DanismanlikComponent,canActivate:[LoginGuard]},
     { path: 'degerlendirme',            component: DegerlendirmeComponent,canActivate:[LoginGuard]},
@@ -87,4 +86,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'ogretim-elemani-mufredat',            component: OgretimElemaniMufredatComponent,canActivate:[LoginGuard]},
     { path: 'ogrenci-alinan-dersler',            component: OgrenciAlinanDerslerComponent,canActivate:[LoginGuard]},
     { path: 'ogrenci-ders-programi',            component: OgrenciDersProgramiComponent,canActivate:[LoginGuard]},
+    { path: 'ogrenci-not-bilgisi',            component: OgrenciNotBilgisiComponent,canActivate:[LoginGuard]},
 ];

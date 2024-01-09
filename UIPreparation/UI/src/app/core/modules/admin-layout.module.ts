@@ -30,7 +30,6 @@ import { DersHavuzuComponent } from '../components/admin/dersHavuzu/dersHavuzu.c
 import { DerslikComponent } from '../components/admin/derslik/derslik.component';
 import { DersProgramiComponent } from '../components/admin/dersProgrami/dersProgrami.component';
 import { LanguageComponent } from '../components/admin/language/language.component';
-import { LogDtoComponent } from '../components/admin/log/logDto.component';
 import { MufredatComponent } from '../components/admin/mufredat/mufredat.component';
 import { OgrenciComponent } from '../components/admin/ogrenci/ogrenci.component';
 import { OgretimElemaniComponent } from '../components/admin/ogretimElemani/ogretimElemani.component';
@@ -96,7 +95,6 @@ import { OzlukBilgileriComponent } from '../components/ogrenci/ozluk-bilgileri/o
         LanguageComponent,
         TranslateComponent,
         OperationClaimComponent,
-        LogDtoComponent,
         BolumComponent,
         DanismanlikComponent,
         DegerlendirmeComponent,

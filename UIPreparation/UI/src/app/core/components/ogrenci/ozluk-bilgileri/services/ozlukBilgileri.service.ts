@@ -31,4 +31,8 @@ export class OzlukBilgileriService {
   getOgrenciDersProgrami(id:number):Observable<DersProgramiDto[]> {
     return this.httpClient.get<DersProgramiDto[]>(environment.getApiUrl + '/Ogrencis/getOgrenciDersProgramiDto?id='+id)
   }
+
+  getOgrenciNotList(id:number):Observable<OgrenciNotBilgisiDto[]> {
+    return this.httpClient.get<OgrenciNotBilgisiDto[]>(environment.getApiUrl + '/Ogrencis/getOgrenciNotBilgisiQuery?id='+id)
+  }
 }
