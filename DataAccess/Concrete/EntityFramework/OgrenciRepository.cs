@@ -220,7 +220,7 @@ namespace DataAccess.Concrete.EntityFramework
                             (DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 7 ? $"{ogrenci.CreatedDate.Year + 3}-{ogrenci.CreatedDate.Year + 4} Güz Dönemi" :
                             (DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 8 ? $"{ogrenci.CreatedDate.Year + 3}-{ogrenci.CreatedDate.Year + 4} Bahar Dönemi" :
                             "Bulunamadı",
-                             DersVerilenDonem = (DateTime.Now - dersalma.CreatedDate).Days / 182.625 <= 1 ? $"{dersalma.CreatedDate.Year}-{dersalma.CreatedDate.Year + 1} Güz Dönemi" :
+                             DersVerilenDonem = (DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 1 ? $"{dersalma.CreatedDate.Year}-{dersalma.CreatedDate.Year + 1} Güz Dönemi" :
                             (DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 2 ? $"{dersalma.CreatedDate.Year - 1}-{dersalma.CreatedDate.Year} Bahar Dönemi" :
                             (DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 3 ? $"{dersalma.CreatedDate.Year}-{dersalma.CreatedDate.Year + 1} Güz Dönemi" :
                             (DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 4 ? $"{dersalma.CreatedDate.Year - 1}-{dersalma.CreatedDate.Year} Bahar Dönemi" :
@@ -247,59 +247,73 @@ namespace DataAccess.Concrete.EntityFramework
 
         public List<OgrenciSinavDto> GetOgrenciNotBilgisiAsync(int userId)
         {
-            var result = from degerlendirme in _context.Degerlendirme
-                         join sinav in _context.Sinav
-                         on degerlendirme.SinavId equals sinav.Id
-                         join dersAcma in _context.DersAcma
-                         on sinav.DersAcmaId equals dersAcma.Id
-                         join mufredat in _context.Mufredat
-                         on dersAcma.MufredatId equals mufredat.Id
-                         join dersHavuzu in _context.DersHavuzu
-                         on mufredat.DersId equals dersHavuzu.Id
-                         join ogrenci in _context.Ogrenci
-                         on degerlendirme.OgrenciId equals ogrenci.Id
-                         join sinavTuru in _context.ST_SinavTuru
-                         on sinav.SinavTuruId equals sinavTuru.Id
-                         where ogrenci.UserId == userId
-                         select new OgrenciSinavDto
-                         {
-                             Id = sinav.Id,
-                             DersAcmaId = dersAcma.Id,
-                             DersKodu = dersHavuzu.DersKodu,
-                             DersAdi = dersHavuzu.DersAdi,
-                             VizeNotu = sinav.SinavTuruId == 1 ? degerlendirme.SinavNotu : (float?)null,
-                             FinalNotu = sinav.SinavTuruId == 3 ? degerlendirme.SinavNotu : (float?)null,
-                             ButunlemeNotu = sinav.SinavTuruId == 4 ? degerlendirme.SinavNotu : (float?)null,
-                             OgrenciSinifi = (DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 1 ? "1.Sınıf Güz" :
-                             ((DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 2 ? "1.Sınıf Bahar" :
-                             ((DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 3 ? "2.Sınıf Güz" :
-                             ((DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 4 ? "2.Sınıf Bahar" :
-                             ((DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 5 ? "3.Sınıf Güz" :
-                             ((DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 6 ? "3.Sınıf Bahar" :
-                             ((DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 7 ? "4.Sınıf Güz" :
-                             ((DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 8 ? "4.Sınıf Bahar" :
-                             ((DateTime.Now - ogrenci.CreatedDate).Days / 182.625).ToString()))))))),
-                             OgrenciDonemi = (DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 1 ? $"{ogrenci.CreatedDate.Year}-{ogrenci.CreatedDate.Year + 1} Güz Dönemi" :
-                            (DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 2 ? $"{ogrenci.CreatedDate.Year}-{ogrenci.CreatedDate.Year + 1} Bahar Dönemi" :
-                            (DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 3 ? $"{ogrenci.CreatedDate.Year + 1}-{ogrenci.CreatedDate.Year + 2} Güz Dönemi" :
-                            (DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 4 ? $"{ogrenci.CreatedDate.Year + 1}-{ogrenci.CreatedDate.Year + 2} Bahar Dönemi" :
-                            (DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 5 ? $"{ogrenci.CreatedDate.Year + 2}-{ogrenci.CreatedDate.Year + 3} Güz Dönemi" :
-                            (DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 6 ? $"{ogrenci.CreatedDate.Year + 2}-{ogrenci.CreatedDate.Year + 3} Bahar Dönemi" :
-                            (DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 7 ? $"{ogrenci.CreatedDate.Year + 3}-{ogrenci.CreatedDate.Year + 4} Güz Dönemi" :
-                            (DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 8 ? $"{ogrenci.CreatedDate.Year + 3}-{ogrenci.CreatedDate.Year + 4} Bahar Dönemi" :
-                            "Bulunamadı",
-                             DersVerilenDonem = (DateTime.Now - sinav.CreatedDate).Days / 182.625 <= 1 ? $"{sinav.CreatedDate.Year}-{sinav.CreatedDate.Year + 1} Güz Dönemi" :
-                            (DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 2 ? $"{sinav.CreatedDate.Year - 1}-{sinav.CreatedDate.Year} Bahar Dönemi" :
-                            (DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 3 ? $"{sinav.CreatedDate.Year}-{sinav.CreatedDate.Year + 1} Güz Dönemi" :
-                            (DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 4 ? $"{sinav.CreatedDate.Year - 1}-{sinav.CreatedDate.Year} Bahar Dönemi" :
-                            (DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 5 ? $"{sinav.CreatedDate.Year}-{sinav.CreatedDate.Year - 1} Güz Dönemi" :
-                            (DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 6 ? $"{sinav.CreatedDate.Year - 1}-{sinav.CreatedDate.Year} Bahar Dönemi" :
-                            (DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 7 ? $"{sinav.CreatedDate.Year}-{sinav.CreatedDate.Year + 1} Güz Dönemi" :
-                            (DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 8 ? $"{sinav.CreatedDate.Year - 1}-{sinav.CreatedDate.Year} Bahar Dönemi" :
-                            "Bulunamadı",
-                         };
 
-            return result.ToList();
+            var query = from degerlendirme in _context.Degerlendirme
+            join sinav in _context.Sinav on degerlendirme.SinavId equals sinav.Id
+            join dersAcma in _context.DersAcma on sinav.DersAcmaId equals dersAcma.Id
+            join mufredat in _context.Mufredat on dersAcma.MufredatId equals mufredat.Id
+            join dersHavuzu in _context.DersHavuzu on mufredat.DersId equals dersHavuzu.Id
+            join ogrenci in _context.Ogrenci on degerlendirme.OgrenciId equals ogrenci.Id
+            join sinavTuru in _context.ST_SinavTuru on sinav.SinavTuruId equals sinavTuru.Id
+            where ogrenci.UserId == userId
+            group new { degerlendirme, sinav, dersAcma, dersHavuzu,ogrenci } by new 
+            { 
+                dersAcma.Id, 
+                dersHavuzu.DersKodu, 
+                dersHavuzu.DersAdi 
+            } into grouped
+            select new OgrenciSinavDto
+            {
+                DersAcmaId = grouped.Key.Id,
+                DersKodu = grouped.Key.DersKodu,
+                DersAdi = grouped.Key.DersAdi,
+                VizeNotu = grouped.Max(g => g.sinav.SinavTuruId == 1 ? g.degerlendirme.SinavNotu : (float?)null),
+                FinalNotu = grouped.Max(g => g.sinav.SinavTuruId == 3 ? g.degerlendirme.SinavNotu : (float?)null),
+                ButunlemeNotu = grouped.Max(g=>g.sinav.SinavTuruId == 4 ? g.degerlendirme.SinavNotu : (float?)null),
+                OgrenciSinifi = (DateTime.Now - grouped.First().ogrenci.CreatedDate).Days / 182.625 <= 1 ? "1.Sınıf Güz" :
+                ((DateTime.Now - grouped.First().ogrenci.CreatedDate).Days / 182.625 <= 2 ? "1.Sınıf Bahar" :
+                ((DateTime.Now - grouped.First().ogrenci.CreatedDate).Days / 182.625 <= 3 ? "2.Sınıf Güz" :
+                ((DateTime.Now - grouped.First().ogrenci.CreatedDate).Days / 182.625 <= 4 ? "2.Sınıf Bahar" :
+                ((DateTime.Now - grouped.First().ogrenci.CreatedDate).Days / 182.625 <= 5 ? "3.Sınıf Güz" :
+                ((DateTime.Now - grouped.First().ogrenci.CreatedDate).Days / 182.625 <= 6 ? "3.Sınıf Bahar" :
+                ((DateTime.Now - grouped.First().ogrenci.CreatedDate).Days / 182.625 <= 7 ? "4.Sınıf Güz" :
+                ((DateTime.Now - grouped.First().ogrenci.CreatedDate).Days / 182.625 <= 8 ? "4.Sınıf Bahar" :
+                ((DateTime.Now - grouped.First().ogrenci.CreatedDate).Days / 182.625).ToString()))))))),
+                OgrenciDonemi = (DateTime.Now - grouped.First().ogrenci.CreatedDate).Days / 182.625 <= 1 ? $"{grouped.First().ogrenci.CreatedDate.Year}-{grouped.First().ogrenci.CreatedDate.Year + 1} Güz Dönemi" :
+                (DateTime.Now - grouped.First().ogrenci.CreatedDate).Days / 182.625 <= 2 ? $"{grouped.First().ogrenci.CreatedDate.Year}-{grouped.First().ogrenci.CreatedDate.Year + 1} Bahar Dönemi" :
+                (DateTime.Now - grouped.First().ogrenci.CreatedDate).Days / 182.625 <= 3 ? $"{grouped.First().ogrenci.CreatedDate.Year + 1}-{grouped.First().ogrenci.CreatedDate.Year + 2} Güz Dönemi" :
+                (DateTime.Now - grouped.First().ogrenci.CreatedDate).Days / 182.625 <= 4 ? $"{grouped.First().ogrenci.CreatedDate.Year + 1}-{grouped.First().ogrenci.CreatedDate.Year + 2} Bahar Dönemi" :
+                (DateTime.Now - grouped.First().ogrenci.CreatedDate).Days / 182.625 <= 5 ? $"{grouped.First().ogrenci.CreatedDate.Year + 2}-{grouped.First().ogrenci.CreatedDate.Year + 3} Güz Dönemi" :
+                (DateTime.Now - grouped.First().ogrenci.CreatedDate).Days / 182.625 <= 6 ? $"{grouped.First().ogrenci.CreatedDate.Year + 2}-{grouped.First().ogrenci.CreatedDate.Year + 3} Bahar Dönemi" :
+                (DateTime.Now - grouped.First().ogrenci.CreatedDate).Days / 182.625 <= 7 ? $"{grouped.First().ogrenci.CreatedDate.Year + 3}-{grouped.First().ogrenci.CreatedDate.Year + 4} Güz Dönemi" :
+                (DateTime.Now - grouped.First().ogrenci.CreatedDate).Days / 182.625 <= 8 ? $"{grouped.First().ogrenci.CreatedDate.Year + 3}-{grouped.First().ogrenci.CreatedDate.Year + 4} Bahar Dönemi" :
+                "Bulunamadı",
+
+
+                SinavDonemi =
+    (grouped.First().ogrenci.CreatedDate.Month < grouped.First().sinav.CreatedDate.Month && grouped.First().sinav.CreatedDate.Month < 12) ? $"{grouped.First().sinav.CreatedDate.Year}-{grouped.First().sinav.CreatedDate.Year + 1} Güz Dönemi" :
+    (new DateTime(grouped.First().ogrenci.CreatedDate.Year + 1, 1, 1)) < grouped.First().sinav.CreatedDate && grouped.First().sinav.CreatedDate < (new DateTime(grouped.First().ogrenci.CreatedDate.Year + 1, 3, 1)) ? $"{grouped.First().sinav.CreatedDate.Year - 1}-{grouped.First().sinav.CreatedDate.Year} Güz Dönemi" :
+    (new DateTime(grouped.First().ogrenci.CreatedDate.Year + 1, 3, 1)) < grouped.First().sinav.CreatedDate && grouped.First().sinav.CreatedDate < (new DateTime(grouped.First().ogrenci.CreatedDate.Year + 1, 5, 15)) ? $"{grouped.First().sinav.CreatedDate.Year - 1}-{grouped.First().sinav.CreatedDate.Year} Bahar Dönemi" :
+    (new DateTime(grouped.First().ogrenci.CreatedDate.Year + 1, 5, 15)) < grouped.First().sinav.CreatedDate && grouped.First().sinav.CreatedDate < (new DateTime(grouped.First().ogrenci.CreatedDate.Year + 1, 7, 15)) ? $"{grouped.First().sinav.CreatedDate.Year - 1}-{grouped.First().sinav.CreatedDate.Year} Bahar Dönemi" :
+    (new DateTime(grouped.First().ogrenci.CreatedDate.Year + 1, 9, 1)) <    grouped.First().sinav.CreatedDate && grouped.First().sinav.CreatedDate < (new DateTime(grouped.First().ogrenci.CreatedDate.Year + 1, 12, 1)) ? $"{grouped.First().sinav.CreatedDate.Year}-{grouped.First().sinav.CreatedDate.Year + 1} Güz Dönemi" :
+    (new DateTime(grouped.First().ogrenci.CreatedDate.Year + 2, 1, 1)) < grouped.First().sinav.CreatedDate && grouped.First().sinav.CreatedDate < (new DateTime(grouped.First().ogrenci.CreatedDate.Year + 2, 3, 1)) ? $"{grouped.First().sinav.CreatedDate.Year - 1}-{grouped.First().sinav.CreatedDate.Year} Güz Dönemi" :
+    (new DateTime(grouped.First().ogrenci.CreatedDate.Year + 2, 3, 1)) < grouped.First().sinav.CreatedDate && grouped.First().sinav.CreatedDate < (new DateTime(grouped.First().ogrenci.CreatedDate.Year + 2, 5, 15)) ? $"{grouped.First().sinav.CreatedDate.Year - 1}-{grouped.First().sinav.CreatedDate.Year} Bahar Dönemi" :
+    (new DateTime(grouped.First().ogrenci.CreatedDate.Year + 2, 5, 15)) < grouped.First().sinav.CreatedDate && grouped.First().sinav.CreatedDate < (new DateTime(grouped.First().ogrenci.CreatedDate.Year + 2, 7, 15)) ? $"{grouped.First().sinav.CreatedDate.Year - 1}-{grouped.First().sinav.CreatedDate.Year} Bahar Dönemi" :
+    (new DateTime(grouped.First().ogrenci.CreatedDate.Year + 2, 9, 1)) < grouped.First().sinav.CreatedDate && grouped.First().sinav.CreatedDate < (new DateTime(grouped.First().ogrenci.CreatedDate.Year + 2, 12, 1)) ? $"{grouped.First().sinav.CreatedDate.Year}-{grouped.First().sinav.CreatedDate.Year + 1} Güz Dönemi" :
+    (new DateTime(grouped.First().ogrenci.CreatedDate.Year + 3, 1, 1)) < grouped.First().sinav.CreatedDate && grouped.First().sinav.CreatedDate < (new DateTime(grouped.First().ogrenci.CreatedDate.Year + 3, 3, 1)) ? $"{grouped.First().sinav.CreatedDate.Year - 1}-{grouped.First().sinav.CreatedDate.Year} Güz Dönemi" :
+    (new DateTime(grouped.First().ogrenci.CreatedDate.Year + 3, 3, 1)) < grouped.First().sinav.CreatedDate && grouped.First().sinav.CreatedDate < (new DateTime(grouped.First().ogrenci.CreatedDate.Year + 3, 5, 15)) ? $"{grouped.First().sinav.CreatedDate.Year - 1}-{grouped.First().sinav.CreatedDate.Year} Bahar Dönemi" :
+    (new DateTime(grouped.First().ogrenci.CreatedDate.Year + 3, 5, 15)) < grouped.First().sinav.CreatedDate && grouped.First().sinav.CreatedDate < (new DateTime(grouped.First().ogrenci.CreatedDate.Year + 3, 7, 15)) ? $"{grouped.First().sinav.CreatedDate.Year - 1}-{grouped.First().sinav.CreatedDate.Year} Bahar Dönemi" :
+    (new DateTime(grouped.First().ogrenci.CreatedDate.Year + 3, 9, 1)) < grouped.First().sinav.CreatedDate && grouped.First().sinav.CreatedDate < (new DateTime(grouped.First().ogrenci.CreatedDate.Year + 3, 12, 1)) ? $"{grouped.First().sinav.CreatedDate.Year}-{grouped.First().sinav.CreatedDate.Year + 1} Güz Dönemi" :
+    (new DateTime(grouped.First().ogrenci.CreatedDate.Year + 4, 1, 1)) < grouped.First().sinav.CreatedDate && grouped.First().sinav.CreatedDate < (new DateTime(grouped.First().ogrenci.CreatedDate.Year + 4, 3, 1)) ? $"{grouped.First().sinav.CreatedDate.Year - 1}-{grouped.First().sinav.CreatedDate.Year} Güz Dönemi" :
+    (new DateTime(grouped.First().ogrenci.CreatedDate.Year + 4, 3, 1)) < grouped.First().sinav.CreatedDate && grouped.First().sinav.CreatedDate < (new DateTime(grouped.First().ogrenci.CreatedDate.Year + 4, 5, 15)) ? $"{grouped.First().sinav.CreatedDate.Year - 1} - {grouped.First().sinav.CreatedDate.Year} Bahar Dönemi" :
+    (new DateTime(grouped.First().ogrenci.CreatedDate.Year + 4, 5, 15)) < grouped.First().sinav.CreatedDate && grouped.First().sinav.CreatedDate < (new DateTime(grouped.First().ogrenci.CreatedDate.Year + 4, 7, 15)) ? $"{grouped.First().sinav.CreatedDate.Year - 1}-{grouped.First().sinav.CreatedDate.Year} Bahar Dönemi" :
+    "Bulunamadı"
+
+        };
+
+            return query.ToList();
+
+
         }
     } 
 }

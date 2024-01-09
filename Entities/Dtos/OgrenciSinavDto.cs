@@ -22,6 +22,6 @@ namespace Entities.Dtos
         public int DersAcmaId { get; set; }
         public string OgrenciSinifi { get; set; }
         public string OgrenciDonemi { get; set; }
-        public string DersVerilenDonem { get; set; }
+        public string SinavDonemi { get; set; }
     }
 }

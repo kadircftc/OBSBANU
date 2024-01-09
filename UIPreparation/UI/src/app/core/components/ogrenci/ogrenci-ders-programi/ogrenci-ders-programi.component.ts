@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { LookUp } from 'app/core/models/lookUp';
 import { LocalStorageService } from 'app/core/services/local-storage.service';
 import { OzlukBilgileriService } from '../ozluk-bilgileri/services/ozlukBilgileri.service';
@@ -9,9 +9,9 @@ import { DersProgramiDto } from './models/dersProgramiDto';
   templateUrl: './ogrenci-ders-programi.component.html',
   styleUrls: ['./ogrenci-ders-programi.component.css']
 })
-export class OgrenciDersProgramiComponent implements OnInit,AfterViewInit {
-  @ViewChild('tableContainer', { static: false }) tableContainer: ElementRef;
-
+export class OgrenciDersProgramiComponent implements OnInit, AfterViewInit {
+  @ViewChild('tableContainer', { static: true  }) tableContainer: ElementRef;
+  private cdRef: ChangeDetectorRef
   dersler: DersProgramiDto[];
   filteredDersProgrami: DersProgramiDto[];
   akademikYilList: LookUp[]
@@ -21,8 +21,7 @@ export class OgrenciDersProgramiComponent implements OnInit,AfterViewInit {
   bitisYili: number
   donem: string
   sinifNumarasi: number
-  bolumAdi:string;
-  tableContent:string;
+  bolumAdi: string;
   saatler: any[] = [
     { id: 1, label: "08:45-09:30" },
     { id: 2, label: "09:35-10:20" },
@@ -41,13 +40,13 @@ export class OgrenciDersProgramiComponent implements OnInit,AfterViewInit {
 
   ngOnInit(): void {
     this.getDersProgramiList();
-    this.getAkademikYil();  
+    this.getAkademikYil();
   }
 
-ngAfterViewInit() {
+  ngAfterViewInit() {
     if (this.tableContainer && this.tableContainer.nativeElement) {
-       this.tableContent = this.tableContainer.nativeElement.innerHTML;
-      console.log( this.tableContent); 
+      let tableContent = this.tableContainer.nativeElement.innerHTML;
+      console.log(tableContent);
     } else {
       console.error('tableContainer elementi tanımlı değil veya DOM\'a eklenmedi.');
     }
@@ -60,7 +59,7 @@ ngAfterViewInit() {
       this.ogrenciDonemi = this.dersler[0].ogrenciDonemi;
       this.ogrenciSinifi = this.dersler[0].ogrenciSinifi;
       this.bolumAdi = this.dersler[0].bolumAdi;
-    
+
       this.filteredDersProgrami = data.filter(d => d.ogrenciDonemi == d.dersVerilenDonem)
       console.log(this.filteredDersProgrami)
       if (!this.isChange) {
@@ -70,7 +69,7 @@ ngAfterViewInit() {
   }
 
   isSaatBlack(saatLabel: string): boolean {
-    if(saatLabel=="12:00-12:50"){
+    if (saatLabel == "12:00-12:50") {
       return true;
     }
   }
@@ -162,15 +161,17 @@ ngAfterViewInit() {
   }
 
   filterByAkademikYil(akademikYil: string) {
+
     if (this.isChange == false) {
       this.filteredDersProgrami = this.dersler.filter(a => a.dersVerilenDonem === akademikYil)
-      this.bolumAdi=this.filteredDersProgrami[0].bolumAdi;
-      this.ogrenciDonemi=this.filteredDersProgrami[0].ogrenciDonemi;
-      this.ogrenciSinifi=this.filteredDersProgrami[0].ogrenciSinifi;
-
+      this.bolumAdi = this.filteredDersProgrami[0].bolumAdi;
+      this.ogrenciDonemi = this.filteredDersProgrami[0].ogrenciDonemi;
+      this.ogrenciSinifi = this.filteredDersProgrami[0].ogrenciSinifi;
+     
       if (this.tableContainer && this.tableContainer.nativeElement) {
-        this.tableContent = this.tableContainer.nativeElement.innerHTML;
-        console.log( this.tableContent); 
+    
+         let tableContent = this.tableContainer.nativeElement.innerHTML;
+        console.log(tableContent);
       } else {
         console.error('tableContainer elementi tanımlı değil veya DOM\'a eklenmedi.');
       }
@@ -179,17 +180,17 @@ ngAfterViewInit() {
     }
     else {
       this.filteredDersProgrami = this.dersler.filter(a => a.dersVerilenDonem === akademikYil)
-      this.bolumAdi=this.filteredDersProgrami[0].bolumAdi;
-      this.ogrenciDonemi=this.filteredDersProgrami[0].dersVerilenDonem;
-      this.ogrenciSinifi=this.filteredDersProgrami[0].ogrenciSinifi;
-      
+      this.bolumAdi = this.filteredDersProgrami[0].bolumAdi;
+      this.ogrenciDonemi = this.filteredDersProgrami[0].dersVerilenDonem;
+      this.ogrenciSinifi = this.filteredDersProgrami[0].ogrenciSinifi;
       if (this.tableContainer && this.tableContainer.nativeElement) {
-        this.tableContent = this.tableContainer.nativeElement.innerHTML;
-        console.log( this.tableContent); 
+  
+        let tableContent = this.tableContainer.nativeElement.innerHTML;
+        console.log(tableContent);
       } else {
         console.error('tableContainer elementi tanımlı değil veya DOM\'a eklenmedi.');
       }
-      
+
     }
 
   }
@@ -198,7 +199,7 @@ ngAfterViewInit() {
     const filteredDers = this.filteredDersProgrami.find(
       d => d.dersSaati === saat && d.dersGunu === gun
     );
-    if(gun=="Çarşamba"&&saat=="12:00-12:50"){
+    if (gun == "Çarşamba" && saat == "12:00-12:50") {
       return 'Öğle Arası'
     }
     if (filteredDers) {
@@ -208,7 +209,7 @@ ngAfterViewInit() {
     } else {
       return '';
     }
-    
+
   }
 
 
