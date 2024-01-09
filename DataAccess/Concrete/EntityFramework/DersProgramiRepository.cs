@@ -38,10 +38,8 @@ namespace DataAccess.Concrete.EntityFramework
                          select new DersProgramiDto
                          {
                              Id = dersProgrami.Id,
-                             OgrElmAdi=ogrElm.Adi,
-                             OgrElmSoyadi=ogrElm.Soyadi,
-                             OgrElmUnvan=ogrElm.Unvan,
-                             BolumAdi=bolum.BolumAdi,
+                             OgretimElemaniBilgisi = ogrElm.Unvan + " " + ogrElm.Adi.ToUpper() + " " + ogrElm.Soyadi.ToUpper(),
+                             BolumAdi =bolum.BolumAdi,
                              DersAdi=dersHavuzu.DersAdi,
                              DersKodu=dersHavuzu.DersKodu,
                              DerslikAdi=derslik.DerslikAdi,

@@ -9,6 +9,7 @@ namespace Entities.Dtos
 {
     public class OgretimElemaniSınavlarDto:IDto
     {
+        public int SinavId { get; set; }
         public string DersAdi { get; set; }
         public string DersKodu { get; set; }
         public string SinavTuru { get; set; }

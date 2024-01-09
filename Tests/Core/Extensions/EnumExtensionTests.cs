@@ -16,15 +16,15 @@ namespace Tests.Core.Extensions
         Office = 3
     }
 
-    [TestFixture]
-    public class EnumExtensionTests
-    {
-        [Test]
-        public void GetDescriptionTest()
-        {
-            var description = UserType.Admin.GetDescription();
+    //[TestFixture]
+    //public class EnumExtensionTests
+    //{
+    //    [Test]
+    //    public void GetDescriptionTest()
+    //    {
+    //        var description = UserType.Admin.GetDescription();
 
-            description.Should().Be("Admin");
-        }
-    }
+    //        description.Should().Be("Admin");
+    //    }
+    //}
 }

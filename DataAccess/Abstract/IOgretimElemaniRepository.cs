@@ -16,5 +16,6 @@ namespace DataAccess.Abstract
         List<MufredatDto> GetOgretimElemaniMufredat(int userId);
         List<OgretimElemaniVerilenDerslerDto> GetOgretimElemaniVerilenDersler(int userId);
         List<OgretimElemaniSınavlarDto> GetOgretimElemaniSinavlar(int userId);
+        List<DegerlendirmeDto> GetOgrenciler(int sinavId);
     }
 }

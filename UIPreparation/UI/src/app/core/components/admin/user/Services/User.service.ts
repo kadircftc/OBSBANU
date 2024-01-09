@@ -1,10 +1,10 @@
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { User } from '../models/user';
-import { environment } from '../../../../../../environments/environment'
 import { LookUp } from 'app/core/models/lookUp';
+import { Observable } from 'rxjs';
+import { environment } from '../../../../../../environments/environment';
 import { PasswordDto } from '../models/passwordDto';
+import { User } from '../models/user';
 
 
 @Injectable({
@@ -50,10 +50,8 @@ export class UserService {
   }
 
   saveUserClaims(userId:number,claims:number[] ):Observable<any> {
-
     var result = this.httpClient.put(environment.getApiUrl + "/user-claims/", {UserId:userId, ClaimIds:claims }, { responseType: 'text' });
     return result;
-
   }
 
   saveUserGroupPermissions(userId:number, groups:number[]):Observable<any> {

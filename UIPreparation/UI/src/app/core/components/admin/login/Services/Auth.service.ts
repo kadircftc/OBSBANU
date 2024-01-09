@@ -6,6 +6,7 @@ import { AlertifyService } from 'app/core/services/alertify.service';
 import { LocalStorageService } from 'app/core/services/local-storage.service';
 import { SharedService } from 'app/core/services/shared.service';
 import { environment } from 'environments/environment';
+import { UserService } from '../../user/services/user.service';
 import { LoginUser } from '../model/login-user';
 import { TokenModel } from '../model/token-model';
 
@@ -24,11 +25,12 @@ export class AuthService {
   claims: string[];
   langText: string;
   userData: TokenModel;
-  userId:number;
+  userId:string;
+  token:string;
 
 
   constructor(private httpClient: HttpClient, private storageService: LocalStorageService,
-    private router: Router, private alertifyService: AlertifyService, private sharedService: SharedService) {
+    private router: Router, private alertifyService: AlertifyService, private sharedService: SharedService,private userService:UserService) {
 
     this.setClaims();
   }
@@ -45,9 +47,12 @@ export class AuthService {
         this.storageService.setToken(data.data.token);
         this.storageService.setItem("refreshToken", data.data.refreshToken)
         this.claims = data.data.claims;
+        console.log(this.claims);
         this.userData = data;
+        this.token=data.data.token;
         var decode = this.jwtHelper.decodeToken(this.storageService.getToken());
-        this.userId= this.userData.data.userId;
+        this.userId= this.userData.data.userId.toString();
+        this.storageService.setItem("userId",this.userId);
         var propUserName = Object.keys(decode).filter(x => x.endsWith("/name"))[0];
         this.userName = decode[propUserName];
         this.sharedService.sendChangeUserNameEvent();
@@ -63,7 +68,6 @@ export class AuthService {
     );
     await this.delay(500);
     if (this.userData == null) {
-    console.log("hatalı parola");
       if (this.langText == "tr-TR" || this.langText == null) {
         this.alertifyService.error("Kullanıcı adı veya parola hatalı!");
       } else {
@@ -78,8 +82,13 @@ export class AuthService {
   getUserName(): string {
     return this.userName;
   }
-  getUserId(): number {
-    return this.userId;
+ 
+   getToken(): string {
+    return this.token;
+  }
+
+  getClaims(){
+    console.log(this.claims);
   }
 
   setClaims() {
@@ -103,6 +112,7 @@ export class AuthService {
     this.storageService.removeToken();
     this.storageService.removeItem("lang")
     this.storageService.removeItem("refreshToken");
+    this.storageService.removeItem("userId");
     this.claims = [];
   }
 
@@ -115,7 +125,9 @@ export class AuthService {
   getCurrentUserId() {
   this.jwtHelper.decodeToken(this.storageService.getToken()).userId;
   }
-
+getUserClaims(){
+  
+}
   claimGuard(claim: string): boolean {
     if (!this.loggedIn())
       this.router.navigate(["/login"]);

@@ -28,7 +28,7 @@ namespace Business.Handlers.DersProgramis.Commands
         public int DersAcmaId { get; set; }
         public int DerslikId { get; set; }
         public int DersGunuId { get; set; }
-        public int DersSaati { get; set; }
+        public string DersSaati { get; set; }
 
         public class UpdateDersProgramiCommandHandler : IRequestHandler<UpdateDersProgramiCommand, IResult>
         {

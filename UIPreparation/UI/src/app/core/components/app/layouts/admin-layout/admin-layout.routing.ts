@@ -31,8 +31,11 @@ import { ST_ProgramTuruComponent } from 'app/core/components/admin/sT_ProgramTur
 import { ST_SinavTuruComponent } from 'app/core/components/admin/sT_SinavTuru/sT_SinavTuru.component';
 import { TranslateComponent } from 'app/core/components/admin/translate/translate.component';
 import { UserComponent } from 'app/core/components/admin/user/user.component';
+import { OgrenciAlinanDerslerComponent } from 'app/core/components/ogrenci/ogrenci-alinan-dersler/ogrenci-alinan-dersler.component';
+import { OgrenciDersProgramiComponent } from 'app/core/components/ogrenci/ogrenci-ders-programi/ogrenci-ders-programi.component';
 import { OgrenciMufredatComponent } from 'app/core/components/ogrenci/ogrenci-mufredat/ogrenci-mufredat.component';
 import { OzlukBilgileriComponent } from 'app/core/components/ogrenci/ozluk-bilgileri/ozluk-bilgileri.component';
+import { OgretimElemaniMufredatComponent } from 'app/core/components/ogretimElemani/ogretim-elemani-mufredat/ogretim-elemani-mufredat.component';
 import { OgretimElemaniOzlukBilgileriComponent } from 'app/core/components/ogretimElemani/ogretim-elemani-ozluk-bilgileri/ogretim-elemani-ozluk-bilgileri.component';
 import { SinavNotlandirmaComponent } from 'app/core/components/ogretimElemani/sinav-notlandirma/sinav-notlandirma.component';
 import { LoginGuard } from 'app/core/guards/login-guard';
@@ -81,4 +84,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'ogrenci-mufredat',            component: OgrenciMufredatComponent,canActivate:[LoginGuard]},
     { path: 'ogretim-elemani-ozluk-bilgileri',            component: OgretimElemaniOzlukBilgileriComponent,canActivate:[LoginGuard]},
     { path: 'sinav-notlandirma',            component: SinavNotlandirmaComponent,canActivate:[LoginGuard]},
+    { path: 'ogretim-elemani-mufredat',            component: OgretimElemaniMufredatComponent,canActivate:[LoginGuard]},
+    { path: 'ogrenci-alinan-dersler',            component: OgrenciAlinanDerslerComponent,canActivate:[LoginGuard]},
+    { path: 'ogrenci-ders-programi',            component: OgrenciDersProgramiComponent,canActivate:[LoginGuard]},
 ];

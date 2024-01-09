@@ -10,15 +10,18 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
 import { AdminLayoutComponent } from './core/components/app/layouts/admin-layout/admin-layout.component';
+import { OgrenciLayoutComponent } from './core/components/app/layouts/ogrenci-layout/ogrenci-layout.component';
+import { OgrenciMufredatComponent } from './core/components/ogrenci/ogrenci-mufredat/ogrenci-mufredat.component';
+import { OgretimElemaniMufredatComponent } from './core/components/ogretimElemani/ogretim-elemani-mufredat/ogretim-elemani-mufredat.component';
+import { OgretimElemaniOzlukBilgileriComponent } from './core/components/ogretimElemani/ogretim-elemani-ozluk-bilgileri/ogretim-elemani-ozluk-bilgileri.component';
+import { SinavNotlandirmaComponent } from './core/components/ogretimElemani/sinav-notlandirma/sinav-notlandirma.component';
 import { LoginGuard } from './core/guards/login-guard';
 import { AuthInterceptorService } from './core/interceptors/auth-interceptor.service';
 import { ComponentsModule } from './core/modules/components.module';
 import { HttpEntityRepositoryService } from './core/services/http-entity-repository.service';
 import { TranslationService } from './core/services/translation.service';
-import { OgrenciMufredatComponent } from './core/components/ogrenci/ogrenci-mufredat/ogrenci-mufredat.component';
-import { OgrenciLayoutComponent } from './core/components/app/layouts/ogrenci-layout/ogrenci-layout.component';
-import { OgretimElemaniOzlukBilgileriComponent } from './core/components/ogretimElemani/ogretim-elemani-ozluk-bilgileri/ogretim-elemani-ozluk-bilgileri.component';
-import { SinavNotlandirmaComponent } from './core/components/ogretimElemani/sinav-notlandirma/sinav-notlandirma.component';
+import { OgrenciAlinanDerslerComponent } from './core/components/ogrenci/ogrenci-alinan-dersler/ogrenci-alinan-dersler.component';
+import { OgrenciDersProgramiComponent } from './core/components/ogrenci/ogrenci-ders-programi/ogrenci-ders-programi.component';
 
 
 
@@ -66,6 +69,9 @@ export function tokenGetter() {
     OgrenciLayoutComponent,
     OgretimElemaniOzlukBilgileriComponent,
     SinavNotlandirmaComponent,
+    OgretimElemaniMufredatComponent,
+    OgrenciAlinanDerslerComponent,
+    OgrenciDersProgramiComponent,
   ],
 
   providers: [

@@ -1,4 +1,4 @@
-﻿<div class="main-content">
+<div class="main-content">
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
@@ -112,7 +112,11 @@
         </h4>
         <div class="separator"></div>
         <form *ngIf="mufredatAddForm" [formGroup]="mufredatAddForm" (ngSubmit)="save()">
-          
+
+          <ng-multiselect-dropdown [settings]="dropdownSettings" [placeholder]="'Dersler'" [data]="dersHavuzuList"
+          [(ngModel)]="selectedDersHavuzuList" (onSelect)="onItemSelect('Ders')" (onSelectAll)="onSelectAll('Ders')"
+          (onDeSelect)="onItemDeSelect('Ders')">
+        </ng-multiselect-dropdown>
 					<div class="row">
 						<div class="col-md-12">
               <div class="d-flex justify-content-start align-items-center">

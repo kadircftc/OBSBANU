@@ -47,7 +47,6 @@ namespace WebAPI.Controllers
         {
             return GetResponseOnlyResultData(await Mediator.Send(new GetUserClaimLookupQuery { UserId = userid }));
         }
-
         /// <summary>
         /// It brings the details according to its id.
         /// </summary>

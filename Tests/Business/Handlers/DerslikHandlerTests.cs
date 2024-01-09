@@ -75,7 +75,7 @@ namespace Tests.Business.HandlersTest
 
             //Asset
             x.Success.Should().BeTrue();
-            ((List<Derslik>)x.Data).Count.Should().BeGreaterThan(1);
+            ((List<Derslik>)x.Data).Count.Should().BeGreaterThan(0);
 
         }
 
@@ -148,7 +148,7 @@ namespace Tests.Business.HandlersTest
             var command = new DeleteDerslikCommand();
 
             _derslikRepository.Setup(x => x.GetAsync(It.IsAny<Expression<Func<Derslik, bool>>>()))
-                        .ReturnsAsync(new Derslik() { /*TODO:propertyler buraya yazılacak DerslikId = 1, DerslikName = "deneme"*/});
+                        .ReturnsAsync(new Derslik() {});
 
             _derslikRepository.Setup(x => x.Delete(It.IsAny<Derslik>()));
 

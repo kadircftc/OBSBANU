@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { LocalStorageService } from 'app/core/services/local-storage.service';
 import { AuthService } from '../../admin/login/services/auth.service';
 import { OgrenciOzlukBilgileriDto } from '../../admin/ogrenci/models/ogrenciOzlukBilgileriDto';
 import { OzlukBilgileriService } from './services/ozlukBilgileri.service';
@@ -21,11 +22,11 @@ export class OzlukBilgileriComponent implements OnInit {
   @Input() data: any;
 
   ozlukBilgileriform: FormGroup;
-  userId : number;
 
 
 
-  constructor(private ozlukBilgileriService: OzlukBilgileriService, private fb: FormBuilder,private authService:AuthService) {
+
+  constructor(private ozlukBilgileriService: OzlukBilgileriService, private fb: FormBuilder,private authService:AuthService,private storageService:LocalStorageService,) {
 
   }
 
@@ -33,19 +34,17 @@ export class OzlukBilgileriComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getUserId();
-    this.getOzlukBilgileri(this.userId);
+ 
+    this.getOzlukBilgileri();
     this.createOzlukBilgilerForm();
   }
 
 
 
-  getUserId(){
-    this.userId = this.authService.getUserId();
-  }
 
-  getOzlukBilgileri(id:number) {
-    this.ozlukBilgileriService.getOgrenciOzlukBilgileri(id).subscribe(data => {
+
+  getOzlukBilgileri() {
+    this.ozlukBilgileriService.getOgrenciOzlukBilgileri(this.storageService.getUserId()).subscribe(data => {
       this.ozlukBilgisi = data
       console.log(this.ozlukBilgisi);
       this.ozlukBilgileriform.patchValue(this.ozlukBilgisi[0]);

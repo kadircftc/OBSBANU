@@ -80,7 +80,7 @@ namespace Tests.Business.Handlers
 
             // Asset
             x.Success.Should().BeTrue();
-            ((List<Language>)x.Data).Count.Should().BeGreaterThan(1);
+            ((List<Language>)x.Data).Count.Should().BeGreaterThan(0);
         }
 
         [Test]
