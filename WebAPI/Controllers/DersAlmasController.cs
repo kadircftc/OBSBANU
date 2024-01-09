@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Entities.Concrete;
 using System.Collections.Generic;
+using Business.Handlers.UserClaims.Commands;
+using Entities.Dtos;
 
 namespace WebAPI.Controllers
 {
@@ -94,7 +96,15 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result.Message);
         }
-
+        [Consumes("application/json")]
+        [Produces("application/json", "text/plain")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+        [HttpPut("UpdateRangeDersAlma")]
+        public async Task<IActionResult> Update([FromBody] UpdateDersAlmaRangeCommand updateDersAlmaDto)
+        {
+            return GetResponseOnlyResultMessage(await Mediator.Send(new UpdateDersAlmaRangeCommand { UserId=updateDersAlmaDto.UserId,DersDurum=updateDersAlmaDto.DersDurum,DersAcmaIds=updateDersAlmaDto.DersAcmaIds }));
+        }
         /// <summary>
         /// Delete DersAlma.
         /// </summary>

@@ -37,7 +37,20 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result.Message);
         }
-
+        [Produces("application/json", "text/plain")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<DersAcmaDto>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+        [HttpGet("getMufredatList")]
+        public async Task<IActionResult> GetMufredatList()
+        {
+            var result = await Mediator.Send(new GetDersAcmaMufredatDtoQuery());
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest(result.Message);
+        }
+        
         ///<summary>
         ///It brings the details according to its id.
         ///</summary>
