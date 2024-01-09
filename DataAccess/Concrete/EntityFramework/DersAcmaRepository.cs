@@ -53,5 +53,20 @@ namespace DataAccess.Concrete.EntityFramework
                          };
             return result.ToList();
         }
+
+        public List<DersAcmaMufredatDto> GetDersMufredatList()
+        {
+            var results = from mufredat in _context.Mufredat
+                          join dersHavuzu in _context.DersHavuzu
+                          on mufredat.DersId equals dersHavuzu.Id
+                          select new DersAcmaMufredatDto
+                          {
+                              Id = mufredat.Id,
+                              DersAdi = dersHavuzu.DersAdi,
+                              
+                          };
+            return results.ToList();
+               
+        }
     }
 }

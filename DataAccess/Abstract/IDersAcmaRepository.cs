@@ -10,5 +10,6 @@ namespace DataAccess.Abstract
     public interface IDersAcmaRepository : IEntityRepository<DersAcma>
     {
         List<DersAcmaDto> GetDersAcmaDtoAsync();
+        List<DersAcmaMufredatDto> GetDersMufredatList();
     }
 }
