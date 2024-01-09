@@ -55,6 +55,7 @@ export const STUDENTROUTES: RouteInfo[] = [
   { path: '/ogrenci-mufredat', title: 'Müfredat', icon: 'update', class: '', claim: "GetOgrenciBolumMufredatQuery" },
   { path: '/ogrenci-alinan-dersler', title: 'Alınan Dersler', icon: 'update', class: '', claim: "GetOgrenciAlinanDerslerQuery" },
   { path: '/ogrenci-ders-programi', title: 'Ders Programı', icon: 'update', class: '', claim: "GetOgrenciDersProgramiQuery" },
+  { path: '/ogrenci-not-bilgisi', title: 'Not Listesi', icon: 'update', class: '', claim: "GetOgrenciNotBilgisiQuery" },
 ]
 export const TEACHINGSTAFFROUTES: RouteInfo[] = [
   { path: '/ogretim-elemani-ozluk-bilgileri', title: 'Özlük Bilgileri', icon: 'update', class: '', claim: "TeachingStaff" },

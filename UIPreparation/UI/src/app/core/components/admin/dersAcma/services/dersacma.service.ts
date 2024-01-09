@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 import { DersAcma } from '../models/DersAcma';
+import { DersAcmaMufredatDto } from '../models/dersAcmaMufredatDto';
 
 
 @Injectable({
@@ -17,6 +18,11 @@ export class DersAcmaService {
 
     return this.httpClient.get<DersAcma[]>(environment.getApiUrl + '/DersAcmas/getall')
   }
+
+  getDersAcmaMufredatList():Observable<DersAcmaMufredatDto[]>{
+    return this.httpClient.get<DersAcmaMufredatDto[]>(environment.getApiUrl + '/DersAcmas/getMufredatList')
+  }
+
 
   getDersAcmaById(id: number): Observable<DersAcma> {
     return this.httpClient.get<DersAcma>(environment.getApiUrl + '/DersAcmas/getbyid?id='+id)

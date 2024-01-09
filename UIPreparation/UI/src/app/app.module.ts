@@ -22,7 +22,7 @@ import { HttpEntityRepositoryService } from './core/services/http-entity-reposit
 import { TranslationService } from './core/services/translation.service';
 import { OgrenciAlinanDerslerComponent } from './core/components/ogrenci/ogrenci-alinan-dersler/ogrenci-alinan-dersler.component';
 import { OgrenciDersProgramiComponent } from './core/components/ogrenci/ogrenci-ders-programi/ogrenci-ders-programi.component';
-
+import { OgrenciNotBilgisiComponent } from './core/components/ogrenci/ogrenci-not-bilgisi/ogrenci-not-bilgisi.component';
 
 
 // i18 kullanıclak ise aşağıdaki metod aktif edilecek
@@ -72,6 +72,7 @@ export function tokenGetter() {
     OgretimElemaniMufredatComponent,
     OgrenciAlinanDerslerComponent,
     OgrenciDersProgramiComponent,
+    OgrenciNotBilgisiComponent,
   ],
 
   providers: [

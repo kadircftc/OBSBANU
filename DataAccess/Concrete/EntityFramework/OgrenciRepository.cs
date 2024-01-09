@@ -314,5 +314,50 @@ namespace DataAccess.Concrete.EntityFramework
 
 
         }
+
+        public List<OgrenciDersKayitDersleri> GetOgrenciDersKayitDersleriList(int userdId)
+        {
+            var results = from dersAcma in _context.DersAcma
+                          join mufredat in _context.Mufredat
+                          on dersAcma.MufredatId equals mufredat.Id
+                          join ogrenci in _context.Ogrenci
+                          on mufredat.BolumId equals ogrenci.BolumId
+                          join dersHavuzu in _context.DersHavuzu
+                          on mufredat.DersId equals dersHavuzu.Id
+                          join bolum in _context.Bolum
+                          on mufredat.BolumId equals bolum.Id
+                          where ogrenci.UserId==userdId
+                          select new OgrenciDersKayitDersleri
+                          {
+                              DersAcmaId = dersAcma.Id,
+                              DersAdi=dersHavuzu.DersAdi,
+                              DersKodu=dersHavuzu.DersKodu,
+                              DersBolumu=bolum.BolumAdi,
+                              ECTS=dersHavuzu.ECTS,
+                              Kredi=dersHavuzu.Kredi,
+                              ZorunluSecmeli=dersHavuzu.DersturuId==1?"Zorunlu":
+                                             dersHavuzu.DersturuId == 1 ? "Seçmeli" :
+                                             "Ders Türü Bulunamadı!",
+                              OgrenciSinifi = (DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 1 ? "1.Sınıf Güz" :
+                             ((DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 2 ? "1.Sınıf Bahar" :
+                             ((DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 3 ? "2.Sınıf Güz" :
+                             ((DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 4 ? "2.Sınıf Bahar" :
+                             ((DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 5 ? "3.Sınıf Güz" :
+                             ((DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 6 ? "3.Sınıf Bahar" :
+                             ((DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 7 ? "4.Sınıf Güz" :
+                             ((DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 8 ? "4.Sınıf Bahar" :
+                             ((DateTime.Now - ogrenci.CreatedDate).Days / 182.625).ToString()))))))),
+                              DersVerildigiSinif =mufredat.DersDonemi == 1 ? "1. Sınıf Güz":
+                                                 mufredat.DersDonemi == 2 ? "1. Sınıf Bahar" :
+                                                 mufredat.DersDonemi == 3 ? "2. Sınıf Güz" :
+                                                 mufredat.DersDonemi == 4 ? "2. Sınıf Bahar" :
+                                                 mufredat.DersDonemi == 5 ? "3. Sınıf Güz" :
+                                                 mufredat.DersDonemi == 6 ? "3. Sınıf Bahar" :
+                                                 mufredat.DersDonemi == 7 ? "4. Sınıf Güz" :
+                                                 mufredat.DersDonemi == 8 ? "4. Sınıf Bahar" :
+                                                 "Sınıf Bulunamadı!"
+                          };
+            return results.ToList();
+        }
     }
 }

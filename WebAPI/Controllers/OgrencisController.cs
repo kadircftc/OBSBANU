@@ -80,6 +80,19 @@ namespace WebAPI.Controllers
             return BadRequest(result.Message);
         }
         [Produces("application/json", "text/plain")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<OgrenciDersKayitDersleri>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+        [HttpGet("getOgrenciDersKayitDersleriList")]
+        public async Task<IActionResult> GetOgrenciDersKayitDersleriList(int id)
+        {
+            var result = await Mediator.Send(new GetOgrenciDersKayitDersleriListQuery { UserId = id });
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest(result.Message);
+        }
+        [Produces("application/json", "text/plain")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<DersProgramiDto>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         [HttpGet("getOgrenciDersProgramiDto")]
