@@ -15,13 +15,13 @@ namespace Entities.Dtos
         public float? VizeNotu { get; set; }
         public float? FinalNotu { get; set; }
         public float? ButunlemeNotu { get; set; }
-        public float NotOrt { get; set; }
+        public float? NotOrt { get; set; }
         public string HarfNotu { get; set; }
         public string Durumu { get; set; }
         public string OgrenciAktifDonem { get; set; }
         public int DersAcmaId { get; set; }
         public string OgrenciSinifi { get; set; }
         public string OgrenciDonemi { get; set; }
-        public string DersVerilenDonem { get; set; }
+        public string SinavDonemi { get; set; }
     }
 }
