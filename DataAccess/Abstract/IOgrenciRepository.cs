@@ -18,5 +18,6 @@ namespace DataAccess.Abstract
         List<DersProgramiDto> GetDersProgramiAsync(int userId);
         List<OgrenciSinavDto> GetOgrenciNotBilgisiAsync(int userId);
         List<OgrenciDersKayitDersleri> GetOgrenciDersKayitDersleriList(int userId);
+        List<OgrenciTranskriptDersler> GetOgrenciTranskriptAsync(int userId);
     }
 }

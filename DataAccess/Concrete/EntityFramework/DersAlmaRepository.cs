@@ -21,7 +21,6 @@ namespace DataAccess.Concrete.EntityFramework
         public async Task<IEnumerable<DersAlma>> BulkInsert(int userId, IEnumerable<DersAlma> dersAcmaIds)
         {
         
-
             await Context.DersAlma.AddRangeAsync(dersAcmaIds);
             return dersAcmaIds;
         }

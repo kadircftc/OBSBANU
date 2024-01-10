@@ -43,9 +43,12 @@ namespace Business.Handlers.DersAlmas.Commands
             [LogAspect(typeof(FileLogger))]
             public async Task<IResult> Handle(UpdateDersAlmaRangeCommand request, CancellationToken cancellationToken)
             {
-                Ogrenci ogrenciId =await _ogrenciRepository.GetAsync(o=>o.UserId==request.UserId);
+                Ogrenci ogrenci =await _ogrenciRepository.GetAsync(o=>o.UserId==request.UserId);
 
-                var dersAcmaList = request.DersAcmaIds.Select(x => new DersAlma() { DersAcmaId = x, OgrenciId = ogrenciId.Id,DersDurumId=request.DersDurum });
+                var dersAcmaList = request.DersAcmaIds.Select(x => new DersAlma() { DersAcmaId = x, OgrenciId = ogrenci.Id,DersDurumId=request.DersDurum,CreatedDate=DateTime.Now });
+
+              
+
 
                 await _dersAlmaRepository.BulkInsert(request.UserId, dersAcmaList);
                 await _dersAlmaRepository.SaveChangesAsync();

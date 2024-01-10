@@ -43,6 +43,7 @@ export class OgrenciMufredatComponent implements OnInit {
   getOgrenciMufredatList() {
     this.mufredatService.getOgrenciMufredat(this.storageService.getUserId()).subscribe(data => {
      this.ogrenciMufredatList=data
+     
    });
   }
 

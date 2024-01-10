@@ -36,6 +36,7 @@ export class OgrenciAlinanDerslerComponent implements OnInit {
       this.alinanDerslerList = data
       this.ogrenciDonemi = this.alinanDerslerList[0].ogrenciDonemi;
       this.ogrenciSinifi = this.alinanDerslerList[0].ogrenciSinifi;
+      this.filteredAlinanDerslerList=data.filter(d=>d.ogrenciDonemi==d.dersVerilenDonem)
       if(!this.isChange){
         this.getAkademikYil()
       }
@@ -138,7 +139,7 @@ export class OgrenciAlinanDerslerComponent implements OnInit {
     }
     else
     {
-      this.getOgrencialinanDersler();
+    
       this.filteredAlinanDerslerList= this.alinanDerslerList.filter(a=>a.dersVerilenDonem===akademikYil)
     }
   }

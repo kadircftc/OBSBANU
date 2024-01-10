@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LookUp } from 'app/core/models/lookUp';
-import { OzlukBilgileriService } from '../ozluk-bilgileri/services/ozlukBilgileri.service';
 import { LocalStorageService } from 'app/core/services/local-storage.service';
+import { OzlukBilgileriService } from '../ozluk-bilgileri/services/ozlukBilgileri.service';
 
 @Component({
   selector: 'app-ogrenci-not-bilgisi',
@@ -21,6 +21,7 @@ export class OgrenciNotBilgisiComponent implements OnInit {
   donem: string
   sinifNumarasi: number
   isChange =  false;
+
   harfNotlari = [
     { harf: 'AA', altSinir: 90, ustSinir: 100, puan: 4.0, durum: 'Başarılı' },
     { harf: 'BA', altSinir: 80, ustSinir: 89, puan: 3.5, durum: 'Başarılı' },
@@ -40,6 +41,7 @@ export class OgrenciNotBilgisiComponent implements OnInit {
   getOgrenciNotList(){
     this.ogrenciservice.getOgrenciNotList(this.localStorageService.getUserId()).subscribe(data=>{
       this.ogrenciNotList = data;
+       
       this.ogrenciNotList.forEach(element => {
         element.notOrt = parseFloat(element.notOrt.toFixed(2));
       });

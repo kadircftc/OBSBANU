@@ -36,7 +36,6 @@ namespace Business.Handlers.Ogrencis.Queries
             [LogAspect(typeof(FileLogger))]
             [SecuredOperation(Priority = 1)]
 
-
             public async Task<IDataResult<IEnumerable<OgrenciSinavDto>>> Handle(GetOgrenciNotBilgisiQuery request, CancellationToken cancellationToken)
             {
                 var result = _ogrenciRepository.GetOgrenciNotBilgisiAsync(request.Id);
