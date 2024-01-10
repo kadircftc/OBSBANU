@@ -1,0 +1,199 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">{{'DanismanlikList'| translate}}</h4>
+                        <a *ngIf="checkClaim('GetOgrenciNotBilgisiQuery')" class="pull-right" data-toggle="modal"
+                            data-target="#danismanlik"> <i style="color:white" title="{{'Add'| translate}}"
+                                class="far fa-plus-square fa-2x"></i></a>
+                    </div>
+                    <div class="card-body">
+                        <h3>Açılan Dersler</h3>
+                        <div class="table-responsive">
+
+                            <div class="col-md-4 pull-right">
+                                <mat-form-field>
+                                    <mat-label>Filter</mat-label>
+                                    <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
+                                </mat-form-field>
+                            </div>
+                            <table mat-table [dataSource]="dataSource" matSort>
+                                <ng-container matColumnDef="dersKodu">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'Ders Kodu'|translate}}</th>
+                                    <td mat-cell *matCellDef="let element">{{element.dersKodu}}</td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="dersAdi">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'Ders Adı'|translate}}
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">{{element.dersAdi}}</td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="secmeliZorunlu">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'Zorunlu/Seçmeli'|translate}}
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">{{element.zorunluSecmeli}}</td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="kredi">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'Kredi'|translate}}
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">{{element.kredi}}</td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="ects">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'ECTS'|translate}}</th>
+                                    <td mat-cell *matCellDef="let element">{{element.ects}}</td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="sinif">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'Sınıf'|translate}}</th>
+                                    <td mat-cell *matCellDef="let element">{{element.dersVerildigiSinif}}</td>
+                                </ng-container>
+
+
+                                <ng-container matColumnDef="delete" >
+                                    <th mat-header-cell *matHeaderCellDef></th>
+                                    <td  style="width: 25px;" mat-cell
+                                      *matCellDef="let element">
+                                      <a  (confirm)="dersiSec(element.dersAcmaId)" [swal]="deleteSwal"><i title="{{'Delete'| translate}}" style="color: #D9534E;"class="fas fa-trash-alt"></i></a>
+                                    </td>
+                                  </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                                <tr class="mat-row" *matNoDataRow style="text-align: center;">
+                                    <td class="mat-cell" colspan="4">{{'NoRecordsFound' |translate}} "{{input.value}}"
+                                    </td>
+                                </tr>
+                            </table>
+                            <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]"></mat-paginator>
+                        </div>
+                    </div>
+
+
+                    <div class="card-body">
+                        <h3>Seçilen Dersler</h3>
+                        <div class="table-responsive">
+
+                            <div class="col-md-4 pull-right">
+                                <mat-form-field>
+                                    <mat-label>Filter</mat-label>
+                                    <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
+                                </mat-form-field>
+                            </div>
+                            <table mat-table [dataSource]="dataSourceSelected" matSort>
+                                <ng-container matColumnDef="dersKodu">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'Ders Kodu'|translate}}</th>
+                                    <td mat-cell *matCellDef="let element">{{element.dersKodu}}</td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="dersAdi">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'Ders Adı'|translate}}
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">{{element.dersAdi}}</td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="secmeliZorunlu">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'Zorunlu/Seçmeli'|translate}}
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">{{element.zorunluSecmeli}}</td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="kredi">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'Kredi'|translate}}
+                                    </th>
+                                    <td mat-cell *matCellDef="let element">{{element.kredi}}</td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="ects">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'ECTS'|translate}}</th>
+                                    <td mat-cell *matCellDef="let element">{{element.ects}}</td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="sinif">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{'Sınıf'|translate}}</th>
+                                    <td mat-cell *matCellDef="let element">{{element.dersVerildigiSinif}}</td>
+                                </ng-container>
+
+
+                                <ng-container matColumnDef="delete" >
+                                    <th mat-header-cell *matHeaderCellDef></th>
+                                    <td  style="width: 25px;" mat-cell
+                                      *matCellDef="let element">
+                                      <a  (confirm)="dersiCikar(element.dersAcmaId)" [swal]="deleteSwal"><i title="{{'Delete'| translate}}" style="color: #D9534E;"class="fas fa-trash-alt"></i></a>
+                                    </td>
+                                  </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                                <tr class="mat-row" *matNoDataRow style="text-align: center;">
+                                    <td class="mat-cell" colspan="4">{{'NoRecordsFound' |translate}} "{{input.value}}"
+                                    </td>
+                                </tr>
+                            </table>
+                            <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]"></mat-paginator>
+                        </div>
+                    </div>
+                    <button (click)="dersKaydiniOnayla()" class="btn-success">Onayla</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal modal-angular fade" id="danismanlik" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                    (click)="clearFormGroup(danismanlikAddForm)"><span aria-hidden="true">&times;</span></button>
+                <h4 class="margin-top">
+                    {{'DanismanlikForm'| translate}}
+                </h4>
+                <div class="separator"></div>
+                <form *ngIf="danismanlikAddForm" [formGroup]="danismanlikAddForm" (ngSubmit)="save()">
+
+
+
+                    <div class="row">
+                        <div class="col col-md-12">
+                            <div class="d-flex justify-content-start align-items-center">
+                                <span class="mr-2">Öğretim Elemanı:</span>
+                            </div>
+                            <select class="browser-default custom-select" formControlName="ogrElmID">
+                                <option *ngFor="let item of ogretimElemaniList" [value]="item.id"> {{item.adi}}
+                                    {{item.soyadi}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="d-flex justify-content-start align-items-center">
+                                <span class="mr-2">Öğrenci:</span>
+                            </div>
+                            <select class="browser-default custom-select" formControlName="ogrenciId">
+                                <option *ngFor="let item of ogrenciList" [value]="item.id"> {{item.adi}} {{item.soyadi}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button mat-raised-button type="submit"
+                        class="btn btn-danger pull-right">{{'Save'|translate}}</button>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<swal #deleteSwal title="{{'DeleteConfirm' | translate}}" icon="error" [showCancelButton]="true"
+    [confirmButtonText]="'OK'" [cancelButtonText]="'Cancel'">
+</swal>

@@ -35,4 +35,13 @@ export class OzlukBilgileriService {
   getOgrenciNotList(id:number):Observable<OgrenciNotBilgisiDto[]> {
     return this.httpClient.get<OgrenciNotBilgisiDto[]>(environment.getApiUrl + '/Ogrencis/getOgrenciNotBilgisiQuery?id='+id)
   }
+
+  getAcilmisDerslerList(id:number):Observable<OgrenciAcilanDerslerDto[]> {
+    return this.httpClient.get<OgrenciAcilanDerslerDto[]>(environment.getApiUrl + '/Ogrencis/getOgrenciDersKayitDersleriList?id='+id)
+  }
+
+  saveAlinanDersler(userId:number, dersDurum:number, dersAcmaIds:number[] ):Observable<any> {
+    var result = this.httpClient.put(environment.getApiUrl + "/DersAlmas/UpdateRangeDersAlma/", {UserId:userId, DersDurum:dersDurum, DersAcmaIds:dersAcmaIds }, { responseType: 'text' });
+    return result;
+  }
 }

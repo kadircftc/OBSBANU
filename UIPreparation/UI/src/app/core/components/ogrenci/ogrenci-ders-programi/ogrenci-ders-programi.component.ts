@@ -101,7 +101,7 @@ export class OgrenciDersProgramiComponent implements OnInit, AfterViewInit {
 
       this.akademikYilList = [
         { id: 1, label: this.ogrenciDonemi },
-        { id: 2, label: this.baslangicYili + '-' + this.bitisYili + 'Güz' + ' Dönemi' },]
+        { id: 2, label: this.baslangicYili + '-' + this.bitisYili + ' Güz' + ' Dönemi' },]
     }
     else if (this.sinifNumarasi == 2 && this.donem == 'Güz') {
 
@@ -113,7 +113,7 @@ export class OgrenciDersProgramiComponent implements OnInit, AfterViewInit {
 
       this.akademikYilList = [
         { id: 1, label: this.ogrenciDonemi },
-        { id: 2, label: this.baslangicYili + '-' + this.baslangicYili + 'Güz' + ' Dönemi' },
+        { id: 2, label: this.baslangicYili + '-' + this.baslangicYili + ' Güz' + ' Dönemi' },
         { id: 3, label: this.baslangicYili - 1 + '-' + this.baslangicYili + ' Bahar' + ' Dönemi' },
         { id: 4, label: this.baslangicYili - 1 + '-' + this.baslangicYili + ' Güz' + ' Dönemi' }]
     }

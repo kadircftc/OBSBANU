@@ -19,10 +19,21 @@ import { LoginGuard } from './core/guards/login-guard';
 import { AuthInterceptorService } from './core/interceptors/auth-interceptor.service';
 import { ComponentsModule } from './core/modules/components.module';
 import { HttpEntityRepositoryService } from './core/services/http-entity-repository.service';
-import { TranslationService } from './core/services/translation.service';
+import { TranslationService } from './core/services/Translation.service';
 import { OgrenciAlinanDerslerComponent } from './core/components/ogrenci/ogrenci-alinan-dersler/ogrenci-alinan-dersler.component';
 import { OgrenciDersProgramiComponent } from './core/components/ogrenci/ogrenci-ders-programi/ogrenci-ders-programi.component';
 import { OgrenciNotBilgisiComponent } from './core/components/ogrenci/ogrenci-not-bilgisi/ogrenci-not-bilgisi.component';
+import { OgrenciDersAlmaComponent } from './core/components/ogrenci/ogrenci-ders-alma/ogrenci-ders-alma.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatRippleModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 // i18 kullanıclak ise aşağıdaki metod aktif edilecek
@@ -45,6 +56,19 @@ export function tokenGetter() {
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatButtonModule,
+    MatRippleModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatTooltipModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatCheckboxModule,
+    NgbModule,
+    NgMultiSelectDropDownModule,
+    SweetAlert2Module,
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
@@ -73,6 +97,7 @@ export function tokenGetter() {
     OgrenciAlinanDerslerComponent,
     OgrenciDersProgramiComponent,
     OgrenciNotBilgisiComponent,
+    OgrenciDersAlmaComponent,
   ],
 
   providers: [

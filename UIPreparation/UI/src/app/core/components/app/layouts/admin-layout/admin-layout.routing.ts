@@ -40,6 +40,7 @@ import { SinavNotlandirmaComponent } from 'app/core/components/ogretimElemani/si
 import { LoginGuard } from 'app/core/guards/login-guard';
 import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { OgrenciNotBilgisiComponent } from 'app/core/components/ogrenci/ogrenci-not-bilgisi/ogrenci-not-bilgisi.component';
+import { OgrenciDersAlmaComponent } from 'app/core/components/ogrenci/ogrenci-ders-alma/ogrenci-ders-alma.component';
 
 
 
@@ -87,4 +88,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'ogrenci-alinan-dersler',            component: OgrenciAlinanDerslerComponent,canActivate:[LoginGuard]},
     { path: 'ogrenci-ders-programi',            component: OgrenciDersProgramiComponent,canActivate:[LoginGuard]},
     { path: 'ogrenci-not-bilgisi',            component: OgrenciNotBilgisiComponent,canActivate:[LoginGuard]},
+    { path: 'ogrenci-ders-alma',            component: OgrenciDersAlmaComponent,canActivate:[LoginGuard]},
 ];

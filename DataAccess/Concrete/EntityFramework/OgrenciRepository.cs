@@ -338,14 +338,14 @@ namespace DataAccess.Concrete.EntityFramework
                               ZorunluSecmeli=dersHavuzu.DersturuId==1?"Zorunlu":
                                              dersHavuzu.DersturuId == 1 ? "Seçmeli" :
                                              "Ders Türü Bulunamadı!",
-                              OgrenciSinifi = (DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 1 ? "1.Sınıf Güz" :
-                             ((DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 2 ? "1.Sınıf Bahar" :
-                             ((DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 3 ? "2.Sınıf Güz" :
-                             ((DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 4 ? "2.Sınıf Bahar" :
-                             ((DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 5 ? "3.Sınıf Güz" :
-                             ((DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 6 ? "3.Sınıf Bahar" :
-                             ((DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 7 ? "4.Sınıf Güz" :
-                             ((DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 8 ? "4.Sınıf Bahar" :
+                              OgrenciSinifi = (DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 1 ? "1. Sınıf Güz" :
+                             ((DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 2 ? "1. Sınıf Bahar" :
+                             ((DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 3 ? "2. Sınıf Güz" :
+                             ((DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 4 ? "2. Sınıf Bahar" :
+                             ((DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 5 ? "3. Sınıf Güz" :
+                             ((DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 6 ? "3. Sınıf Bahar" :
+                             ((DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 7 ? "4. Sınıf Güz" :
+                             ((DateTime.Now - ogrenci.CreatedDate).Days / 182.625 <= 8 ? "4. Sınıf Bahar" :
                              ((DateTime.Now - ogrenci.CreatedDate).Days / 182.625).ToString()))))))),
                               DersVerildigiSinif =mufredat.DersDonemi == 1 ? "1. Sınıf Güz":
                                                  mufredat.DersDonemi == 2 ? "1. Sınıf Bahar" :

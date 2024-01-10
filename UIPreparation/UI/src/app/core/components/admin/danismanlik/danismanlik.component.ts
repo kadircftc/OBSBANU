@@ -10,7 +10,7 @@ import { OgrenciService } from '../ogrenci/services/Ogrenci.service';
 import { OgretimElemani } from '../ogretimElemani/models/OgretimElemani';
 import { OgretimElemaniService } from '../ogretimElemani/services/OgretimElemani.service';
 import { Danismanlik } from './models/Danismanlik';
-import { DanismanlikService } from './services/Danismanlik.service';
+import { DanismanlikService } from './services/danismanlik.service';
 
 declare var jQuery: any;
 

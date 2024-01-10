@@ -23,13 +23,13 @@ export class OgrenciNotBilgisiComponent implements OnInit {
   isChange =  false;
   harfNotlari = [
     { harf: 'AA', altSinir: 90, ustSinir: 100, puan: 4.0, durum: 'Başarılı' },
-    { harf: 'BA', altSinir: 80, ustSinir: 89, puan: 3.5, durum: 'Başarılı' },
-    { harf: 'BB', altSinir: 75, ustSinir: 79, puan: 3.0, durum: 'Başarılı' },
-    { harf: 'CB', altSinir: 70, ustSinir: 74, puan: 2.5, durum: 'Başarılı' },
-    { harf: 'CC', altSinir: 60, ustSinir: 69, puan: 2.0, durum: 'Başarılı' },
-    { harf: 'DC', altSinir: 50, ustSinir: 59, puan: 1.5, durum: 'Koşullu Başarılı - Başarısız' },
-    { harf: 'DD', altSinir: 40, ustSinir: 49, puan: 1.0, durum: 'Başarısız' },
-    { harf: 'FD', altSinir: 30, ustSinir: 39, puan: 0.5, durum: 'Başarısız' },
+    { harf: 'BA', altSinir: 80, ustSinir: 89.9, puan: 3.5, durum: 'Başarılı' },
+    { harf: 'BB', altSinir: 75, ustSinir: 79.9, puan: 3.0, durum: 'Başarılı' },
+    { harf: 'CB', altSinir: 70, ustSinir: 74.9, puan: 2.5, durum: 'Başarılı' },
+    { harf: 'CC', altSinir: 60, ustSinir: 69.9, puan: 2.0, durum: 'Başarılı' },
+    { harf: 'DC', altSinir: 50, ustSinir: 59.9, puan: 1.5, durum: 'Koşullu Başarılı - Başarısız' },
+    { harf: 'DD', altSinir: 40, ustSinir: 49.9, puan: 1.0, durum: 'Başarısız' },
+    { harf: 'FD', altSinir: 30, ustSinir: 39.9, puan: 0.5, durum: 'Başarısız' },
   ];
 
   ngOnInit(): void {
